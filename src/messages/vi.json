@@ -12,8 +12,8 @@
   },
   "home": {
     "cta": "Bắt đầu chọn xe",
-    "subtitle": "Chọn xe → xem phụ kiện mẫu → ghép combo → xuất PDF. Fitment mặc định chưa xác minh.",
-    "disclaimer": "Dữ liệu mẫu Phase 1. Không thu thập thông tin khách hàng thật."
+    "subtitle": "Chọn xe → xem phụ kiện → ghép combo → xuất PDF báo giá. Fitment mặc định cần xác minh.",
+    "disclaimer": "Fitment chưa xác minh thì không khẳng định lắp được. Thông tin liên hệ chỉ gửi khi bạn đồng ý và hệ thống báo giá đã cấu hình."
   },
   "vehicle": {
     "title": "Chọn xe của bạn",
@@ -26,10 +26,10 @@
     "reset": "Chọn lại",
     "selected": "Xe đã chọn",
     "pickTrim": "Chọn phiên bản để tiếp tục.",
-    "emptyBrands": "Chưa có hãng xe trong dữ liệu mẫu.",
+    "emptyBrands": "Chưa có hãng xe trong danh mục.",
     "emptyModels": "Không có dòng xe cho hãng này.",
     "emptyYears": "Không có năm cho dòng xe này.",
-    "emptyTrims": "Không có phiên bản (trim) cho năm đã chọn. Hãy chọn năm khác hoặc liên hệ kỹ thuật viên."
+    "emptyTrims": "Không có phiên bản (trim) cho năm đã chọn. Hãy chọn năm khác hoặc liên hệ cửa hàng."
   },
   "recommend": {
     "title": "Gợi ý phụ kiện",
@@ -57,23 +57,39 @@
     "total": "Tổng",
     "exportPdf": "Xuất PDF báo giá",
     "requestQuote": "Yêu cầu báo giá",
-    "unverifiedWarn": "Combo có sản phẩm chưa xác minh fitment — xem kỹ trước khi đặt.",
+    "unverifiedWarn": "Combo có sản phẩm cần xác minh fitment — xem kỹ trước khi đặt.",
+    "duplicateWarn": "Combo đang có nhiều sản phẩm cùng chức năng ({categories}). Bạn có thể giữ cả hai hoặc xóa bớt.",
+    "conflictTitle": "Trùng chức năng trong combo",
+    "conflictBody": "Bạn đang thêm «{incoming}» trong khi combo đã có «{existing}» (cùng nhóm {category}).",
+    "conflictReplace": "Thay thế sản phẩm cũ",
+    "conflictKeep": "Giữ cả hai",
+    "conflictCancel": "Hủy",
     "remove": "Xóa",
     "removedToast": "Đã xóa khỏi combo"
   },
   "quote": {
     "title": "Yêu cầu báo giá",
-    "customerName": "Tên (tuỳ chọn — không lưu server)",
+    "customerName": "Họ tên",
+    "phone": "Số điện thoại",
+    "email": "Email",
     "note": "Ghi chú",
+    "consent": "Tôi đồng ý gửi thông tin liên hệ để cửa hàng liên lạc báo giá. Chỉ gửi khi hệ thống đã cấu hình; không lưu giả trên trình duyệt.",
+    "consentRequired": "Cần đồng ý trước khi gửi thông tin liên hệ.",
     "download": "Tải PDF báo giá",
-    "requestCta": "Yêu cầu báo giá",
+    "requestCta": "Gửi yêu cầu báo giá",
+    "submitting": "Đang gửi…",
+    "success": "Đã gửi yêu cầu báo giá. Mã: {id}",
+    "errorNotConfigured": "Chưa cấu hình nhận yêu cầu báo giá (thiếu QUOTE_WEBHOOK_URL). Không thể gửi — vui lòng liên hệ cửa hàng hoặc thử lại sau khi cấu hình.",
+    "errorFailed": "Gửi yêu cầu thất bại. Vui lòng thử lại hoặc liên hệ cửa hàng.",
+    "errorInvalid": "Yêu cầu không hợp lệ (combo trống hoặc dữ liệu thiếu).",
+    "notConfiguredBanner": "Gửi yêu cầu báo giá chưa sẵn sàng trên môi trường này. Bạn vẫn có thể tải PDF; liên hệ cửa hàng để được báo giá.",
     "back": "Quay lại combo"
   },
   "chat": {
-    "title": "Tư vấn AI (stub)",
+    "title": "Tư vấn AI",
     "placeholder": "Hỏi về dashcam, giá, hoặc lắp đặt…",
     "send": "Gửi",
-    "hint": "Phase 1: trả lời rule-based, không gọi API trả phí. Không khẳng định tương thích nếu chưa xác minh."
+    "hint": "Trả lời rule-based, không gọi API trả phí. Không khẳng định tương thích nếu chưa xác minh."
   },
   "admin": {
     "title": "Admin sản phẩm",
@@ -82,7 +98,7 @@
     "password": "Mật khẩu",
     "signIn": "Đăng nhập",
     "signOut": "Đăng xuất",
-    "sampleMode": "Sample mode — chỉnh sửa ghi vào JSON local, không phải production DB.",
+    "sampleMode": "Chế độ admin — chỉnh sửa ghi vào JSON local, không phải production DB.",
     "roleNote": "Kiến trúc Auth.js + RBAC (admin/editor). Production cần IdP thật.",
     "save": "Lưu",
     "new": "Thêm sản phẩm",
@@ -91,7 +107,7 @@
     "delete": "Ẩn",
     "unauthorized": "Bạn cần đăng nhập với quyền admin hoặc editor.",
     "fitmentTitle": "Xác nhận fitment",
-    "fitmentHint": "Mặc định luôn là Chưa xác minh. Chỉ chọn Đã xác minh khi kỹ thuật viên đã xác nhận.",
+    "fitmentHint": "Mặc định luôn là Cần xác minh. Chỉ chọn Đã xác minh khi kỹ thuật viên đã xác nhận.",
     "fitmentProduct": "Sản phẩm",
     "fitmentBrand": "Hãng (tuỳ chọn)",
     "fitmentModel": "Model (tuỳ chọn)",
@@ -106,9 +122,9 @@
   },
   "fitment": {
     "verified": "Đã xác minh",
-    "unverified": "Chưa xác minh",
+    "unverified": "Cần xác minh",
     "incompatible": "Không phù hợp",
-    "disclaimer": "Sản phẩm chưa xác minh chưa được xác nhận lắp được trên xe này. Cần kỹ thuật viên kiểm tra trước khi đặt hàng.",
+    "disclaimer": "Sản phẩm cần xác minh chưa được xác nhận lắp được trên xe này. Cần kỹ thuật viên kiểm tra trước khi đặt hàng.",
     "badgeAria": "Trạng thái fitment"
   },
   "pdf": {
@@ -127,10 +143,11 @@
     "laborSubtotal": "Tạm tính lắp đặt",
     "total": "Tổng cộng",
     "disclaimerHeading": "Lưu ý / Fitment",
-    "disclaimerPrice": "Giá mẫu / ước tính; chưa gồm thuế, shipping, phụ phí phát sinh.",
+    "disclaimerPrice": "Giá ước tính; chưa gồm thuế, shipping, phụ phí phát sinh.",
     "disclaimerFitment": "Phụ kiện chưa được xác minh tương thích với xe này — kỹ thuật viên phải kiểm tra trước khi lắp đặt/đặt hàng.",
     "disclaimerContract": "Báo giá không phải hợp đồng; cần xác nhận kỹ thuật trước khi đặt hàng.",
-    "contact": "KietAuto — liên hệ placeholder Phase 1 (chưa cung cấp thông tin thật)"
+    "brandSub": "AI Car Upgrade",
+    "contact": "KietAuto — liên hệ cửa hàng để xác nhận báo giá và lắp đặt"
   },
   "categories": {
     "dashcam": "Camera hành trình",
@@ -144,70 +161,70 @@
   "products": {
     "dcV35": {
       "name": "Dashcam V35 Front/Rear",
-      "desc": "Camera trước/sau, Wi‑Fi — dữ liệu mẫu."
+      "desc": "Camera trước/sau, Wi‑Fi."
     },
     "dcPro4k": {
       "name": "Dashcam Pro 4K",
-      "desc": "4K + parking mode — dữ liệu mẫu."
+      "desc": "4K + parking mode."
     },
     "huAndroid": {
       "name": "Android Head Unit 10\"",
-      "desc": "Màn Android 10 inch — dữ liệu mẫu."
+      "desc": "Màn Android 10 inch."
     },
     "huWireless": {
       "name": "Wireless Multimedia Unit",
-      "desc": "Hỗ trợ CarPlay không dây — dữ liệu mẫu."
+      "desc": "Hỗ trợ CarPlay không dây."
     },
     "cpWireless": {
       "name": "Wireless CarPlay Adapter",
-      "desc": "Adapter CarPlay không dây — dữ liệu mẫu."
+      "desc": "Adapter CarPlay không dây."
     },
     "cpModule": {
       "name": "OEM CarPlay Module",
-      "desc": "Module tích hợp OEM — dữ liệu mẫu."
+      "desc": "Module tích hợp OEM."
     },
     "cam360Basic": {
       "name": "360 Camera Basic",
-      "desc": "Bird-view 4 camera — dữ liệu mẫu."
+      "desc": "Bird-view 4 camera."
     },
     "cam360Pro": {
       "name": "360 Camera Pro 3D",
-      "desc": "3D + recording — dữ liệu mẫu."
+      "desc": "3D + recording."
     },
     "ledFog": {
       "name": "LED Fog Kit",
-      "desc": "Bộ đèn sương mù LED — dữ liệu mẫu."
+      "desc": "Bộ đèn sương mù LED."
     },
     "ledBar": {
       "name": "LED Light Bar 22\"",
-      "desc": "Thanh đèn off-road — dữ liệu mẫu."
+      "desc": "Thanh đèn off-road."
     },
     "tintCeramic": {
       "name": "Ceramic Tint Package",
-      "desc": "Gói phim ceramic — labor gộp giá — dữ liệu mẫu."
+      "desc": "Gói phim ceramic — labor gộp giá."
     },
     "remoteStart": {
       "name": "Remote Start Pro",
-      "desc": "Khởi động từ xa — dữ liệu mẫu."
+      "desc": "Khởi động từ xa."
     },
     "liftgateKit": {
       "name": "Cốp điện tiêu chuẩn",
-      "desc": "Bộ cốp điện (power liftgate) hands-free — dữ liệu mẫu."
+      "desc": "Bộ cốp điện (power liftgate) hands-free."
     },
     "liftgatePro": {
       "name": "Cốp điện Pro",
-      "desc": "Cốp điện nhớ chiều cao + chống kẹp — dữ liệu mẫu."
+      "desc": "Cốp điện nhớ chiều cao + chống kẹp."
     }
   },
   "fitmentNotes": {
-    "installedCamry2024": "Đã lắp thử trên Camry 2024 (mẫu).",
-    "installedAccord": "Đã lắp thử trên Accord (mẫu).",
-    "installedRav4Xle": "Đã lắp thử trên RAV4 XLE 2024 (mẫu).",
-    "hondaWireless": "Adapter xác minh trên nhiều Honda (mẫu).",
-    "f150BirdView": "Bộ 360 xác minh trên F-150 (mẫu).",
+    "installedCamry2024": "Đã lắp thử trên Camry 2024.",
+    "installedAccord": "Đã lắp thử trên Accord.",
+    "installedRav4Xle": "Đã lắp thử trên RAV4 XLE 2024.",
+    "hondaWireless": "Adapter xác minh trên nhiều Honda.",
+    "f150BirdView": "Bộ 360 xác minh trên F-150.",
     "teslaNoHeadUnit": "Tesla dùng màn OEM — không thay head unit tiêu chuẩn.",
     "teslaNoCarplay": "Tesla không hỗ trợ CarPlay OEM.",
-    "crvLiftgate2024": "Đã lắp thử cốp điện trên CR-V 2024 (mẫu).",
-    "rav4LiftgateXle": "Đã lắp thử cốp điện Pro trên RAV4 XLE 2024 (mẫu)."
+    "crvLiftgate2024": "Đã lắp thử cốp điện trên CR-V 2024.",
+    "rav4LiftgateXle": "Đã lắp thử cốp điện Pro trên RAV4 XLE 2024."
   }
 }

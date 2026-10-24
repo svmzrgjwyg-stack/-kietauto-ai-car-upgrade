@@ -112,7 +112,7 @@ const rows = [
     name: "Dashcam V35 Front/Rear",
     sku: "KA-DC-V35",
     qty: 2,
-    fit: "Chưa xác minh",
+    fit: "Cần xác minh",
     unit: 189,
     labor: 158,
     line: 536,
@@ -121,7 +121,7 @@ const rows = [
     name: "Dashcam Pro 4K",
     sku: "KA-DC-4K",
     qty: 1,
-    fit: "Chưa xác minh",
+    fit: "Cần xác minh",
     unit: 329,
     labor: 99,
     line: 428,
@@ -157,7 +157,7 @@ const doc = React.createElement(
         React.createElement(
           Text,
           { style: styles.sub },
-          "AI Car Upgrade · Phase 1 sample",
+          "AI Car Upgrade",
         ),
       ),
       React.createElement(
@@ -237,7 +237,7 @@ const doc = React.createElement(
       React.createElement(
         Text,
         { style: { fontSize: 8, marginTop: 3 } },
-        "• Giá mẫu / ước tính; chưa gồm thuế, shipping, phụ phí phát sinh.",
+        "• Giá ước tính; chưa gồm thuế, shipping, phụ phí phát sinh.",
       ),
       React.createElement(
         Text,
@@ -248,7 +248,7 @@ const doc = React.createElement(
     React.createElement(
       Text,
       { style: { marginTop: 20, fontSize: 8, color: "#94a3b8" } },
-      "KietAuto — liên hệ placeholder Phase 1 (chưa cung cấp thông tin thật)",
+      "KietAuto — liên hệ cửa hàng để xác nhận báo giá và lắp đặt",
     ),
   ),
 );

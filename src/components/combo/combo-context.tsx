@@ -21,6 +21,8 @@ type ComboContextValue = {
   setVehicle: (v: VehicleSelection | null) => void;
   items: ComboItem[];
   addProduct: (productId: string) => void;
+  /** Remove `replaceId` then add `productId` (same-category swap). */
+  replaceProduct: (replaceId: string, productId: string) => void;
   removeProduct: (productId: string) => void;
   setQty: (productId: string, qty: number) => void;
   setIncludeLabor: (productId: string, includeLabor: boolean) => void;
@@ -60,6 +62,23 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
               i.productId === productId ? { ...i, qty: i.qty + 1 } : i,
             )
           : [...prev, { productId, includeLabor: true, qty: 1 }];
+        saveCombo(next);
+        return next;
+      });
+    },
+    [],
+  );
+
+  const replaceProduct = useCallback(
+    (replaceId: string, productId: string) => {
+      setItems((prev) => {
+        const without = prev.filter((i) => i.productId !== replaceId);
+        const existing = without.find((i) => i.productId === productId);
+        const next = existing
+          ? without.map((i) =>
+              i.productId === productId ? { ...i, qty: i.qty + 1 } : i,
+            )
+          : [...without, { productId, includeLabor: true, qty: 1 }];
         saveCombo(next);
         return next;
       });
@@ -110,6 +129,7 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
       setVehicle,
       items,
       addProduct,
+      replaceProduct,
       removeProduct,
       setQty,
       setIncludeLabor,
@@ -121,6 +141,7 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
       setVehicle,
       items,
       addProduct,
+      replaceProduct,
       removeProduct,
       setQty,
       setIncludeLabor,

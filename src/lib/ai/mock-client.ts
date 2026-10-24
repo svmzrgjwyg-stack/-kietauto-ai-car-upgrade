@@ -40,10 +40,10 @@ function productBlurb(locale: "vi" | "en", categoryId?: string): string {
         locale === "vi"
           ? status === "verified"
             ? "Đã xác minh"
-            : "Chưa xác minh"
+            : "Cần xác minh"
           : status === "verified"
             ? "Verified"
-            : "Not verified";
+            : "Needs verification";
       return `• ${p.sku}: $${p.priceUsd} (+ labor $${p.laborCostUsd}) — ${badge}`;
     })
     .join("\n");
@@ -72,26 +72,26 @@ function fitmentReply(
             ? "Không phù hợp"
             : "Not compatible"
           : locale === "vi"
-            ? "Chưa xác minh"
-            : "Not verified";
+            ? "Cần xác minh"
+            : "Needs verification";
     return `• ${p.sku}: ${label}`;
   });
 
   if (locale === "vi") {
     return [
-      `Với xe ${vehicleLabel ?? "đã chọn"}, trạng thái fitment mẫu:`,
+      `Với xe ${vehicleLabel ?? "đã chọn"}, trạng thái fitment:`,
       ...samples,
       "",
-      "Mặc định là Chưa xác minh nếu chưa có hồ sơ kiểm tra. Đây là gợi ý tham khảo — vui lòng xác nhận với kỹ thuật viên trước khi lắp.",
+      "Mặc định là Cần xác minh nếu chưa có hồ sơ kiểm tra. Đây là gợi ý tham khảo — vui lòng xác nhận với kỹ thuật viên trước khi lắp.",
       `(Rule: ${RULE})`,
     ].join("\n");
   }
 
   return [
-    `For ${vehicleLabel ?? "your vehicle"}, sample fitment status:`,
+    `For ${vehicleLabel ?? "your vehicle"}, fitment status:`,
     ...samples,
     "",
-    "Default is Not verified when no inspection record exists. These are reference suggestions — confirm with a technician before install.",
+    "Default is Needs verification when no inspection record exists. These are reference suggestions — confirm with a technician before install.",
     `(Rule: ${RULE})`,
   ].join("\n");
 }
@@ -137,13 +137,13 @@ export class MockAiClient implements AiClient {
     } else if (intents.includes("price") || intents.includes("combo")) {
       content =
         locale === "vi"
-          ? `Giá trên app là USD mẫu (phụ kiện + tùy chọn labor). Chưa gồm thuế/ship. Thêm sản phẩm vào Combo rồi xuất PDF báo giá.\n${productBlurb(locale)}`
-          : `Prices shown are sample USD (parts + optional labor). Tax/shipping not included. Add items to Combo then export a PDF quote.\n${productBlurb(locale)}`;
+          ? `Giá trên app là USD ước tính (phụ kiện + tùy chọn labor). Chưa gồm thuế/ship. Thêm sản phẩm vào Combo rồi xuất PDF báo giá.\n${productBlurb(locale)}`
+          : `Prices shown are estimated USD (parts + optional labor). Tax/shipping not included. Add items to Combo then export a PDF quote.\n${productBlurb(locale)}`;
     } else {
       content =
         locale === "vi"
-          ? `Xin chào! Tôi là tư vấn stub Phase 1 (không gọi LLM trả phí).\nBạn có thể hỏi về dashcam, màn Android, CarPlay, camera 360, đèn, giá, hoặc “có lắp được không?”.\nLuôn kiểm tra badge fitment — mặc định Chưa xác minh.`
-          : `Hi! I'm the Phase 1 advisory stub (no paid LLM).\nAsk about dashcam, Android head units, CarPlay, 360 cameras, lights, pricing, or “will it fit?”.\nAlways check fitment badges — default is Not verified.`;
+          ? `Xin chào! Tôi là tư vấn rule-based (không gọi LLM trả phí).\nBạn có thể hỏi về dashcam, màn Android, CarPlay, camera 360, đèn, giá, hoặc “có lắp được không?”.\nLuôn kiểm tra badge fitment — mặc định Cần xác minh.`
+          : `Hi! I'm a rule-based advisor (no paid LLM).\nAsk about dashcam, Android head units, CarPlay, 360 cameras, lights, pricing, or “will it fit?”.\nAlways check fitment badges — default is Needs verification.`;
     }
 
     return {

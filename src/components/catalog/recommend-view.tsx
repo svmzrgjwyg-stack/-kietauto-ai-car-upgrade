@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { ProductCard } from "./product-card";
+import { ConflictDialog } from "@/components/combo/conflict-dialog";
 import { useCombo } from "@/components/combo/combo-context";
 import { useToast } from "@/components/ui/toast";
 import {
@@ -12,16 +13,23 @@ import {
   getSeedProducts,
   vehicleLabel,
 } from "@/lib/catalog/data";
+import {
+  findSameCategoryConflict,
+  type CategoryConflict,
+} from "@/lib/combo/conflicts";
 import { resolveFitment } from "@/lib/fitment/resolve";
 
 export function RecommendView() {
   const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
-  const { vehicle, addProduct, items, hydrated } = useCombo();
+  const { vehicle, addProduct, replaceProduct, items, hydrated } = useCombo();
   const { showToast } = useToast();
   const [categoryId, setCategoryId] = useState<string>("all");
   const [flash, setFlash] = useState<string | null>(null);
+  const [conflict, setConflict] = useState<CategoryConflict | null>(null);
+  const [pendingId, setPendingId] = useState<string | null>(null);
+  const [afterAdd, setAfterAdd] = useState<"stay" | "quote">("stay");
 
   const products = useMemo(() => getSeedProducts(), []);
   const categories = useMemo(() => getCategories(), []);
@@ -37,12 +45,30 @@ export function RecommendView() {
     return <p className="text-sm text-[var(--muted)]">…</p>;
   }
 
-  function handleAdd(productId: string) {
-    addProduct(productId);
+  function confirmAdded() {
     const msg = t("recommend.addedToast");
     setFlash(msg);
     showToast(msg);
     window.setTimeout(() => setFlash(null), 3200);
+  }
+
+  function finishAdd(productId: string) {
+    addProduct(productId);
+    confirmAdded();
+    if (afterAdd === "quote") {
+      router.push(`/${locale}/quote`);
+    }
+  }
+
+  function requestAdd(productId: string, mode: "stay" | "quote") {
+    setAfterAdd(mode);
+    const c = findSameCategoryConflict(productId, items, products);
+    if (c) {
+      setPendingId(productId);
+      setConflict(c);
+      return;
+    }
+    finishAdd(productId);
   }
 
   return (
@@ -114,15 +140,39 @@ export function RecommendView() {
               product={product}
               status={status}
               locale={locale}
-              onAdd={() => handleAdd(product.id)}
-              onRequestQuote={() => {
-                handleAdd(product.id);
-                router.push(`/${locale}/quote`);
-              }}
+              onAdd={() => requestAdd(product.id, "stay")}
+              onRequestQuote={() => requestAdd(product.id, "quote")}
             />
           );
         })}
       </div>
+
+      {conflict && pendingId && (
+        <ConflictDialog
+          conflict={conflict}
+          onCancel={() => {
+            setConflict(null);
+            setPendingId(null);
+          }}
+          onKeepBoth={() => {
+            const id = pendingId;
+            setConflict(null);
+            setPendingId(null);
+            finishAdd(id);
+          }}
+          onReplace={() => {
+            const id = pendingId;
+            const replaceId = conflict.existingProductId;
+            setConflict(null);
+            setPendingId(null);
+            replaceProduct(replaceId, id);
+            confirmAdded();
+            if (afterAdd === "quote") {
+              router.push(`/${locale}/quote`);
+            }
+          }}
+        />
+      )}
     </div>
   );
 }

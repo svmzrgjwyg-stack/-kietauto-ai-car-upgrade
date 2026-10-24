@@ -17,8 +17,8 @@ export function ChatView() {
       role: "assistant",
       content:
         locale === "vi"
-          ? "Xin chào! Hỏi tôi về phụ kiện hoặc fitment. Tôi là stub Phase 1 — không gọi LLM trả phí."
-          : "Hi! Ask about accessories or fitment. I'm the Phase 1 stub — no paid LLM calls.",
+          ? "Xin chào! Hỏi tôi về phụ kiện hoặc fitment. Tư vấn rule-based — không gọi LLM trả phí."
+          : "Hi! Ask about accessories or fitment. Rule-based advisory — no paid LLM calls.",
     },
   ]);
 

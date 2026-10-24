@@ -100,17 +100,17 @@ const doc = React.createElement(
       React.createElement(
         Text,
         { style: { fontSize: 9 } },
-        "• Sản phẩm đánh dấu Chưa xác minh chưa được xác nhận lắp được trên xe này.",
+        "• Sản phẩm đánh dấu Cần xác minh chưa được xác nhận lắp được trên xe này.",
       ),
       React.createElement(
         Text,
         { style: { fontSize: 9, marginTop: 2 } },
-        "• Giá mẫu / ước tính; chưa gồm thuế, shipping, phụ phí phát sinh.",
+        "• Giá ước tính; chưa gồm thuế, shipping, phụ phí phát sinh.",
       ),
       React.createElement(
         Text,
         { style: { fontSize: 9, marginTop: 2 } },
-        "• KietAuto — liên hệ placeholder Phase 1 (chưa cung cấp thông tin thật)",
+        "• KietAuto — liên hệ cửa hàng để xác nhận báo giá và lắp đặt",
       ),
     ),
   ),

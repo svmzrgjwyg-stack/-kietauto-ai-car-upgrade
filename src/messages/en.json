@@ -12,8 +12,8 @@
   },
   "home": {
     "cta": "Start with your vehicle",
-    "subtitle": "Pick a vehicle → browse sample accessories → build a combo → export PDF. Fitment defaults to not verified.",
-    "disclaimer": "Phase 1 sample data only. We do not collect real customer PII."
+    "subtitle": "Pick a vehicle → browse accessories → build a combo → export a PDF quote. Fitment defaults to needs verification.",
+    "disclaimer": "Unverified fitment never claims compatibility. Contact details are sent only with your consent when quote submission is configured."
   },
   "vehicle": {
     "title": "Select your vehicle",
@@ -26,10 +26,10 @@
     "reset": "Reset",
     "selected": "Selected vehicle",
     "pickTrim": "Choose a trim to continue.",
-    "emptyBrands": "No brands in sample data.",
+    "emptyBrands": "No brands in the catalog yet.",
     "emptyModels": "No models for this brand.",
     "emptyYears": "No years for this model.",
-    "emptyTrims": "No trim/version for the selected year. Pick another year or contact a technician."
+    "emptyTrims": "No trim/version for the selected year. Pick another year or contact the store."
   },
   "recommend": {
     "title": "Accessory recommendations",
@@ -57,23 +57,39 @@
     "total": "Total",
     "exportPdf": "Export PDF quote",
     "requestQuote": "Request quote",
-    "unverifiedWarn": "This combo includes unverified fitment items — review carefully before ordering.",
+    "unverifiedWarn": "This combo includes items that need fitment verification — review carefully before ordering.",
+    "duplicateWarn": "This combo has multiple products in the same function ({categories}). Keep both or remove extras.",
+    "conflictTitle": "Same function already in combo",
+    "conflictBody": "You are adding “{incoming}” while the combo already has “{existing}” (same {category} group).",
+    "conflictReplace": "Replace the existing product",
+    "conflictKeep": "Keep both",
+    "conflictCancel": "Cancel",
     "remove": "Remove",
     "removedToast": "Removed from combo"
   },
   "quote": {
     "title": "Request a quote",
-    "customerName": "Name (optional — not stored on server)",
+    "customerName": "Name",
+    "phone": "Phone",
+    "email": "Email",
     "note": "Note",
+    "consent": "I agree to send my contact details so the store can follow up on this quote. Sent only when submission is configured — not stored as a fake browser save.",
+    "consentRequired": "Consent is required before sending contact details.",
     "download": "Download PDF quote",
-    "requestCta": "Request quote",
+    "requestCta": "Submit quote request",
+    "submitting": "Submitting…",
+    "success": "Quote request sent. Reference: {id}",
+    "errorNotConfigured": "Quote submission is not configured (QUOTE_WEBHOOK_URL missing). Request was not sent — contact the store or try again after configuration.",
+    "errorFailed": "Quote request failed. Please try again or contact the store.",
+    "errorInvalid": "Invalid request (empty combo or missing data).",
+    "notConfiguredBanner": "Quote submission is not ready in this environment. You can still download the PDF; contact the store for a formal quote.",
     "back": "Back to combo"
   },
   "chat": {
-    "title": "AI advisory (stub)",
+    "title": "AI advisory",
     "placeholder": "Ask about dashcam, pricing, or fitment…",
     "send": "Send",
-    "hint": "Phase 1: rule-based answers, no paid API calls. Never claims compatibility unless verified."
+    "hint": "Rule-based answers, no paid API calls. Never claims compatibility unless verified."
   },
   "admin": {
     "title": "Product admin",
@@ -82,7 +98,7 @@
     "password": "Password",
     "signIn": "Sign in",
     "signOut": "Sign out",
-    "sampleMode": "Sample mode — edits persist to local JSON, not a production DB.",
+    "sampleMode": "Admin mode — edits persist to local JSON, not a production DB.",
     "roleNote": "Auth.js + RBAC architecture (admin/editor). Production needs a real IdP.",
     "save": "Save",
     "new": "Add product",
@@ -91,7 +107,7 @@
     "delete": "Hide",
     "unauthorized": "Sign in with admin or editor role required.",
     "fitmentTitle": "Confirm fitment",
-    "fitmentHint": "Status always defaults to Not verified. Choose Verified only after technician confirmation.",
+    "fitmentHint": "Status always defaults to Needs verification. Choose Verified only after technician confirmation.",
     "fitmentProduct": "Product",
     "fitmentBrand": "Brand (optional)",
     "fitmentModel": "Model (optional)",
@@ -106,9 +122,9 @@
   },
   "fitment": {
     "verified": "Verified fitment",
-    "unverified": "Fitment not verified",
+    "unverified": "Needs verification",
     "incompatible": "Not compatible",
-    "disclaimer": "Items marked not verified have not been confirmed to fit this vehicle. Technician confirmation required before ordering.",
+    "disclaimer": "Items marked needs verification have not been confirmed to fit this vehicle. Technician confirmation required before ordering.",
     "badgeAria": "Fitment status"
   },
   "pdf": {
@@ -127,10 +143,11 @@
     "laborSubtotal": "Labor subtotal",
     "total": "Total",
     "disclaimerHeading": "Notes / Fitment",
-    "disclaimerPrice": "Sample / estimate pricing; tax, shipping, and extras not included.",
+    "disclaimerPrice": "Estimated pricing; tax, shipping, and extras not included.",
     "disclaimerFitment": "Accessories are not verified for this vehicle — a technician must check before install/order.",
     "disclaimerContract": "This quote is not a contract; technical confirmation required before order.",
-    "contact": "KietAuto — Phase 1 contact placeholder (no real contact details yet)"
+    "brandSub": "AI Car Upgrade",
+    "contact": "KietAuto — contact the store to confirm quote and installation"
   },
   "categories": {
     "dashcam": "Dashcam",
@@ -144,70 +161,70 @@
   "products": {
     "dcV35": {
       "name": "Dashcam V35 Front/Rear",
-      "desc": "Front/rear camera with Wi‑Fi — sample data."
+      "desc": "Front/rear camera with Wi‑Fi."
     },
     "dcPro4k": {
       "name": "Dashcam Pro 4K",
-      "desc": "4K + parking mode — sample data."
+      "desc": "4K + parking mode."
     },
     "huAndroid": {
       "name": "Android Head Unit 10\"",
-      "desc": "10-inch Android unit — sample data."
+      "desc": "10-inch Android unit."
     },
     "huWireless": {
       "name": "Wireless Multimedia Unit",
-      "desc": "Wireless CarPlay capable — sample data."
+      "desc": "Wireless CarPlay capable."
     },
     "cpWireless": {
       "name": "Wireless CarPlay Adapter",
-      "desc": "Wireless CarPlay adapter — sample data."
+      "desc": "Wireless CarPlay adapter."
     },
     "cpModule": {
       "name": "OEM CarPlay Module",
-      "desc": "OEM integration module — sample data."
+      "desc": "OEM integration module."
     },
     "cam360Basic": {
       "name": "360 Camera Basic",
-      "desc": "Bird-view 4-camera kit — sample data."
+      "desc": "Bird-view 4-camera kit."
     },
     "cam360Pro": {
       "name": "360 Camera Pro 3D",
-      "desc": "3D + recording — sample data."
+      "desc": "3D + recording."
     },
     "ledFog": {
       "name": "LED Fog Kit",
-      "desc": "LED fog light kit — sample data."
+      "desc": "LED fog light kit."
     },
     "ledBar": {
       "name": "LED Light Bar 22\"",
-      "desc": "Off-road light bar — sample data."
+      "desc": "Off-road light bar."
     },
     "tintCeramic": {
       "name": "Ceramic Tint Package",
-      "desc": "Ceramic tint package — labor bundled — sample data."
+      "desc": "Ceramic tint package — labor bundled."
     },
     "remoteStart": {
       "name": "Remote Start Pro",
-      "desc": "Remote start system — sample data."
+      "desc": "Remote start system."
     },
     "liftgateKit": {
       "name": "Power Liftgate Standard",
-      "desc": "Hands-free power liftgate kit — sample data."
+      "desc": "Hands-free power liftgate kit."
     },
     "liftgatePro": {
       "name": "Power Liftgate Pro",
-      "desc": "Height memory + anti-pinch power liftgate — sample data."
+      "desc": "Height memory + anti-pinch power liftgate."
     }
   },
   "fitmentNotes": {
-    "installedCamry2024": "Bench/install verified on Camry 2024 (sample).",
-    "installedAccord": "Verified on Accord (sample).",
-    "installedRav4Xle": "Verified on RAV4 XLE 2024 (sample).",
-    "hondaWireless": "Adapter verified across many Honda models (sample).",
-    "f150BirdView": "360 kit verified on F-150 (sample).",
+    "installedCamry2024": "Bench/install verified on Camry 2024.",
+    "installedAccord": "Verified on Accord.",
+    "installedRav4Xle": "Verified on RAV4 XLE 2024.",
+    "hondaWireless": "Adapter verified across many Honda models.",
+    "f150BirdView": "360 kit verified on F-150.",
     "teslaNoHeadUnit": "Tesla uses OEM screen — standard head-unit swap not applicable.",
     "teslaNoCarplay": "Tesla does not support OEM CarPlay.",
-    "crvLiftgate2024": "Power liftgate verified on CR-V 2024 (sample).",
-    "rav4LiftgateXle": "Power liftgate Pro verified on RAV4 XLE 2024 (sample)."
+    "crvLiftgate2024": "Power liftgate verified on CR-V 2024.",
+    "rav4LiftgateXle": "Power liftgate Pro verified on RAV4 XLE 2024."
   }
 }

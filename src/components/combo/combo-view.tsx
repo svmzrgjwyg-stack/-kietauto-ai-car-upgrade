@@ -11,6 +11,7 @@ import {
   getSeedProducts,
   vehicleLabel,
 } from "@/lib/catalog/data";
+import { listDuplicateCategories } from "@/lib/combo/conflicts";
 import { resolveFitment } from "@/lib/fitment/resolve";
 import {
   comboTotals,
@@ -19,6 +20,16 @@ import {
   lineProductTotal,
   lineTotal,
 } from "@/lib/pricing/totals";
+
+const CATEGORY_I18N: Record<string, string> = {
+  dashcam: "dashcam",
+  "head-unit": "headUnit",
+  carplay: "carplay",
+  "camera-360": "camera360",
+  lights: "lights",
+  "power-liftgate": "powerLiftgate",
+  other: "other",
+};
 
 export function ComboView() {
   const t = useTranslations();
@@ -46,6 +57,19 @@ export function ComboView() {
     return status === "unverified";
   });
 
+  const duplicateCategories = useMemo(
+    () => listDuplicateCategories(items, products),
+    [items, products],
+  );
+
+  const duplicateLabel = duplicateCategories
+    .map((id) =>
+      t(
+        `categories.${CATEGORY_I18N[id] ?? "other"}` as Parameters<typeof t>[0],
+      ),
+    )
+    .join(", ");
+
   if (!hydrated) return null;
 
   if (items.length === 0) {
@@ -72,6 +96,14 @@ export function ComboView() {
       {hasUnverified && (
         <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950">
           {t("combo.unverifiedWarn")}
+        </p>
+      )}
+      {duplicateCategories.length > 0 && (
+        <p
+          role="status"
+          className="rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3 text-sm text-orange-950"
+        >
+          {t("combo.duplicateWarn", { categories: duplicateLabel })}
         </p>
       )}
 

@@ -24,7 +24,7 @@ describe("PDF layout invariants", () => {
     expect(TABLE_COLS.qty).toBeGreaterThan(0);
     expect(TABLE_COLS.fit).toBeGreaterThan(TABLE_COLS.qty);
     expect(TABLE_COL_GAP).toBeGreaterThanOrEqual(4);
-    // Explicit separation: fitment width reserved so “2” cannot sit on “Chưa xác minh”
+    // Explicit separation: fitment width reserved so “2” cannot sit on “Cần xác minh”
     expect(TABLE_COLS.fit).toBeGreaterThanOrEqual(80);
   });
 
@@ -41,8 +41,8 @@ describe("dedupeQuoteDisclaimers", () => {
   it("keeps a single fitment warning when duplicates are present", () => {
     const lines = [
       "Phụ kiện chưa được xác minh tương thích với xe này — kỹ thuật viên phải kiểm tra trước khi lắp đặt/đặt hàng.",
-      "Giá mẫu / ước tính; chưa gồm thuế, shipping, phụ phí phát sinh.",
-      "Sản phẩm chưa xác minh chưa được xác nhận lắp được trên xe này. Cần kỹ thuật viên kiểm tra trước khi đặt hàng.",
+      "Giá ước tính; chưa gồm thuế, shipping, phụ phí phát sinh.",
+      "Sản phẩm cần xác minh chưa được xác nhận lắp được trên xe này. Cần kỹ thuật viên kiểm tra trước khi đặt hàng.",
       "Báo giá không phải hợp đồng; cần xác nhận kỹ thuật trước khi đặt hàng.",
       "Phụ kiện chưa được xác minh tương thích với xe này — kỹ thuật viên phải kiểm tra trước khi lắp đặt/đặt hàng.",
     ];
@@ -64,9 +64,9 @@ describe("dedupeQuoteDisclaimers", () => {
   it("preserves price and contract notes alongside one fitment warning", () => {
     const out = dedupeQuoteDisclaimers([
       "Accessories are not verified for this vehicle — a technician must check before install/order.",
-      "Sample / estimate pricing; tax, shipping, and extras not included.",
+      "Estimated pricing; tax, shipping, and extras not included.",
       "This quote is not a contract; technical confirmation required before order.",
-      "Items marked not verified have not been confirmed to fit this vehicle. Technician confirmation required before ordering.",
+      "Items marked needs verification have not been confirmed to fit this vehicle. Technician confirmation required before ordering.",
     ]);
     expect(out).toHaveLength(3);
     expect(out[0]).toMatch(/not verified/i);

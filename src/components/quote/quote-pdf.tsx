@@ -34,6 +34,7 @@ export type QuotePdfLabels = {
   laborSubtotal: string;
   total: string;
   contact: string;
+  brandSub?: string;
   fitmentVerified: string;
   fitmentUnverified: string;
   fitmentIncompatible: string;
@@ -264,7 +265,7 @@ function QuoteDocument({
               <Text style={styles.brand}>KietAuto</Text>
             </View>
             <Text style={styles.brandSub}>
-              AI Car Upgrade · Phase 1 sample
+              {labels.brandSub ?? "AI Car Upgrade"}
             </Text>
           </View>
           <View style={styles.metaRight}>

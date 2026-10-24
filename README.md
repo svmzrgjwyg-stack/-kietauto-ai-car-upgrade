@@ -20,8 +20,11 @@ Greenfield Next.js app for honest accessory recommendations, combo quotes, and a
 - Admin edits persist to `data/admin/products.json` and `data/admin/fitment.json` (sample mode)
 - Categories include dashcam, CarPlay, Android head unit, 360 camera, lights, **power liftgate (cốp điện)**, and other accessories
 - Clear **Yêu cầu báo giá / Request quote** CTA on product cards, combo, and quote page
+- Quote submit uses `QUOTE_WEBHOOK_URL` — **never fake success** if missing/failing; PII only with consent
+- Same-category combo conflict warning (keep both / replace)
 - Admin can explicitly confirm fitment (verified / unverified / incompatible) — never defaults to verified
-- Placeholder images/logos under `public/placeholders/`
+- Catalog images under `public/placeholders/` (replace with brand assets when ready)
+- Customer UI/PDF: no fake business contact; neutral “liên hệ cửa hàng” until real details exist
 - Preview hosting OK; **no production deploy** until requested
 
 ## Scripts
@@ -46,8 +49,13 @@ Production must use a real IdP (OAuth/OIDC). This credentials stub models sessio
 
 ## Fitment honesty
 
-Missing fitment record → **unverified**. UI badges, chat stub, and PDF disclaimers all enforce this.
+Missing fitment record → **needs verification / cần xác minh**. UI badges, chat stub, and PDF disclaimers all enforce this.
 
 ## Env
 
-Copy `.env.example` → `.env.local`. See variables there. `OPENAI_API_KEY` is never required for Phase 1.
+Copy `.env.example` → `.env.local`. Names only for quote submit:
+
+- `QUOTE_WEBHOOK_URL` — required for successful quote request
+- `QUOTE_WEBHOOK_SECRET` — optional bearer for the webhook
+
+`OPENAI_API_KEY` is never required for this MVP.

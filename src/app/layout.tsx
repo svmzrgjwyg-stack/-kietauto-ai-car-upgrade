@@ -17,7 +17,7 @@ const display = Fraunces({
 export const metadata: Metadata = {
   title: "KietAuto — AI Car Upgrade",
   description:
-    "Phase 1 MVP: honest fitment accessory recommendations and PDF quotes.",
+    "Honest fitment accessory recommendations and PDF quotes for KietAuto.",
 };
 
 export const viewport: Viewport = {
