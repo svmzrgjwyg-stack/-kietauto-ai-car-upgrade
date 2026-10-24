@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { getTrims, getYears } from "@/lib/catalog/data";
+import { getFitmentRecords, getTrims, getYears } from "@/lib/catalog/data";
 import {
   isCompleteVehicleSelection,
   sanitizeVehicleDraft,
 } from "@/lib/catalog/vehicle-cascade";
+import { resolveFitment } from "@/lib/fitment/resolve";
 
 describe("vehicle cascade data", () => {
   it("Camry 2024 has LE and XLE trims", () => {
@@ -84,5 +85,23 @@ describe("sanitizeVehicleDraft / isCompleteVehicleSelection", () => {
         trimId: "",
       }),
     ).toBe(false);
+  });
+});
+
+describe("Camry 2025 fitment honesty", () => {
+  it("sample products stay unverified for Camry 2025 SE (never auto-verified)", () => {
+    const selection = {
+      brandId: "toyota",
+      modelId: "camry",
+      yearId: "camry-2025",
+      trimId: "camry-2025-se",
+    };
+    const records = getFitmentRecords();
+    // Spot-check common SKUs — must not claim verified for 2025 SE
+    for (const productId of ["dc-v35", "liftgate-kit", "cp-wireless"]) {
+      const { status } = resolveFitment(productId, selection, records);
+      expect(status).not.toBe("verified");
+      expect(status === "unverified" || status === "incompatible").toBe(true);
+    }
   });
 });

@@ -35,6 +35,9 @@
     "title": "Accessory recommendations",
     "needVehicle": "Select a vehicle first for contextual suggestions.",
     "add": "Add to combo",
+    "added": "Added ✓",
+    "addedToast": "Added to combo — open the Combo tab",
+    "comboCount": "Combo: {count} item(s)",
     "requestQuote": "Request quote",
     "labor": "Labor",
     "price": "Price",
@@ -46,13 +49,17 @@
     "empty": "No products yet. Add some from Recommendations.",
     "includeLabor": "Include labor",
     "qty": "Qty",
+    "lineParts": "Parts",
+    "lineLabor": "Labor",
+    "lineTotal": "Line total",
     "subtotalProducts": "Parts",
     "subtotalLabor": "Labor",
     "total": "Total",
     "exportPdf": "Export PDF quote",
     "requestQuote": "Request quote",
     "unverifiedWarn": "This combo includes unverified fitment items — review carefully before ordering.",
-    "remove": "Remove"
+    "remove": "Remove",
+    "removedToast": "Removed from combo"
   },
   "quote": {
     "title": "Request a quote",

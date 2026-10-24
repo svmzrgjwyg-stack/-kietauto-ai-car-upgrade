@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { FitmentBadge } from "@/components/ui/fitment-badge";
 import { formatUsd } from "@/lib/pricing/totals";
@@ -24,6 +25,13 @@ export function ProductCard({
   const t = useTranslations();
   const name = t(product.nameKey as Parameters<typeof t>[0]);
   const desc = t(product.descriptionKey as Parameters<typeof t>[0]);
+  const [justAdded, setJustAdded] = useState(false);
+
+  function handleAdd() {
+    onAdd();
+    setJustAdded(true);
+    window.setTimeout(() => setJustAdded(false), 1600);
+  }
 
   if (status === "incompatible") {
     return (
@@ -34,7 +42,7 @@ export function ProductCard({
             alt=""
             width={88}
             height={88}
-            className="h-[88px] w-[88px] rounded-2xl object-cover"
+            className="pointer-events-none h-[88px] w-[88px] rounded-2xl object-cover"
           />
           <div className="min-w-0 flex-1 space-y-2">
             <FitmentBadge status={status} />
@@ -47,14 +55,14 @@ export function ProductCard({
   }
 
   return (
-    <article className="overflow-hidden rounded-3xl border border-[var(--line)] bg-white shadow-[0_10px_30px_-18px_rgba(15,23,42,0.45)]">
+    <article className="relative overflow-hidden rounded-3xl border border-[var(--line)] bg-white shadow-[0_10px_30px_-18px_rgba(15,23,42,0.45)]">
       <div className="flex gap-3 p-3">
         <Image
           src={product.imageUrl}
           alt=""
           width={96}
           height={96}
-          className="h-24 w-24 shrink-0 rounded-2xl bg-[var(--wash)] object-cover"
+          className="pointer-events-none h-24 w-24 shrink-0 rounded-2xl bg-[var(--wash)] object-cover"
         />
         <div className="min-w-0 flex-1 space-y-2">
           <FitmentBadge status={status} />
@@ -68,23 +76,25 @@ export function ProductCard({
               · {t("recommend.labor")} {formatUsd(product.laborCostUsd, locale)}
             </span>
           </p>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-            <button
-              type="button"
-              onClick={onAdd}
-              className="min-h-11 w-full rounded-xl border border-[var(--brand)] bg-white text-sm font-semibold text-[var(--brand)]"
-            >
-              {t("recommend.add")}
-            </button>
-            <button
-              type="button"
-              onClick={onRequestQuote}
-              className="min-h-11 w-full rounded-xl bg-[var(--accent)] text-sm font-bold text-[var(--ink)]"
-            >
-              {t("recommend.requestQuote")}
-            </button>
-          </div>
         </div>
+      </div>
+
+      {/* Full-width actions below media/text — larger iOS hit targets */}
+      <div className="relative z-10 grid grid-cols-1 gap-2 border-t border-[var(--line)] bg-[var(--wash)]/60 p-3 sm:grid-cols-2">
+        <button
+          type="button"
+          onClick={handleAdd}
+          className="min-h-12 w-full touch-manipulation select-none rounded-xl border border-[var(--brand)] bg-white px-3 text-sm font-semibold text-[var(--brand)] active:bg-[var(--brand-soft)]"
+        >
+          {justAdded ? t("recommend.added") : t("recommend.add")}
+        </button>
+        <button
+          type="button"
+          onClick={onRequestQuote}
+          className="min-h-12 w-full touch-manipulation select-none rounded-xl bg-[var(--accent)] px-3 text-sm font-bold text-[var(--ink)] active:opacity-90"
+        >
+          {t("recommend.requestQuote")}
+        </button>
       </div>
     </article>
   );

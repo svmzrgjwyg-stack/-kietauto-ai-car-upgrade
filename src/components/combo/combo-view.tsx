@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { FitmentBadge } from "@/components/ui/fitment-badge";
+import { useToast } from "@/components/ui/toast";
 import { useCombo } from "@/components/combo/combo-context";
 import {
   getFitmentRecords,
@@ -11,11 +12,18 @@ import {
   vehicleLabel,
 } from "@/lib/catalog/data";
 import { resolveFitment } from "@/lib/fitment/resolve";
-import { comboTotals, formatUsd } from "@/lib/pricing/totals";
+import {
+  comboTotals,
+  formatUsd,
+  lineLaborTotal,
+  lineProductTotal,
+  lineTotal,
+} from "@/lib/pricing/totals";
 
 export function ComboView() {
   const t = useTranslations();
   const locale = useLocale();
+  const { showToast } = useToast();
   const {
     items,
     vehicle,
@@ -46,7 +54,7 @@ export function ComboView() {
         <p className="text-sm text-[var(--muted)]">{t("combo.empty")}</p>
         <Link
           href={`/${locale}/recommend`}
-          className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-[var(--brand)] px-5 text-sm font-semibold text-white"
+          className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-[var(--brand)] px-5 text-sm font-semibold text-white touch-manipulation"
         >
           {t("nav.recommend")}
         </Link>
@@ -55,7 +63,7 @@ export function ComboView() {
   }
 
   return (
-    <div className="space-y-4 pb-28">
+    <div className="space-y-4 pb-36">
       {vehicle && (
         <p className="text-sm font-medium text-[var(--brand)]">
           {vehicleLabel(vehicle)}
@@ -73,6 +81,9 @@ export function ComboView() {
           if (!product) return null;
           const { status } = resolveFitment(item.productId, vehicle, fitment);
           const name = t(product.nameKey as Parameters<typeof t>[0]);
+          const parts = lineProductTotal(product, item);
+          const labor = lineLaborTotal(product, item);
+          const line = lineTotal(product, item);
           return (
             <li
               key={item.productId}
@@ -96,7 +107,7 @@ export function ComboView() {
                     onChange={(e) =>
                       setQty(item.productId, Number(e.target.value) || 1)
                     }
-                    className="min-h-11 w-16 rounded-xl border border-[var(--line)] px-2 text-center"
+                    className="min-h-11 w-16 rounded-xl border border-[var(--line)] px-2 text-center text-[16px]"
                   />
                 </label>
                 <label className="flex min-h-11 items-center gap-2 text-sm">
@@ -112,20 +123,29 @@ export function ComboView() {
                 </label>
                 <button
                   type="button"
-                  onClick={() => removeProduct(item.productId)}
-                  className="ml-auto text-sm font-semibold text-rose-700"
+                  onClick={() => {
+                    removeProduct(item.productId);
+                    showToast(t("combo.removedToast"));
+                  }}
+                  className="ml-auto min-h-11 touch-manipulation rounded-xl border border-rose-200 px-3 text-sm font-semibold text-rose-700"
                 >
                   {t("combo.remove")}
                 </button>
               </div>
-              <p className="mt-2 text-sm font-semibold">
-                {formatUsd(product.priceUsd * item.qty, locale)}
-                {item.includeLabor && (
-                  <span className="ml-2 font-medium text-[var(--muted)]">
-                    + {formatUsd(product.laborCostUsd * item.qty, locale)} labor
-                  </span>
-                )}
-              </p>
+              <div className="mt-3 space-y-1 rounded-2xl bg-[var(--wash)] px-3 py-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-[var(--muted)]">{t("combo.lineParts")}</span>
+                  <span>{formatUsd(parts, locale)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[var(--muted)]">{t("combo.lineLabor")}</span>
+                  <span>{formatUsd(labor, locale)}</span>
+                </div>
+                <div className="flex justify-between border-t border-[var(--line)] pt-1 font-semibold">
+                  <span>{t("combo.lineTotal")}</span>
+                  <span>{formatUsd(line, locale)}</span>
+                </div>
+              </div>
             </li>
           );
         })}
@@ -150,13 +170,13 @@ export function ComboView() {
         <div className="mx-auto flex max-w-lg flex-col gap-2">
           <Link
             href={`/${locale}/quote`}
-            className="flex min-h-12 items-center justify-center rounded-2xl bg-[var(--accent)] text-sm font-bold text-[var(--ink)]"
+            className="flex min-h-12 touch-manipulation items-center justify-center rounded-2xl bg-[var(--accent)] text-sm font-bold text-[var(--ink)]"
           >
             {t("combo.requestQuote")}
           </Link>
           <Link
             href={`/${locale}/quote`}
-            className="flex min-h-11 items-center justify-center text-sm font-semibold text-[var(--brand)]"
+            className="flex min-h-11 touch-manipulation items-center justify-center text-sm font-semibold text-[var(--brand)]"
           >
             {t("combo.exportPdf")}
           </Link>

@@ -35,6 +35,9 @@
     "title": "Gợi ý phụ kiện",
     "needVehicle": "Hãy chọn xe trước để xem gợi ý theo ngữ cảnh.",
     "add": "Thêm vào combo",
+    "added": "Đã thêm ✓",
+    "addedToast": "Đã thêm vào combo — xem tab Combo",
+    "comboCount": "Combo: {count} món",
     "requestQuote": "Yêu cầu báo giá",
     "labor": "Lắp đặt",
     "price": "Giá",
@@ -46,13 +49,17 @@
     "empty": "Chưa có sản phẩm. Thêm từ trang Gợi ý.",
     "includeLabor": "Gồm lắp đặt",
     "qty": "SL",
+    "lineParts": "Phụ kiện",
+    "lineLabor": "Lắp đặt",
+    "lineTotal": "Thành tiền",
     "subtotalProducts": "Phụ kiện",
     "subtotalLabor": "Lắp đặt",
     "total": "Tổng",
     "exportPdf": "Xuất PDF báo giá",
     "requestQuote": "Yêu cầu báo giá",
     "unverifiedWarn": "Combo có sản phẩm chưa xác minh fitment — xem kỹ trước khi đặt.",
-    "remove": "Xóa"
+    "remove": "Xóa",
+    "removedToast": "Đã xóa khỏi combo"
   },
   "quote": {
     "title": "Yêu cầu báo giá",
