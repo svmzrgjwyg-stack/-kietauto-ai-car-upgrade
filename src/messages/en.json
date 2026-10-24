@@ -1,0 +1,168 @@
+{
+  "brand": "KietAuto",
+  "tagline": "Smarter car upgrades — honest fitment",
+  "nav": {
+    "home": "Home",
+    "vehicle": "Vehicle",
+    "recommend": "Recommend",
+    "combo": "Combo",
+    "chat": "AI Chat",
+    "admin": "Admin",
+    "quote": "Quote"
+  },
+  "home": {
+    "cta": "Start with your vehicle",
+    "subtitle": "Pick a vehicle → browse sample accessories → build a combo → export PDF. Fitment defaults to not verified.",
+    "disclaimer": "Phase 1 sample data only. We do not collect real customer PII."
+  },
+  "vehicle": {
+    "title": "Select your vehicle",
+    "brand": "Brand",
+    "model": "Model",
+    "year": "Year",
+    "trim": "Trim",
+    "continue": "See recommendations",
+    "reset": "Reset",
+    "selected": "Selected vehicle"
+  },
+  "recommend": {
+    "title": "Accessory recommendations",
+    "needVehicle": "Select a vehicle first for contextual suggestions.",
+    "add": "Add to combo",
+    "labor": "Labor",
+    "price": "Price",
+    "all": "All",
+    "filter": "Category"
+  },
+  "combo": {
+    "title": "Your combo",
+    "empty": "No products yet. Add some from Recommendations.",
+    "includeLabor": "Include labor",
+    "qty": "Qty",
+    "subtotalProducts": "Parts",
+    "subtotalLabor": "Labor",
+    "total": "Total",
+    "exportPdf": "Export PDF quote",
+    "unverifiedWarn": "This combo includes unverified fitment items — review carefully before ordering.",
+    "remove": "Remove"
+  },
+  "quote": {
+    "title": "PDF quote",
+    "customerName": "Name (optional — not stored on server)",
+    "note": "Note",
+    "download": "Download PDF",
+    "back": "Back to combo"
+  },
+  "chat": {
+    "title": "AI advisory (stub)",
+    "placeholder": "Ask about dashcam, pricing, or fitment…",
+    "send": "Send",
+    "hint": "Phase 1: rule-based answers, no paid API calls. Never claims compatibility unless verified."
+  },
+  "admin": {
+    "title": "Product admin",
+    "login": "Admin sign in",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "sampleMode": "Sample mode — edits persist to local JSON, not a production DB.",
+    "roleNote": "Auth.js + RBAC architecture (admin/editor). Production needs a real IdP.",
+    "save": "Save",
+    "new": "Add product",
+    "price": "Price USD",
+    "labor": "Labor USD",
+    "delete": "Hide",
+    "unauthorized": "Sign in with admin or editor role required."
+  },
+  "fitment": {
+    "verified": "Verified fitment",
+    "unverified": "Fitment not verified",
+    "incompatible": "Not compatible",
+    "disclaimer": "Items marked not verified have not been confirmed to fit this vehicle. Technician confirmation required before ordering.",
+    "badgeAria": "Fitment status"
+  },
+  "pdf": {
+    "title": "Accessory quote",
+    "quoteId": "Quote",
+    "date": "Date",
+    "vehicle": "Vehicle",
+    "sku": "SKU",
+    "item": "Item",
+    "fitment": "Fitment",
+    "unit": "Unit",
+    "labor": "Labor",
+    "line": "Line total",
+    "disclaimerPrice": "Sample / estimate pricing; tax, shipping, and extras not included.",
+    "disclaimerFitment": "Items marked Not verified are not confirmed to fit this vehicle.",
+    "disclaimerContract": "This quote is not a contract; technical confirmation required before order.",
+    "contact": "KietAuto — Phase 1 contact placeholder"
+  },
+  "categories": {
+    "dashcam": "Dashcam",
+    "headUnit": "Android head unit",
+    "carplay": "CarPlay",
+    "camera360": "360 camera",
+    "lights": "Lights",
+    "other": "Other accessories"
+  },
+  "products": {
+    "dcV35": {
+      "name": "Dashcam V35 Front/Rear",
+      "desc": "Front/rear camera with Wi‑Fi — sample data."
+    },
+    "dcPro4k": {
+      "name": "Dashcam Pro 4K",
+      "desc": "4K + parking mode — sample data."
+    },
+    "huAndroid": {
+      "name": "Android Head Unit 10\"",
+      "desc": "10-inch Android unit — sample data."
+    },
+    "huWireless": {
+      "name": "Wireless Multimedia Unit",
+      "desc": "Wireless CarPlay capable — sample data."
+    },
+    "cpWireless": {
+      "name": "Wireless CarPlay Adapter",
+      "desc": "Wireless CarPlay adapter — sample data."
+    },
+    "cpModule": {
+      "name": "OEM CarPlay Module",
+      "desc": "OEM integration module — sample data."
+    },
+    "cam360Basic": {
+      "name": "360 Camera Basic",
+      "desc": "Bird-view 4-camera kit — sample data."
+    },
+    "cam360Pro": {
+      "name": "360 Camera Pro 3D",
+      "desc": "3D + recording — sample data."
+    },
+    "ledFog": {
+      "name": "LED Fog Kit",
+      "desc": "LED fog light kit — sample data."
+    },
+    "ledBar": {
+      "name": "LED Light Bar 22\"",
+      "desc": "Off-road light bar — sample data."
+    },
+    "tintCeramic": {
+      "name": "Ceramic Tint Package",
+      "desc": "Ceramic tint package — labor bundled — sample data."
+    },
+    "remoteStart": {
+      "name": "Remote Start Pro",
+      "desc": "Remote start system — sample data."
+    }
+  },
+  "fitmentNotes": {
+    "installedCamry2024": "Bench/install verified on Camry 2024 (sample).",
+    "installedAccord": "Verified on Accord (sample).",
+    "installedRav4Xle": "Verified on RAV4 XLE 2024 (sample).",
+    "hondaWireless": "Adapter verified across many Honda models (sample).",
+    "f150BirdView": "360 kit verified on F-150 (sample).",
+    "teslaNoHeadUnit": "Tesla uses OEM screen — standard head-unit swap not applicable.",
+    "teslaNoCarplay": "Tesla does not support OEM CarPlay."
+  }
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="img" aria-label="Lights placeholder">
+  <rect width="240" height="240" rx="28" fill="#fff7ed"/>
+  <path d="M120 36 L148 110 H92 Z" fill="#e8b84a"/>
+  <rect x="70" y="118" width="100" height="56" rx="12" fill="#0b3d5c"/>
+  <rect x="86" y="134" width="20" height="24" rx="4" fill="#fde68a"/>
+  <rect x="110" y="134" width="20" height="24" rx="4" fill="#fde68a"/>
+  <rect x="134" y="134" width="20" height="24" rx="4" fill="#fde68a"/>
+</svg>

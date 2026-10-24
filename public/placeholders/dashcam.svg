@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="img" aria-label="Dashcam placeholder">
+  <rect width="240" height="240" rx="28" fill="#d7e8f3"/>
+  <rect x="48" y="78" width="144" height="84" rx="16" fill="#0b3d5c"/>
+  <circle cx="120" cy="120" r="28" fill="#e8b84a"/>
+  <circle cx="120" cy="120" r="12" fill="#0f172a"/>
+  <rect x="100" y="58" width="40" height="24" rx="6" fill="#124a6b"/>
+</svg>

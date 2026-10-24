@@ -1,0 +1,168 @@
+{
+  "brand": "KietAuto",
+  "tagline": "Nâng cấp xe thông minh — tư vấn trung thực",
+  "nav": {
+    "home": "Trang chủ",
+    "vehicle": "Chọn xe",
+    "recommend": "Gợi ý",
+    "combo": "Combo",
+    "chat": "Tư vấn AI",
+    "admin": "Admin",
+    "quote": "Báo giá"
+  },
+  "home": {
+    "cta": "Bắt đầu chọn xe",
+    "subtitle": "Chọn xe → xem phụ kiện mẫu → ghép combo → xuất PDF. Fitment mặc định chưa xác minh.",
+    "disclaimer": "Dữ liệu mẫu Phase 1. Không thu thập thông tin khách hàng thật."
+  },
+  "vehicle": {
+    "title": "Chọn xe của bạn",
+    "brand": "Hãng",
+    "model": "Dòng xe",
+    "year": "Năm",
+    "trim": "Phiên bản",
+    "continue": "Xem gợi ý",
+    "reset": "Chọn lại",
+    "selected": "Xe đã chọn"
+  },
+  "recommend": {
+    "title": "Gợi ý phụ kiện",
+    "needVehicle": "Hãy chọn xe trước để xem gợi ý theo ngữ cảnh.",
+    "add": "Thêm vào combo",
+    "labor": "Lắp đặt",
+    "price": "Giá",
+    "all": "Tất cả",
+    "filter": "Danh mục"
+  },
+  "combo": {
+    "title": "Combo của bạn",
+    "empty": "Chưa có sản phẩm. Thêm từ trang Gợi ý.",
+    "includeLabor": "Gồm lắp đặt",
+    "qty": "SL",
+    "subtotalProducts": "Phụ kiện",
+    "subtotalLabor": "Lắp đặt",
+    "total": "Tổng",
+    "exportPdf": "Xuất PDF báo giá",
+    "unverifiedWarn": "Combo có sản phẩm chưa xác minh fitment — xem kỹ trước khi đặt.",
+    "remove": "Xóa"
+  },
+  "quote": {
+    "title": "Báo giá PDF",
+    "customerName": "Tên (tuỳ chọn — không lưu server)",
+    "note": "Ghi chú",
+    "download": "Tải PDF",
+    "back": "Quay lại combo"
+  },
+  "chat": {
+    "title": "Tư vấn AI (stub)",
+    "placeholder": "Hỏi về dashcam, giá, hoặc lắp đặt…",
+    "send": "Gửi",
+    "hint": "Phase 1: trả lời rule-based, không gọi API trả phí. Không khẳng định tương thích nếu chưa xác minh."
+  },
+  "admin": {
+    "title": "Admin sản phẩm",
+    "login": "Đăng nhập Admin",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "signIn": "Đăng nhập",
+    "signOut": "Đăng xuất",
+    "sampleMode": "Sample mode — chỉnh sửa ghi vào JSON local, không phải production DB.",
+    "roleNote": "Kiến trúc Auth.js + RBAC (admin/editor). Production cần IdP thật.",
+    "save": "Lưu",
+    "new": "Thêm sản phẩm",
+    "price": "Giá USD",
+    "labor": "Labor USD",
+    "delete": "Ẩn",
+    "unauthorized": "Bạn cần đăng nhập với quyền admin hoặc editor."
+  },
+  "fitment": {
+    "verified": "Đã xác minh",
+    "unverified": "Chưa xác minh",
+    "incompatible": "Không phù hợp",
+    "disclaimer": "Sản phẩm chưa xác minh chưa được xác nhận lắp được trên xe này. Cần kỹ thuật viên kiểm tra trước khi đặt hàng.",
+    "badgeAria": "Trạng thái fitment"
+  },
+  "pdf": {
+    "title": "Báo giá phụ kiện",
+    "quoteId": "Mã",
+    "date": "Ngày",
+    "vehicle": "Xe",
+    "sku": "SKU",
+    "item": "Sản phẩm",
+    "fitment": "Fitment",
+    "unit": "Đơn giá",
+    "labor": "Lắp đặt",
+    "line": "Thành tiền",
+    "disclaimerPrice": "Giá mẫu / ước tính; chưa gồm thuế, shipping, phụ phí phát sinh.",
+    "disclaimerFitment": "Sản phẩm đánh dấu Chưa xác minh chưa được xác nhận lắp được trên xe này.",
+    "disclaimerContract": "Báo giá không phải hợp đồng; cần xác nhận kỹ thuật trước khi đặt hàng.",
+    "contact": "KietAuto — liên hệ placeholder Phase 1"
+  },
+  "categories": {
+    "dashcam": "Camera hành trình",
+    "headUnit": "Màn Android",
+    "carplay": "CarPlay",
+    "camera360": "Camera 360",
+    "lights": "Đèn",
+    "other": "Phụ kiện khác"
+  },
+  "products": {
+    "dcV35": {
+      "name": "Dashcam V35 Front/Rear",
+      "desc": "Camera trước/sau, Wi‑Fi — dữ liệu mẫu."
+    },
+    "dcPro4k": {
+      "name": "Dashcam Pro 4K",
+      "desc": "4K + parking mode — dữ liệu mẫu."
+    },
+    "huAndroid": {
+      "name": "Android Head Unit 10\"",
+      "desc": "Màn Android 10 inch — dữ liệu mẫu."
+    },
+    "huWireless": {
+      "name": "Wireless Multimedia Unit",
+      "desc": "Hỗ trợ CarPlay không dây — dữ liệu mẫu."
+    },
+    "cpWireless": {
+      "name": "Wireless CarPlay Adapter",
+      "desc": "Adapter CarPlay không dây — dữ liệu mẫu."
+    },
+    "cpModule": {
+      "name": "OEM CarPlay Module",
+      "desc": "Module tích hợp OEM — dữ liệu mẫu."
+    },
+    "cam360Basic": {
+      "name": "360 Camera Basic",
+      "desc": "Bird-view 4 camera — dữ liệu mẫu."
+    },
+    "cam360Pro": {
+      "name": "360 Camera Pro 3D",
+      "desc": "3D + recording — dữ liệu mẫu."
+    },
+    "ledFog": {
+      "name": "LED Fog Kit",
+      "desc": "Bộ đèn sương mù LED — dữ liệu mẫu."
+    },
+    "ledBar": {
+      "name": "LED Light Bar 22\"",
+      "desc": "Thanh đèn off-road — dữ liệu mẫu."
+    },
+    "tintCeramic": {
+      "name": "Ceramic Tint Package",
+      "desc": "Gói phim ceramic — labor gộp giá — dữ liệu mẫu."
+    },
+    "remoteStart": {
+      "name": "Remote Start Pro",
+      "desc": "Khởi động từ xa — dữ liệu mẫu."
+    }
+  },
+  "fitmentNotes": {
+    "installedCamry2024": "Đã lắp thử trên Camry 2024 (mẫu).",
+    "installedAccord": "Đã lắp thử trên Accord (mẫu).",
+    "installedRav4Xle": "Đã lắp thử trên RAV4 XLE 2024 (mẫu).",
+    "hondaWireless": "Adapter xác minh trên nhiều Honda (mẫu).",
+    "f150BirdView": "Bộ 360 xác minh trên F-150 (mẫu).",
+    "teslaNoHeadUnit": "Tesla dùng màn OEM — không thay head unit tiêu chuẩn.",
+    "teslaNoCarplay": "Tesla không hỗ trợ CarPlay OEM."
+  }
+}

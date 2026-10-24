@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="img" aria-label="360 camera placeholder">
+  <rect width="240" height="240" rx="28" fill="#ecfdf5"/>
+  <ellipse cx="120" cy="120" rx="70" ry="40" fill="none" stroke="#0b3d5c" stroke-width="8"/>
+  <ellipse cx="120" cy="120" rx="40" ry="70" fill="none" stroke="#e8b84a" stroke-width="8"/>
+  <circle cx="120" cy="120" r="14" fill="#0b3d5c"/>
+</svg>
