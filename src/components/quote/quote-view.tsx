@@ -61,11 +61,11 @@ export function QuoteView() {
         vehicleLabel: vehicle ? vehicleLabel(vehicle) : "—",
         lineItems,
         ...totals,
+        // Single fitment warning only (no duplicate of fitment.disclaimer).
         disclaimers: [
-          t("pdf.disclaimerPrice"),
           t("pdf.disclaimerFitment"),
+          t("pdf.disclaimerPrice"),
           t("pdf.disclaimerContract"),
-          t("fitment.disclaimer"),
         ],
         customerName: name || undefined,
         note: note || undefined,

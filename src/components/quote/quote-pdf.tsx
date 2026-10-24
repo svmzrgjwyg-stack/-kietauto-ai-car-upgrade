@@ -11,6 +11,12 @@ import {
 import type { FitmentStatus, QuoteDraft } from "@/types";
 import { ensurePdfFonts } from "@/lib/pdf/fonts";
 import { formatQuoteDate, formatUsdPdf } from "@/lib/pdf/format";
+import {
+  PDF_PAGE,
+  TABLE_COL_GAP,
+  TABLE_COLS,
+  dedupeQuoteDisclaimers,
+} from "@/lib/pdf/layout";
 
 export type QuotePdfLabels = {
   title: string;
@@ -36,10 +42,10 @@ export type QuotePdfLabels = {
 
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 40,
-    paddingBottom: 48,
-    paddingHorizontal: 40,
-    fontSize: 11,
+    paddingTop: PDF_PAGE.marginTop,
+    paddingBottom: PDF_PAGE.marginBottom,
+    paddingHorizontal: PDF_PAGE.marginX,
+    fontSize: 10,
     fontFamily: "NotoSans",
     color: "#0f172a",
     lineHeight: 1.35,
@@ -48,37 +54,88 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    marginBottom: 16,
+    marginBottom: 14,
     borderBottomWidth: 2,
     borderBottomColor: "#0b3d5c",
     paddingBottom: 12,
   },
-  brandBlock: { flexDirection: "column" },
+  brandLeft: {
+    width: "56%",
+    paddingRight: 12,
+  },
+  brandRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 6,
+  },
   logoBox: {
-    width: 36,
-    height: 36,
+    width: 32,
+    height: 32,
     backgroundColor: "#0b3d5c",
     borderRadius: 6,
-    marginBottom: 6,
     justifyContent: "center",
     alignItems: "center",
+    marginRight: 10,
   },
-  logoMark: { color: "#e8b84a", fontSize: 16, fontFamily: "NotoSans", fontWeight: 700 },
-  brand: { fontSize: 20, fontFamily: "NotoSans", fontWeight: 700, color: "#0b3d5c" },
-  brandSub: { fontSize: 9, color: "#64748b" },
-  title: { fontSize: 14, fontFamily: "NotoSans", fontWeight: 700, marginBottom: 4 },
-  meta: { fontSize: 10, color: "#334155", marginBottom: 3 },
-  sectionGap: { marginTop: 14 },
+  logoMark: {
+    color: "#e8b84a",
+    fontSize: 14,
+    fontFamily: "NotoSans",
+    fontWeight: 700,
+  },
+  brand: {
+    fontSize: 18,
+    fontFamily: "NotoSans",
+    fontWeight: 700,
+    color: "#0b3d5c",
+  },
+  brandSub: {
+    fontSize: 9,
+    color: "#64748b",
+    marginTop: 2,
+  },
+  metaRight: {
+    width: "42%",
+    alignItems: "flex-end",
+  },
+  title: {
+    fontSize: 12,
+    fontFamily: "NotoSans",
+    fontWeight: 700,
+    marginBottom: 6,
+    textAlign: "right",
+  },
+  meta: {
+    fontSize: 9,
+    color: "#334155",
+    marginBottom: 3,
+    textAlign: "right",
+  },
+  vehicleBlock: {
+    marginBottom: 10,
+  },
+  vehicleText: {
+    fontSize: 10,
+    fontFamily: "NotoSans",
+    fontWeight: 700,
+    color: "#0b3d5c",
+    marginBottom: 2,
+  },
+  vehicleMeta: {
+    fontSize: 9,
+    color: "#475569",
+    marginBottom: 2,
+  },
   tableHeader: {
     flexDirection: "row",
     backgroundColor: "#0b3d5c",
-    paddingVertical: 7,
-    paddingHorizontal: 6,
-    marginTop: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 4,
+    marginTop: 6,
   },
   tableHeaderText: {
     color: "#ffffff",
-    fontSize: 9,
+    fontSize: 8,
     fontFamily: "NotoSans",
     fontWeight: 700,
   },
@@ -86,21 +143,38 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderBottomWidth: 0.75,
     borderBottomColor: "#dbe3ec",
-    paddingVertical: 7,
-    paddingHorizontal: 6,
+    paddingVertical: 8,
+    paddingHorizontal: 4,
     alignItems: "flex-start",
   },
   tableRowAlt: { backgroundColor: "#f8fafc" },
-  cell: { fontSize: 9, fontFamily: "NotoSans" },
-  colItem: { width: "28%", paddingRight: 4 },
-  colSku: { width: "12%" },
-  colQty: { width: "8%", textAlign: "right" },
-  colFit: { width: "16%", paddingRight: 2 },
-  colNum: { width: "12%", textAlign: "right" },
+  cell: { fontSize: 8, fontFamily: "NotoSans" },
+  cellRight: { fontSize: 8, fontFamily: "NotoSans", textAlign: "right" },
+  colItem: { width: TABLE_COLS.item, paddingRight: TABLE_COL_GAP },
+  colSku: { width: TABLE_COLS.sku, paddingRight: TABLE_COL_GAP },
+  colQty: {
+    width: TABLE_COLS.qty,
+    paddingRight: TABLE_COL_GAP,
+    alignItems: "flex-end",
+  },
+  colFit: {
+    width: TABLE_COLS.fit,
+    paddingRight: TABLE_COL_GAP,
+    paddingLeft: 2,
+  },
+  colNum: {
+    width: TABLE_COLS.unit,
+    paddingRight: TABLE_COL_GAP,
+    alignItems: "flex-end",
+  },
+  colLine: {
+    width: TABLE_COLS.line,
+    alignItems: "flex-end",
+  },
   totalsBox: {
     marginTop: 14,
     alignSelf: "flex-end",
-    width: "48%",
+    width: 220,
     borderWidth: 1,
     borderColor: "#dbe3ec",
     borderRadius: 4,
@@ -111,7 +185,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 4,
-    fontSize: 10,
+    fontSize: 9,
   },
   totalsTotal: {
     flexDirection: "row",
@@ -122,7 +196,7 @@ const styles = StyleSheet.create({
     borderTopColor: "#cbd5e1",
     fontFamily: "NotoSans",
     fontWeight: 700,
-    fontSize: 12,
+    fontSize: 11,
   },
   warnBox: {
     marginTop: 16,
@@ -133,18 +207,23 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   warnTitle: {
-    fontSize: 10,
+    fontSize: 9,
     fontFamily: "NotoSans",
     fontWeight: 700,
     color: "#92400e",
     marginBottom: 4,
   },
-  disclaimer: { fontSize: 9, color: "#475569", marginBottom: 3, lineHeight: 1.4 },
+  disclaimer: {
+    fontSize: 8,
+    color: "#475569",
+    marginBottom: 3,
+    lineHeight: 1.4,
+  },
   footer: {
     position: "absolute",
-    bottom: 28,
-    left: 40,
-    right: 40,
+    bottom: 24,
+    left: PDF_PAGE.marginX,
+    right: PDF_PAGE.marginX,
     fontSize: 8,
     color: "#94a3b8",
     borderTopWidth: 0.75,
@@ -171,19 +250,24 @@ function QuoteDocument({
 }) {
   const locale = quote.locale;
   const dateStr = formatQuoteDate(quote.createdAt, locale);
+  const warnings = dedupeQuoteDisclaimers(quote.disclaimers);
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <View style={styles.brandBlock}>
-            <View style={styles.logoBox}>
-              <Text style={styles.logoMark}>K</Text>
+          <View style={styles.brandLeft}>
+            <View style={styles.brandRow}>
+              <View style={styles.logoBox}>
+                <Text style={styles.logoMark}>K</Text>
+              </View>
+              <Text style={styles.brand}>KietAuto</Text>
             </View>
-            <Text style={styles.brand}>KietAuto</Text>
-            <Text style={styles.brandSub}>AI Car Upgrade · Phase 1 sample</Text>
+            <Text style={styles.brandSub}>
+              AI Car Upgrade · Phase 1 sample
+            </Text>
           </View>
-          <View>
+          <View style={styles.metaRight}>
             <Text style={styles.title}>{labels.title}</Text>
             <Text style={styles.meta}>
               {labels.quoteId}: {quote.id}
@@ -194,36 +278,48 @@ function QuoteDocument({
           </View>
         </View>
 
-        <Text style={styles.meta}>
-          {labels.vehicle}: {quote.vehicleLabel}
-        </Text>
-        {quote.customerName ? (
-          <Text style={styles.meta}>{quote.customerName}</Text>
-        ) : null}
-        {quote.note ? <Text style={styles.meta}>{quote.note}</Text> : null}
+        <View style={styles.vehicleBlock}>
+          <Text style={styles.vehicleText}>
+            {labels.vehicle}: {quote.vehicleLabel}
+          </Text>
+          {quote.customerName ? (
+            <Text style={styles.vehicleMeta}>{quote.customerName}</Text>
+          ) : null}
+          {quote.note ? (
+            <Text style={styles.vehicleMeta}>{quote.note}</Text>
+          ) : null}
+        </View>
 
         <View style={styles.tableHeader}>
-          <Text style={[styles.tableHeaderText, styles.colItem]}>
-            {labels.item}
-          </Text>
-          <Text style={[styles.tableHeaderText, styles.colSku]}>
-            {labels.sku}
-          </Text>
-          <Text style={[styles.tableHeaderText, styles.colQty]}>
-            {labels.qty}
-          </Text>
-          <Text style={[styles.tableHeaderText, styles.colFit]}>
-            {labels.fitment}
-          </Text>
-          <Text style={[styles.tableHeaderText, styles.colNum]}>
-            {labels.unit}
-          </Text>
-          <Text style={[styles.tableHeaderText, styles.colNum]}>
-            {labels.labor}
-          </Text>
-          <Text style={[styles.tableHeaderText, styles.colNum]}>
-            {labels.line}
-          </Text>
+          <View style={styles.colItem}>
+            <Text style={styles.tableHeaderText}>{labels.item}</Text>
+          </View>
+          <View style={styles.colSku}>
+            <Text style={styles.tableHeaderText}>{labels.sku}</Text>
+          </View>
+          <View style={styles.colQty}>
+            <Text style={[styles.tableHeaderText, { textAlign: "right" }]}>
+              {labels.qty}
+            </Text>
+          </View>
+          <View style={styles.colFit}>
+            <Text style={styles.tableHeaderText}>{labels.fitment}</Text>
+          </View>
+          <View style={styles.colNum}>
+            <Text style={[styles.tableHeaderText, { textAlign: "right" }]}>
+              {labels.unit}
+            </Text>
+          </View>
+          <View style={styles.colNum}>
+            <Text style={[styles.tableHeaderText, { textAlign: "right" }]}>
+              {labels.labor}
+            </Text>
+          </View>
+          <View style={styles.colLine}>
+            <Text style={[styles.tableHeaderText, { textAlign: "right" }]}>
+              {labels.line}
+            </Text>
+          </View>
         </View>
 
         {quote.lineItems.map((li, index) => (
@@ -232,21 +328,35 @@ function QuoteDocument({
             style={[styles.tableRow, index % 2 === 1 ? styles.tableRowAlt : {}]}
             wrap={false}
           >
-            <Text style={[styles.cell, styles.colItem]}>{li.name}</Text>
-            <Text style={[styles.cell, styles.colSku]}>{li.sku}</Text>
-            <Text style={[styles.cell, styles.colQty]}>{li.qty}</Text>
-            <Text style={[styles.cell, styles.colFit]}>
-              {fitmentLabel(li.fitmentStatus, labels)}
-            </Text>
-            <Text style={[styles.cell, styles.colNum]}>
-              {formatUsdPdf(li.unitPrice, locale)}
-            </Text>
-            <Text style={[styles.cell, styles.colNum]}>
-              {formatUsdPdf(li.labor, locale)}
-            </Text>
-            <Text style={[styles.cell, styles.colNum]}>
-              {formatUsdPdf(li.lineTotal, locale)}
-            </Text>
+            <View style={styles.colItem}>
+              <Text style={styles.cell}>{li.name}</Text>
+            </View>
+            <View style={styles.colSku}>
+              <Text style={styles.cell}>{li.sku}</Text>
+            </View>
+            <View style={styles.colQty}>
+              <Text style={styles.cellRight}>{li.qty}</Text>
+            </View>
+            <View style={styles.colFit}>
+              <Text style={styles.cell}>
+                {fitmentLabel(li.fitmentStatus, labels)}
+              </Text>
+            </View>
+            <View style={styles.colNum}>
+              <Text style={styles.cellRight}>
+                {formatUsdPdf(li.unitPrice, locale)}
+              </Text>
+            </View>
+            <View style={styles.colNum}>
+              <Text style={styles.cellRight}>
+                {formatUsdPdf(li.labor, locale)}
+              </Text>
+            </View>
+            <View style={styles.colLine}>
+              <Text style={styles.cellRight}>
+                {formatUsdPdf(li.lineTotal, locale)}
+              </Text>
+            </View>
           </View>
         ))}
 
@@ -269,7 +379,7 @@ function QuoteDocument({
 
         <View style={styles.warnBox}>
           <Text style={styles.warnTitle}>{labels.disclaimerHeading}</Text>
-          {quote.disclaimers.map((d, i) => (
+          {warnings.map((d, i) => (
             <Text key={i} style={styles.disclaimer}>
               • {d}
             </Text>
