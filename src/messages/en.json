@@ -21,9 +21,15 @@
     "model": "Model",
     "year": "Year",
     "trim": "Trim",
+    "placeholder": "— Select —",
     "continue": "See recommendations",
     "reset": "Reset",
-    "selected": "Selected vehicle"
+    "selected": "Selected vehicle",
+    "pickTrim": "Choose a trim to continue.",
+    "emptyBrands": "No brands in sample data.",
+    "emptyModels": "No models for this brand.",
+    "emptyYears": "No years for this model.",
+    "emptyTrims": "No trim/version for the selected year. Pick another year or contact a technician."
   },
   "recommend": {
     "title": "Accessory recommendations",

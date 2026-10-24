@@ -19,6 +19,7 @@
     { "id": "camry-2022", "modelId": "camry", "year": 2022 },
     { "id": "camry-2023", "modelId": "camry", "year": 2023 },
     { "id": "camry-2024", "modelId": "camry", "year": 2024 },
+    { "id": "camry-2025", "modelId": "camry", "year": 2025 },
     { "id": "rav4-2023", "modelId": "rav4", "year": 2023 },
     { "id": "rav4-2024", "modelId": "rav4", "year": 2024 },
     { "id": "accord-2023", "modelId": "accord", "year": 2023 },
@@ -35,6 +36,7 @@
   "trims": [
     { "id": "camry-2024-le", "yearId": "camry-2024", "name": "LE", "slug": "le" },
     { "id": "camry-2024-xle", "yearId": "camry-2024", "name": "XLE", "slug": "xle" },
+    { "id": "camry-2025-se", "yearId": "camry-2025", "name": "SE", "slug": "se" },
     { "id": "camry-2023-se", "yearId": "camry-2023", "name": "SE", "slug": "se" },
     { "id": "camry-2022-le", "yearId": "camry-2022", "name": "LE", "slug": "le" },
     { "id": "rav4-2024-xle", "yearId": "rav4-2024", "name": "XLE", "slug": "xle" },

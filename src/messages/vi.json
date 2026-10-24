@@ -21,9 +21,15 @@
     "model": "Dòng xe",
     "year": "Năm",
     "trim": "Phiên bản",
+    "placeholder": "— Chọn —",
     "continue": "Xem gợi ý",
     "reset": "Chọn lại",
-    "selected": "Xe đã chọn"
+    "selected": "Xe đã chọn",
+    "pickTrim": "Chọn phiên bản để tiếp tục.",
+    "emptyBrands": "Chưa có hãng xe trong dữ liệu mẫu.",
+    "emptyModels": "Không có dòng xe cho hãng này.",
+    "emptyYears": "Không có năm cho dòng xe này.",
+    "emptyTrims": "Không có phiên bản (trim) cho năm đã chọn. Hãy chọn năm khác hoặc liên hệ kỹ thuật viên."
   },
   "recommend": {
     "title": "Gợi ý phụ kiện",
