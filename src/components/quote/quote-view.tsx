@@ -121,7 +121,15 @@ export function QuoteView() {
         type="button"
         disabled={busy || items.length === 0}
         onClick={onDownload}
-        className="flex min-h-12 w-full items-center justify-center rounded-2xl bg-[var(--brand)] text-sm font-semibold text-white disabled:opacity-40"
+        className="flex min-h-12 w-full items-center justify-center rounded-2xl bg-[var(--accent)] text-sm font-bold text-[var(--ink)] disabled:opacity-40"
+      >
+        {t("quote.requestCta")}
+      </button>
+      <button
+        type="button"
+        disabled={busy || items.length === 0}
+        onClick={onDownload}
+        className="flex min-h-11 w-full items-center justify-center rounded-2xl border border-[var(--brand)] bg-white text-sm font-semibold text-[var(--brand)] disabled:opacity-40"
       >
         {t("quote.download")}
       </button>

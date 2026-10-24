@@ -4,5 +4,6 @@
   { "id": "carplay", "slug": "carplay", "nameKey": "categories.carplay" },
   { "id": "camera-360", "slug": "camera-360", "nameKey": "categories.camera360" },
   { "id": "lights", "slug": "lights", "nameKey": "categories.lights" },
+  { "id": "power-liftgate", "slug": "power-liftgate", "nameKey": "categories.powerLiftgate" },
   { "id": "other", "slug": "other", "nameKey": "categories.other" }
 ]

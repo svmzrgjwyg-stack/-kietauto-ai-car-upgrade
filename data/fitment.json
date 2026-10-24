@@ -63,5 +63,26 @@
     "brandId": "tesla",
     "status": "incompatible",
     "notesKey": "fitment.notes.teslaNoCarplay"
+  },
+  {
+    "productId": "liftgate-kit",
+    "brandId": "honda",
+    "modelId": "crv",
+    "yearId": "crv-2024",
+    "status": "verified",
+    "notesKey": "fitment.notes.crvLiftgate2024",
+    "verifiedAt": "2026-09-12",
+    "verifiedBy": "tech-demo"
+  },
+  {
+    "productId": "liftgate-pro",
+    "brandId": "toyota",
+    "modelId": "rav4",
+    "yearId": "rav4-2024",
+    "trimId": "rav4-2024-xle",
+    "status": "verified",
+    "notesKey": "fitment.notes.rav4LiftgateXle",
+    "verifiedAt": "2026-09-20",
+    "verifiedBy": "tech-demo"
   }
 ]

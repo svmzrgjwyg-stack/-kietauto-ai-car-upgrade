@@ -29,6 +29,7 @@
     "title": "Gợi ý phụ kiện",
     "needVehicle": "Hãy chọn xe trước để xem gợi ý theo ngữ cảnh.",
     "add": "Thêm vào combo",
+    "requestQuote": "Yêu cầu báo giá",
     "labor": "Lắp đặt",
     "price": "Giá",
     "all": "Tất cả",
@@ -43,14 +44,16 @@
     "subtotalLabor": "Lắp đặt",
     "total": "Tổng",
     "exportPdf": "Xuất PDF báo giá",
+    "requestQuote": "Yêu cầu báo giá",
     "unverifiedWarn": "Combo có sản phẩm chưa xác minh fitment — xem kỹ trước khi đặt.",
     "remove": "Xóa"
   },
   "quote": {
-    "title": "Báo giá PDF",
+    "title": "Yêu cầu báo giá",
     "customerName": "Tên (tuỳ chọn — không lưu server)",
     "note": "Ghi chú",
-    "download": "Tải PDF",
+    "download": "Tải PDF báo giá",
+    "requestCta": "Yêu cầu báo giá",
     "back": "Quay lại combo"
   },
   "chat": {
@@ -73,7 +76,20 @@
     "price": "Giá USD",
     "labor": "Labor USD",
     "delete": "Ẩn",
-    "unauthorized": "Bạn cần đăng nhập với quyền admin hoặc editor."
+    "unauthorized": "Bạn cần đăng nhập với quyền admin hoặc editor.",
+    "fitmentTitle": "Xác nhận fitment",
+    "fitmentHint": "Mặc định luôn là Chưa xác minh. Chỉ chọn Đã xác minh khi kỹ thuật viên đã xác nhận.",
+    "fitmentProduct": "Sản phẩm",
+    "fitmentBrand": "Hãng (tuỳ chọn)",
+    "fitmentModel": "Model (tuỳ chọn)",
+    "fitmentYear": "Năm (tuỳ chọn)",
+    "fitmentTrim": "Trim (tuỳ chọn)",
+    "fitmentStatus": "Trạng thái",
+    "fitmentConfirm": "Lưu xác nhận fitment",
+    "fitmentRemove": "Xóa bản ghi",
+    "fitmentAny": "— mọi —",
+    "productsTab": "Sản phẩm & giá",
+    "fitmentTab": "Xác nhận tương thích"
   },
   "fitment": {
     "verified": "Đã xác minh",
@@ -104,6 +120,7 @@
     "carplay": "CarPlay",
     "camera360": "Camera 360",
     "lights": "Đèn",
+    "powerLiftgate": "Cốp điện",
     "other": "Phụ kiện khác"
   },
   "products": {
@@ -154,6 +171,14 @@
     "remoteStart": {
       "name": "Remote Start Pro",
       "desc": "Khởi động từ xa — dữ liệu mẫu."
+    },
+    "liftgateKit": {
+      "name": "Cốp điện tiêu chuẩn",
+      "desc": "Bộ cốp điện (power liftgate) hands-free — dữ liệu mẫu."
+    },
+    "liftgatePro": {
+      "name": "Cốp điện Pro",
+      "desc": "Cốp điện nhớ chiều cao + chống kẹp — dữ liệu mẫu."
     }
   },
   "fitmentNotes": {
@@ -163,6 +188,8 @@
     "hondaWireless": "Adapter xác minh trên nhiều Honda (mẫu).",
     "f150BirdView": "Bộ 360 xác minh trên F-150 (mẫu).",
     "teslaNoHeadUnit": "Tesla dùng màn OEM — không thay head unit tiêu chuẩn.",
-    "teslaNoCarplay": "Tesla không hỗ trợ CarPlay OEM."
+    "teslaNoCarplay": "Tesla không hỗ trợ CarPlay OEM.",
+    "crvLiftgate2024": "Đã lắp thử cốp điện trên CR-V 2024 (mẫu).",
+    "rav4LiftgateXle": "Đã lắp thử cốp điện Pro trên RAV4 XLE 2024 (mẫu)."
   }
 }

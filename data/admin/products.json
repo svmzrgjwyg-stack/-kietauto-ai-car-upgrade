@@ -120,6 +120,30 @@
     "active": true
   },
   {
+    "id": "liftgate-kit",
+    "sku": "KA-LG-STD",
+    "categoryId": "power-liftgate",
+    "nameKey": "products.liftgateKit.name",
+    "descriptionKey": "products.liftgateKit.desc",
+    "imageUrl": "/placeholders/liftgate.svg",
+    "priceUsd": 549,
+    "laborCostUsd": 249,
+    "tags": ["power-liftgate", "hands-free"],
+    "active": true
+  },
+  {
+    "id": "liftgate-pro",
+    "sku": "KA-LG-PRO",
+    "categoryId": "power-liftgate",
+    "nameKey": "products.liftgatePro.name",
+    "descriptionKey": "products.liftgatePro.desc",
+    "imageUrl": "/placeholders/liftgate.svg",
+    "priceUsd": 749,
+    "laborCostUsd": 299,
+    "tags": ["power-liftgate", "memory", "anti-pinch"],
+    "active": true
+  },
+  {
     "id": "tint-ceramic",
     "sku": "KA-TINT-C",
     "categoryId": "other",

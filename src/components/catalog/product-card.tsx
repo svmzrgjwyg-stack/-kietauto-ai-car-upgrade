@@ -11,9 +11,16 @@ type Props = {
   status: FitmentStatus;
   locale: string;
   onAdd: () => void;
+  onRequestQuote: () => void;
 };
 
-export function ProductCard({ product, status, locale, onAdd }: Props) {
+export function ProductCard({
+  product,
+  status,
+  locale,
+  onAdd,
+  onRequestQuote,
+}: Props) {
   const t = useTranslations();
   const name = t(product.nameKey as Parameters<typeof t>[0]);
   const desc = t(product.descriptionKey as Parameters<typeof t>[0]);
@@ -61,13 +68,22 @@ export function ProductCard({ product, status, locale, onAdd }: Props) {
               · {t("recommend.labor")} {formatUsd(product.laborCostUsd, locale)}
             </span>
           </p>
-          <button
-            type="button"
-            onClick={onAdd}
-            className="min-h-11 w-full rounded-xl bg-[var(--brand)] text-sm font-semibold text-white"
-          >
-            {t("recommend.add")}
-          </button>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <button
+              type="button"
+              onClick={onAdd}
+              className="min-h-11 w-full rounded-xl border border-[var(--brand)] bg-white text-sm font-semibold text-[var(--brand)]"
+            >
+              {t("recommend.add")}
+            </button>
+            <button
+              type="button"
+              onClick={onRequestQuote}
+              className="min-h-11 w-full rounded-xl bg-[var(--accent)] text-sm font-bold text-[var(--ink)]"
+            >
+              {t("recommend.requestQuote")}
+            </button>
+          </div>
         </div>
       </div>
     </article>

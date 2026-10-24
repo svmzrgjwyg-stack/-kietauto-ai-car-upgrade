@@ -29,6 +29,7 @@
     "title": "Accessory recommendations",
     "needVehicle": "Select a vehicle first for contextual suggestions.",
     "add": "Add to combo",
+    "requestQuote": "Request quote",
     "labor": "Labor",
     "price": "Price",
     "all": "All",
@@ -43,14 +44,16 @@
     "subtotalLabor": "Labor",
     "total": "Total",
     "exportPdf": "Export PDF quote",
+    "requestQuote": "Request quote",
     "unverifiedWarn": "This combo includes unverified fitment items — review carefully before ordering.",
     "remove": "Remove"
   },
   "quote": {
-    "title": "PDF quote",
+    "title": "Request a quote",
     "customerName": "Name (optional — not stored on server)",
     "note": "Note",
-    "download": "Download PDF",
+    "download": "Download PDF quote",
+    "requestCta": "Request quote",
     "back": "Back to combo"
   },
   "chat": {
@@ -73,7 +76,20 @@
     "price": "Price USD",
     "labor": "Labor USD",
     "delete": "Hide",
-    "unauthorized": "Sign in with admin or editor role required."
+    "unauthorized": "Sign in with admin or editor role required.",
+    "fitmentTitle": "Confirm fitment",
+    "fitmentHint": "Status always defaults to Not verified. Choose Verified only after technician confirmation.",
+    "fitmentProduct": "Product",
+    "fitmentBrand": "Brand (optional)",
+    "fitmentModel": "Model (optional)",
+    "fitmentYear": "Year (optional)",
+    "fitmentTrim": "Trim (optional)",
+    "fitmentStatus": "Status",
+    "fitmentConfirm": "Save fitment confirmation",
+    "fitmentRemove": "Remove record",
+    "fitmentAny": "— any —",
+    "productsTab": "Products & prices",
+    "fitmentTab": "Confirm compatibility"
   },
   "fitment": {
     "verified": "Verified fitment",
@@ -104,6 +120,7 @@
     "carplay": "CarPlay",
     "camera360": "360 camera",
     "lights": "Lights",
+    "powerLiftgate": "Power liftgate",
     "other": "Other accessories"
   },
   "products": {
@@ -154,6 +171,14 @@
     "remoteStart": {
       "name": "Remote Start Pro",
       "desc": "Remote start system — sample data."
+    },
+    "liftgateKit": {
+      "name": "Power Liftgate Standard",
+      "desc": "Hands-free power liftgate kit — sample data."
+    },
+    "liftgatePro": {
+      "name": "Power Liftgate Pro",
+      "desc": "Height memory + anti-pinch power liftgate — sample data."
     }
   },
   "fitmentNotes": {
@@ -163,6 +188,8 @@
     "hondaWireless": "Adapter verified across many Honda models (sample).",
     "f150BirdView": "360 kit verified on F-150 (sample).",
     "teslaNoHeadUnit": "Tesla uses OEM screen — standard head-unit swap not applicable.",
-    "teslaNoCarplay": "Tesla does not support OEM CarPlay."
+    "teslaNoCarplay": "Tesla does not support OEM CarPlay.",
+    "crvLiftgate2024": "Power liftgate verified on CR-V 2024 (sample).",
+    "rav4LiftgateXle": "Power liftgate Pro verified on RAV4 XLE 2024 (sample)."
   }
 }

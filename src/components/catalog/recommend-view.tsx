@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { ProductCard } from "./product-card";
 import { useCombo } from "@/components/combo/combo-context";
 import {
@@ -15,6 +16,7 @@ import { resolveFitment } from "@/lib/fitment/resolve";
 export function RecommendView() {
   const t = useTranslations();
   const locale = useLocale();
+  const router = useRouter();
   const { vehicle, addProduct, hydrated } = useCombo();
   const [categoryId, setCategoryId] = useState<string>("all");
 
@@ -84,6 +86,10 @@ export function RecommendView() {
               status={status}
               locale={locale}
               onAdd={() => addProduct(product.id)}
+              onRequestQuote={() => {
+                addProduct(product.id);
+                router.push(`/${locale}/quote`);
+              }}
             />
           );
         })}

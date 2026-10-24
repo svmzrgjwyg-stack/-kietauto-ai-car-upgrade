@@ -147,10 +147,16 @@ export function ComboView() {
       </div>
 
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[var(--line)] bg-white/95 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur">
-        <div className="mx-auto max-w-lg">
+        <div className="mx-auto flex max-w-lg flex-col gap-2">
           <Link
             href={`/${locale}/quote`}
             className="flex min-h-12 items-center justify-center rounded-2xl bg-[var(--accent)] text-sm font-bold text-[var(--ink)]"
+          >
+            {t("combo.requestQuote")}
+          </Link>
+          <Link
+            href={`/${locale}/quote`}
+            className="flex min-h-11 items-center justify-center text-sm font-semibold text-[var(--brand)]"
           >
             {t("combo.exportPdf")}
           </Link>

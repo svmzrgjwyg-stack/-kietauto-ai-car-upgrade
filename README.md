@@ -17,7 +17,10 @@ Greenfield Next.js app for honest accessory recommendations, combo quotes, and a
 - JSON sample data only (`data/`) — no real customer PII
 - No paid API calls (OpenAI etc.)
 - Fitment defaults to **unverified**; never claim compatibility unless verified
-- Admin edits persist to `data/admin/products.json` (sample mode)
+- Admin edits persist to `data/admin/products.json` and `data/admin/fitment.json` (sample mode)
+- Categories include dashcam, CarPlay, Android head unit, 360 camera, lights, **power liftgate (cốp điện)**, and other accessories
+- Clear **Yêu cầu báo giá / Request quote** CTA on product cards, combo, and quote page
+- Admin can explicitly confirm fitment (verified / unverified / incompatible) — never defaults to verified
 - Placeholder images/logos under `public/placeholders/`
 - Preview hosting OK; **no production deploy** until requested
 
