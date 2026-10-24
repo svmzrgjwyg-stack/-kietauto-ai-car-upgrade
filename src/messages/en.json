@@ -118,14 +118,19 @@
     "vehicle": "Vehicle",
     "sku": "SKU",
     "item": "Item",
+    "qty": "Qty",
     "fitment": "Fitment",
     "unit": "Unit",
     "labor": "Labor",
     "line": "Line total",
+    "partsSubtotal": "Parts subtotal",
+    "laborSubtotal": "Labor subtotal",
+    "total": "Total",
+    "disclaimerHeading": "Notes / Fitment",
     "disclaimerPrice": "Sample / estimate pricing; tax, shipping, and extras not included.",
     "disclaimerFitment": "Items marked Not verified are not confirmed to fit this vehicle.",
     "disclaimerContract": "This quote is not a contract; technical confirmation required before order.",
-    "contact": "KietAuto — Phase 1 contact placeholder"
+    "contact": "KietAuto — Phase 1 contact placeholder (no real contact details yet)"
   },
   "categories": {
     "dashcam": "Dashcam",
