@@ -47,8 +47,9 @@ export function VehiclePicker() {
     setVehicle(null);
   }
 
+  // text-[16px] avoids iOS Safari input-zoom; touch-manipulation improves tap response
   const selectClass =
-    "w-full min-h-12 appearance-none rounded-2xl border border-[var(--line)] bg-white px-4 text-base text-[var(--ink)] shadow-sm outline-none focus:border-[var(--brand)] focus:ring-2 focus:ring-[var(--brand-soft)]";
+    "w-full min-h-12 appearance-none rounded-2xl border border-[var(--line)] bg-white px-4 text-[16px] text-[var(--ink)] shadow-sm outline-none touch-manipulation focus:border-[var(--brand)] focus:ring-2 focus:ring-[var(--brand-soft)]";
 
   return (
     <div className="space-y-5">
