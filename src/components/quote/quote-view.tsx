@@ -1,25 +1,23 @@
 "use client";
 
+import { useCatalog } from "@/lib/catalog/use-catalog";
+import type { CatalogSnapshot } from "@/lib/catalog/snapshot";
+
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useCombo } from "@/components/combo/combo-context";
 import { downloadQuotePdf } from "./quote-pdf";
-import {
-  getFitmentRecords,
-  getSeedProducts,
-  vehicleLabel,
-} from "@/lib/catalog/data";
-import { resolveFitment } from "@/lib/fitment/resolve";
-import { comboTotals, lineLaborTotal, lineProductTotal } from "@/lib/pricing/totals";
-import type { QuoteDraft, QuoteLineItem } from "@/types";
+import { vehicleLabel } from "@/lib/catalog/data";
+import { buildQuoteModel } from "@/lib/quote/model";
+import type { QuoteDraft } from "@/types";
 
 type SubmitState =
   | { kind: "idle" }
   | { kind: "success"; id: string }
   | { kind: "error"; message: string };
 
-export function QuoteView() {
+export function QuoteView({ catalog: initialCatalog }: { catalog: CatalogSnapshot }) {
   const t = useTranslations();
   const locale = useLocale() as "vi" | "en";
   const { items, vehicle, hydrated } = useCombo();
@@ -33,13 +31,7 @@ export function QuoteView() {
   const [configured, setConfigured] = useState<boolean | null>(null);
   const [submitState, setSubmitState] = useState<SubmitState>({ kind: "idle" });
 
-  const products = useMemo(() => getSeedProducts(), []);
-  const byId = useMemo(
-    () => new Map(products.map((p) => [p.id, p])),
-    [products],
-  );
-  const fitment = useMemo(() => getFitmentRecords(), []);
-
+  const { failed, refresh } = useCatalog(initialCatalog);
   useEffect(() => {
     let cancelled = false;
     fetch("/api/quote/request")
@@ -55,34 +47,15 @@ export function QuoteView() {
     };
   }, []);
 
-  if (!hydrated) return null;
+  if (failed) return <p role="alert">{t("catalog.unavailable")}</p>;
 
-  function buildLineItems(): QuoteLineItem[] {
-    return items.flatMap((item) => {
-      const product = byId.get(item.productId);
-      if (!product) return [];
-      const { status } = resolveFitment(item.productId, vehicle, fitment);
-      const labor = lineLaborTotal(product, item);
-      return [
-        {
-          productId: product.id,
-          name: t(product.nameKey as Parameters<typeof t>[0]),
-          sku: product.sku,
-          qty: item.qty,
-          unitPrice: product.priceUsd,
-          labor,
-          lineTotal: lineProductTotal(product, item) + labor,
-          fitmentStatus: status,
-        },
-      ];
-    });
-  }
+  if (!hydrated) return null;
 
   async function onDownload() {
     setBusy(true);
     try {
-      const lineItems = buildLineItems();
-      const totals = comboTotals(items, byId);
+      const current = await refresh();
+      const { lineItems, ...totals } = buildQuoteModel(items, vehicle, current, (key) => t(key as Parameters<typeof t>[0]));
       const quote: QuoteDraft = {
         id: `Q-${Date.now().toString(36).toUpperCase()}`,
         locale,
@@ -126,6 +99,8 @@ export function QuoteView() {
         },
         `${quote.id}.pdf`,
       );
+    } catch {
+      setSubmitState({ kind: "error", message: t("catalog.quoteUnavailable") });
     } finally {
       setBusy(false);
     }
@@ -133,7 +108,7 @@ export function QuoteView() {
 
   async function onSubmitRequest() {
     setSubmitState({ kind: "idle" });
-    const hasPii = Boolean(name.trim() || phone.trim() || email.trim());
+    const hasPii = Boolean(name.trim() || phone.trim() || email.trim() || note.trim());
     if (hasPii && !consent) {
       setSubmitState({
         kind: "error",
@@ -144,8 +119,8 @@ export function QuoteView() {
 
     setSubmitBusy(true);
     try {
-      const lineItems = buildLineItems();
-      const totals = comboTotals(items, byId);
+      const current = await refresh();
+      const { lineItems, ...totals } = buildQuoteModel(items, vehicle, current, (key) => t(key as Parameters<typeof t>[0]));
       const res = await fetch("/api/quote/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

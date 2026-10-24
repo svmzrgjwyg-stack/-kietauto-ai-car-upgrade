@@ -6,11 +6,10 @@ import { useSession } from "next-auth/react";
 import {
   getBrands,
   getModels,
-  getSeedProducts,
   getTrims,
   getYears,
 } from "@/lib/catalog/data";
-import type { FitmentRecord, FitmentStatus } from "@/types";
+import type { FitmentRecord, FitmentStatus, Product } from "@/types";
 
 const DEFAULT_STATUS: FitmentStatus = "unverified";
 
@@ -26,7 +25,7 @@ export function AdminFitment() {
   const [trimId, setTrimId] = useState("");
   const [fitStatus, setFitStatus] = useState<FitmentStatus>(DEFAULT_STATUS);
 
-  const products = useMemo(() => getSeedProducts(), []);
+  const [products, setProducts] = useState<Product[]>([]);
   const brands = useMemo(() => getBrands(), []);
   const models = useMemo(
     () => (brandId ? getModels(brandId) : []),
@@ -46,6 +45,8 @@ export function AdminFitment() {
     }
     const data = await res.json();
     setRecords(data.records ?? []);
+    const productRes = await fetch("/api/admin/products", { cache: "no-store" });
+    if (productRes.ok) setProducts((await productRes.json()).products ?? []);
   }
 
   useEffect(() => {
@@ -77,7 +78,8 @@ export function AdminFitment() {
       }),
     });
     if (!res.ok) {
-      setError("Save failed");
+      const data = await res.json();
+      setError(data.error || "Save failed");
       return;
     }
     const data = await res.json();
@@ -93,7 +95,11 @@ export function AdminFitment() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(record),
     });
-    if (!res.ok) return;
+    if (!res.ok) {
+      const data = await res.json();
+      setError(data.error || "Save failed");
+      return;
+    }
     const data = await res.json();
     setRecords(data.records);
   }

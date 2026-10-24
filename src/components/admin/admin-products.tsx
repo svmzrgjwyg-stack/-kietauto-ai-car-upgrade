@@ -4,6 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { FulfillmentEditor, ShippingSummary } from "./shipping-planning";
 import type { Product } from "@/types";
 
 export function AdminProducts() {
@@ -11,6 +12,7 @@ export function AdminProducts() {
   const locale = useLocale();
   const { data: session, status } = useSession();
   const [products, setProducts] = useState<Product[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
   const [error, setError] = useState("");
 
   async function load() {
@@ -47,13 +49,15 @@ export function AdminProducts() {
   const canWrite = role === "admin" || role === "editor";
 
   async function save(product: Product) {
+    setError("");
     const res = await fetch("/api/admin/products", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(product),
     });
     if (!res.ok) {
-      setError("Save failed");
+      const data = await res.json();
+      setError(data.error || "Save failed");
       return;
     }
     const data = await res.json();
@@ -65,7 +69,11 @@ export function AdminProducts() {
     const res = await fetch(`/api/admin/products?id=${id}`, {
       method: "DELETE",
     });
-    if (!res.ok) return;
+    if (!res.ok) {
+      const data = await res.json();
+      setError(data.error || "Save failed");
+      return;
+    }
     const data = await res.json();
     setProducts(data.products);
   }
@@ -88,6 +96,7 @@ export function AdminProducts() {
         {t("sampleMode")}
       </p>
       {error && <p className="text-sm text-rose-700">{error}</p>}
+      <ShippingSummary products={products.filter((p) => selected.includes(p.id) && p.active !== false)} vi={locale === "vi"} />
       <ul className="space-y-3">
         {products.map((p) => (
           <li
@@ -100,6 +109,8 @@ export function AdminProducts() {
                 {p.active === false ? "(hidden)" : ""}
               </span>
             </p>
+            <label className="flex gap-2 text-sm"><input type="checkbox" disabled={p.active === false} checked={selected.includes(p.id)} onChange={(e) => setSelected((ids) => e.target.checked ? [...ids, p.id] : ids.filter((id) => id !== p.id))} />{locale === "vi" ? "Cần món này trong kế hoạch" : "Required in this plan"}</label>
+            <FulfillmentEditor product={p} disabled={!canWrite} vi={locale === "vi"} onChange={(fulfillment) => setProducts((all) => all.map((x) => x.id === p.id ? { ...x, fulfillment } : x))} />
             <div className="grid grid-cols-2 gap-2">
               <label className="text-xs">
                 {t("price")}

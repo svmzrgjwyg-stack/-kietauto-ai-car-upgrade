@@ -1,3 +1,6 @@
+import { readCatalog } from "@/lib/catalog/server";
+import { validateQuoteRequest } from "./validate";
+
 export type QuoteSubmitPayload = {
   locale: string;
   customerName?: string;
@@ -45,18 +48,23 @@ export function quoteSubmitConfigured(): boolean {
  * Does not persist PII locally — webhook/store is the only sink when configured.
  */
 export async function submitQuoteRequest(
-  payload: QuoteSubmitPayload,
+  input: unknown,
 ): Promise<QuoteSubmitResult> {
+  const payload = validateQuoteRequest(input, await readCatalog());
+  if (!payload) {
+    return { ok: false, code: "invalid", message: "Invalid quote. Refresh the catalog and try again." };
+  }
   const hasPii = Boolean(
     payload.customerName?.trim() ||
       payload.phone?.trim() ||
-      payload.email?.trim(),
+      payload.email?.trim() ||
+      payload.note?.trim(),
   );
   if (hasPii && !payload.consent) {
     return {
       ok: false,
       code: "consent_required",
-      message: "Consent required to send contact details.",
+      message: "Consent required to send contact details or notes.",
     };
   }
 
@@ -70,14 +78,6 @@ export async function submitQuoteRequest(
     };
   }
 
-  if (!payload.items.length) {
-    return {
-      ok: false,
-      code: "invalid",
-      message: "Combo is empty.",
-    };
-  }
-
   const id = `QR-${Date.now().toString(36).toUpperCase()}`;
   const body = {
     id,
@@ -87,6 +87,7 @@ export async function submitQuoteRequest(
     customerName: payload.consent ? payload.customerName : undefined,
     phone: payload.consent ? payload.phone : undefined,
     email: payload.consent ? payload.email : undefined,
+    note: payload.consent ? payload.note : undefined,
   };
 
   try {

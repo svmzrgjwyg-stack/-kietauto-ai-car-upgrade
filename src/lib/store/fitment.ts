@@ -1,9 +1,7 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { readLocalJson, writeLocalJson } from "./local-json";
 import seedFitment from "../../../data/fitment.json";
 import type { FitmentRecord, FitmentStatus } from "@/types";
 
-const ADMIN_FITMENT_PATH = path.join(process.cwd(), "data/admin/fitment.json");
 
 /** New / incomplete records must never become verified by default. */
 export function normalizeFitmentRecord(
@@ -43,32 +41,12 @@ function sameScope(a: FitmentRecord, b: FitmentRecord): boolean {
   );
 }
 
-async function ensureAdminFile(): Promise<void> {
-  try {
-    await fs.access(ADMIN_FITMENT_PATH);
-  } catch {
-    await fs.mkdir(path.dirname(ADMIN_FITMENT_PATH), { recursive: true });
-    await fs.writeFile(
-      ADMIN_FITMENT_PATH,
-      JSON.stringify(seedFitment, null, 2),
-      "utf8",
-    );
-  }
-}
-
 export async function listFitment(): Promise<FitmentRecord[]> {
-  await ensureAdminFile();
-  const raw = await fs.readFile(ADMIN_FITMENT_PATH, "utf8");
-  return JSON.parse(raw) as FitmentRecord[];
+  return readLocalJson("fitment.json", seedFitment as FitmentRecord[]);
 }
 
 export async function saveFitment(records: FitmentRecord[]): Promise<void> {
-  await ensureAdminFile();
-  await fs.writeFile(
-    ADMIN_FITMENT_PATH,
-    JSON.stringify(records, null, 2),
-    "utf8",
-  );
+  await writeLocalJson("fitment.json", records);
 }
 
 export async function upsertFitment(

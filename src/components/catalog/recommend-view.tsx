@@ -1,5 +1,8 @@
 "use client";
 
+import { useCatalog } from "@/lib/catalog/use-catalog";
+import type { CatalogSnapshot } from "@/lib/catalog/snapshot";
+
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -9,8 +12,6 @@ import { useCombo } from "@/components/combo/combo-context";
 import { useToast } from "@/components/ui/toast";
 import {
   getCategories,
-  getFitmentRecords,
-  getSeedProducts,
   vehicleLabel,
 } from "@/lib/catalog/data";
 import {
@@ -19,7 +20,7 @@ import {
 } from "@/lib/combo/conflicts";
 import { resolveFitment } from "@/lib/fitment/resolve";
 
-export function RecommendView() {
+export function RecommendView({ catalog: initialCatalog }: { catalog: CatalogSnapshot }) {
   const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
@@ -31,15 +32,17 @@ export function RecommendView() {
   const [pendingId, setPendingId] = useState<string | null>(null);
   const [afterAdd, setAfterAdd] = useState<"stay" | "quote">("stay");
 
-  const products = useMemo(() => getSeedProducts(), []);
+  const { catalog, failed } = useCatalog(initialCatalog);
+  const { products, fitment } = catalog;
   const categories = useMemo(() => getCategories(), []);
-  const fitment = useMemo(() => getFitmentRecords(), []);
 
   const filtered = products.filter(
     (p) => categoryId === "all" || p.categoryId === categoryId,
   );
 
   const comboCount = items.reduce((n, i) => n + i.qty, 0);
+
+  if (failed) return <p role="alert">{t("catalog.unavailable")}</p>;
 
   if (!hydrated) {
     return <p className="text-sm text-[var(--muted)]">…</p>;

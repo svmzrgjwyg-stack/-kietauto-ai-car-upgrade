@@ -10,6 +10,7 @@ export class OpenAiClient implements AiClient {
   readonly name = "openai-stub";
 
   async chat(_request: AiChatRequest): Promise<AiChatResponse> {
+    void _request;
     const key = process.env.OPENAI_API_KEY;
     if (!key) {
       throw new Error(

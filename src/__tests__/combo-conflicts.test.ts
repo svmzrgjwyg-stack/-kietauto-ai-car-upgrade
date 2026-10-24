@@ -3,7 +3,7 @@ import {
   findSameCategoryConflict,
   listDuplicateCategories,
 } from "@/lib/combo/conflicts";
-import { getSeedProducts } from "@/lib/catalog/data";
+import { getSeedProducts } from "@/lib/catalog/seed";
 import type { ComboItem } from "@/types";
 
 describe("combo category conflicts", () => {

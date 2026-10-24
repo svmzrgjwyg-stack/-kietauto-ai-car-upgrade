@@ -8,7 +8,7 @@ import {
   tableRowWidth,
 } from "@/lib/pdf/layout";
 import { comboTotals, lineLaborTotal, lineProductTotal } from "@/lib/pricing/totals";
-import { getSeedProducts } from "@/lib/catalog/data";
+import { getSeedProducts } from "@/lib/catalog/seed";
 import type { ComboItem, Product } from "@/types";
 
 describe("PDF layout invariants", () => {

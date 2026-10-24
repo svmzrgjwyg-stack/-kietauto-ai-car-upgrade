@@ -44,6 +44,8 @@ export interface Category {
 }
 
 export interface Product {
+  /** Internal manual planning only; excluded from public catalog and customer quotes. */
+  fulfillment?: import("@/lib/shipping/planning").Fulfillment;
   id: string;
   sku: string;
   categoryId: string;

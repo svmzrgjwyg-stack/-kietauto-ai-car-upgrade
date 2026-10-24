@@ -1,13 +1,9 @@
 import vehicles from "../../../data/vehicles.json";
 import categories from "../../../data/categories.json";
-import seedProducts from "../../../data/products.json";
-import fitment from "../../../data/fitment.json";
 import type {
   Brand,
   Category,
-  FitmentRecord,
   Model,
-  Product,
   Trim,
   VehicleSelection,
   Year,
@@ -34,14 +30,6 @@ export function getTrims(yearId?: string): Trim[] {
 
 export function getCategories(): Category[] {
   return categories as Category[];
-}
-
-export function getSeedProducts(): Product[] {
-  return (seedProducts as Product[]).filter((p) => p.active !== false);
-}
-
-export function getFitmentRecords(): FitmentRecord[] {
-  return fitment as FitmentRecord[];
 }
 
 export function vehicleLabel(selection: VehicleSelection): string {

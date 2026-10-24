@@ -1,16 +1,15 @@
 "use client";
 
+import { useCatalog } from "@/lib/catalog/use-catalog";
+import type { CatalogSnapshot } from "@/lib/catalog/snapshot";
+
 import Link from "next/link";
 import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { FitmentBadge } from "@/components/ui/fitment-badge";
 import { useToast } from "@/components/ui/toast";
 import { useCombo } from "@/components/combo/combo-context";
-import {
-  getFitmentRecords,
-  getSeedProducts,
-  vehicleLabel,
-} from "@/lib/catalog/data";
+import { vehicleLabel } from "@/lib/catalog/data";
 import { listDuplicateCategories } from "@/lib/combo/conflicts";
 import { resolveFitment } from "@/lib/fitment/resolve";
 import {
@@ -31,7 +30,7 @@ const CATEGORY_I18N: Record<string, string> = {
   other: "other",
 };
 
-export function ComboView() {
+export function ComboView({ catalog: initialCatalog }: { catalog: CatalogSnapshot }) {
   const t = useTranslations();
   const locale = useLocale();
   const { showToast } = useToast();
@@ -44,12 +43,12 @@ export function ComboView() {
     hydrated,
   } = useCombo();
 
-  const products = useMemo(() => getSeedProducts(), []);
+  const { catalog, failed } = useCatalog(initialCatalog);
+  const { products, fitment } = catalog;
   const byId = useMemo(
     () => new Map(products.map((p) => [p.id, p])),
     [products],
   );
-  const fitment = useMemo(() => getFitmentRecords(), []);
   const totals = comboTotals(items, byId);
 
   const hasUnverified = items.some((item) => {
@@ -69,6 +68,8 @@ export function ComboView() {
       ),
     )
     .join(", ");
+
+  if (failed) return <p role="alert">{t("catalog.unavailable")}</p>;
 
   if (!hydrated) return null;
 
@@ -110,7 +111,14 @@ export function ComboView() {
       <ul className="space-y-3">
         {items.map((item) => {
           const product = byId.get(item.productId);
-          if (!product) return null;
+          if (!product) return (
+            <li key={item.productId} className="rounded-3xl border border-amber-200 p-4">
+              <p>{t("catalog.itemUnavailable")}</p>
+              <button type="button" onClick={() => removeProduct(item.productId)} className="min-h-11 font-semibold">
+                {t("combo.remove")}
+              </button>
+            </li>
+          );
           const { status } = resolveFitment(item.productId, vehicle, fitment);
           const name = t(product.nameKey as Parameters<typeof t>[0]);
           const parts = lineProductTotal(product, item);

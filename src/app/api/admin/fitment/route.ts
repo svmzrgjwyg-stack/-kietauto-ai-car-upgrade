@@ -1,3 +1,4 @@
+import { localCatalogWritable, READ_ONLY_MESSAGE } from "@/lib/store/local-json";
 import { NextResponse } from "next/server";
 import { auth, hasRole } from "@/lib/auth/config";
 import {
@@ -14,13 +15,16 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const records = await listFitment();
-  return NextResponse.json({ records });
+  return NextResponse.json({ records }, { headers: { "Cache-Control": "no-store" } });
 }
 
 export async function PUT(req: Request) {
   const session = await auth();
   if (!session?.user || !hasRole(session.user.role, ["admin", "editor"])) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  if (!localCatalogWritable()) {
+    return NextResponse.json({ error: READ_ONLY_MESSAGE }, { status: 503 });
   }
   const body = (await req.json()) as Partial<FitmentRecord>;
   if (!body?.productId) {
@@ -41,6 +45,9 @@ export async function DELETE(req: Request) {
   if (!session?.user || !hasRole(session.user.role, ["admin"])) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
+  if (!localCatalogWritable()) {
+    return NextResponse.json({ error: READ_ONLY_MESSAGE }, { status: 503 });
+  }
   const body = (await req.json()) as Partial<FitmentRecord>;
   if (!body?.productId) {
     return NextResponse.json({ error: "Missing productId" }, { status: 400 });
@@ -52,5 +59,5 @@ export async function DELETE(req: Request) {
     yearId: body.yearId,
     trimId: body.trimId,
   });
-  return NextResponse.json({ records });
+  return NextResponse.json({ records }, { headers: { "Cache-Control": "no-store" } });
 }

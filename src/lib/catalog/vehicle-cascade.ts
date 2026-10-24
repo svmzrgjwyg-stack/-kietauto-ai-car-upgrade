@@ -33,7 +33,8 @@ export function sanitizeVehicleDraft(draft: {
   yearId: string;
   trimId: string;
 }): { brandId: string; modelId: string; yearId: string; trimId: string } {
-  let { brandId, modelId, yearId, trimId } = draft;
+  const { brandId } = draft;
+  let { modelId, yearId, trimId } = draft;
 
   if (brandId && !getBrands().some((b) => b.id === brandId)) {
     return { brandId: "", modelId: "", yearId: "", trimId: "" };

@@ -73,8 +73,8 @@
     "phone": "Số điện thoại",
     "email": "Email",
     "note": "Ghi chú",
-    "consent": "Tôi đồng ý gửi thông tin liên hệ để cửa hàng liên lạc báo giá. Chỉ gửi khi hệ thống đã cấu hình; không lưu giả trên trình duyệt.",
-    "consentRequired": "Cần đồng ý trước khi gửi thông tin liên hệ.",
+    "consent": "Tôi đồng ý gửi thông tin liên hệ và ghi chú để cửa hàng liên lạc báo giá. Chỉ gửi khi hệ thống đã cấu hình; không lưu giả trên trình duyệt.",
+    "consentRequired": "Cần đồng ý trước khi gửi thông tin liên hệ hoặc ghi chú.",
     "download": "Tải PDF báo giá",
     "requestCta": "Gửi yêu cầu báo giá",
     "submitting": "Đang gửi…",
@@ -226,5 +226,10 @@
     "teslaNoCarplay": "Tesla không hỗ trợ CarPlay OEM.",
     "crvLiftgate2024": "Đã lắp thử cốp điện trên CR-V 2024.",
     "rav4LiftgateXle": "Đã lắp thử cốp điện Pro trên RAV4 XLE 2024."
+  },
+  "catalog": {
+    "unavailable": "Không tải được danh mục mới nhất. Anh tải lại trang trước khi tiếp tục nhé.",
+    "itemUnavailable": "Sản phẩm này không còn khả dụng. Vui lòng xóa khỏi combo trước khi báo giá.",
+    "quoteUnavailable": "Chưa tạo được báo giá cập nhật. Vui lòng kiểm tra danh mục và xóa sản phẩm không còn khả dụng trong combo."
   }
 }

@@ -73,8 +73,8 @@
     "phone": "Phone",
     "email": "Email",
     "note": "Note",
-    "consent": "I agree to send my contact details so the store can follow up on this quote. Sent only when submission is configured — not stored as a fake browser save.",
-    "consentRequired": "Consent is required before sending contact details.",
+    "consent": "I agree to send my contact details and notes so the store can follow up on this quote. Sent only when submission is configured — not stored as a fake browser save.",
+    "consentRequired": "Consent is required before sending contact details or notes.",
     "download": "Download PDF quote",
     "requestCta": "Submit quote request",
     "submitting": "Submitting…",
@@ -226,5 +226,10 @@
     "teslaNoCarplay": "Tesla does not support OEM CarPlay.",
     "crvLiftgate2024": "Power liftgate verified on CR-V 2024.",
     "rav4LiftgateXle": "Power liftgate Pro verified on RAV4 XLE 2024."
+  },
+  "catalog": {
+    "unavailable": "Catalog could not be refreshed. Reload this page before continuing.",
+    "itemUnavailable": "This item is no longer available. Remove it before creating a quote.",
+    "quoteUnavailable": "Could not create a current quote. Check the catalog and remove unavailable items in your combo."
   }
 }

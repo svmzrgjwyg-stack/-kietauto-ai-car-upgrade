@@ -1,36 +1,14 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { readLocalJson, writeLocalJson } from "./local-json";
 import seedProducts from "../../../data/products.json";
 import type { Product } from "@/types";
 
-const ADMIN_PRODUCTS_PATH = path.join(process.cwd(), "data/admin/products.json");
-
-async function ensureAdminFile(): Promise<void> {
-  try {
-    await fs.access(ADMIN_PRODUCTS_PATH);
-  } catch {
-    await fs.mkdir(path.dirname(ADMIN_PRODUCTS_PATH), { recursive: true });
-    await fs.writeFile(
-      ADMIN_PRODUCTS_PATH,
-      JSON.stringify(seedProducts, null, 2),
-      "utf8",
-    );
-  }
-}
 
 export async function listProducts(): Promise<Product[]> {
-  await ensureAdminFile();
-  const raw = await fs.readFile(ADMIN_PRODUCTS_PATH, "utf8");
-  return JSON.parse(raw) as Product[];
+  return readLocalJson("products.json", seedProducts as Product[]);
 }
 
-export async function saveProducts(products: Product[]): Promise<void> {
-  await ensureAdminFile();
-  await fs.writeFile(
-    ADMIN_PRODUCTS_PATH,
-    JSON.stringify(products, null, 2),
-    "utf8",
-  );
+export async function saveProducts(records: Product[]): Promise<void> {
+  await writeLocalJson("products.json", records);
 }
 
 export async function upsertProduct(product: Product): Promise<Product[]> {

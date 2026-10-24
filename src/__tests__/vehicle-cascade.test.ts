@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { getFitmentRecords, getTrims, getYears } from "@/lib/catalog/data";
+import { getFitmentRecords } from "@/lib/catalog/seed";
+import { getTrims, getYears } from "@/lib/catalog/data";
 import {
   isCompleteVehicleSelection,
   sanitizeVehicleDraft,

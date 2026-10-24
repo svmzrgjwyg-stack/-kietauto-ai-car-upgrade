@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import {
   quoteSubmitConfigured,
   submitQuoteRequest,
-  type QuoteSubmitPayload,
 } from "@/lib/quote/submit";
 
 export async function GET() {
@@ -12,9 +11,9 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  let body: QuoteSubmitPayload;
+  let body: unknown;
   try {
-    body = (await req.json()) as QuoteSubmitPayload;
+    body = await req.json();
   } catch {
     return NextResponse.json(
       { ok: false, code: "invalid", message: "Invalid JSON body." },
@@ -22,10 +21,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const result = await submitQuoteRequest({
-    ...body,
-    consent: Boolean(body.consent),
-  });
+  const result = await submitQuoteRequest(body);
 
   if (!result.ok) {
     const status =
