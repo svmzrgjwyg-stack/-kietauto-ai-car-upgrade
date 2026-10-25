@@ -1,0 +1,59 @@
+{
+  "brands": [
+    { "id": "toyota", "name": "Toyota", "slug": "toyota" },
+    { "id": "honda", "name": "Honda", "slug": "honda" },
+    { "id": "ford", "name": "Ford", "slug": "ford" },
+    { "id": "tesla", "name": "Tesla", "slug": "tesla" },
+    { "id": "hyundai", "name": "Hyundai", "slug": "hyundai" }
+  ],
+  "models": [
+    { "id": "camry", "brandId": "toyota", "name": "Camry", "slug": "camry" },
+    { "id": "rav4", "brandId": "toyota", "name": "RAV4", "slug": "rav4" },
+    { "id": "accord", "brandId": "honda", "name": "Accord", "slug": "accord" },
+    { "id": "crv", "brandId": "honda", "name": "CR-V", "slug": "cr-v" },
+    { "id": "f150", "brandId": "ford", "name": "F-150", "slug": "f-150" },
+    { "id": "model3", "brandId": "tesla", "name": "Model 3", "slug": "model-3" },
+    { "id": "tucson", "brandId": "hyundai", "name": "Tucson", "slug": "tucson" }
+  ],
+  "years": [
+    { "id": "camry-2022", "modelId": "camry", "year": 2022 },
+    { "id": "camry-2023", "modelId": "camry", "year": 2023 },
+    { "id": "camry-2024", "modelId": "camry", "year": 2024 },
+    { "id": "camry-2025", "modelId": "camry", "year": 2025 },
+    { "id": "rav4-2023", "modelId": "rav4", "year": 2023 },
+    { "id": "rav4-2024", "modelId": "rav4", "year": 2024 },
+    { "id": "accord-2023", "modelId": "accord", "year": 2023 },
+    { "id": "accord-2024", "modelId": "accord", "year": 2024 },
+    { "id": "crv-2023", "modelId": "crv", "year": 2023 },
+    { "id": "crv-2024", "modelId": "crv", "year": 2024 },
+    { "id": "f150-2023", "modelId": "f150", "year": 2023 },
+    { "id": "f150-2024", "modelId": "f150", "year": 2024 },
+    { "id": "model3-2023", "modelId": "model3", "year": 2023 },
+    { "id": "model3-2024", "modelId": "model3", "year": 2024 },
+    { "id": "tucson-2023", "modelId": "tucson", "year": 2023 },
+    { "id": "tucson-2024", "modelId": "tucson", "year": 2024 }
+  ],
+  "trims": [
+    { "id": "camry-2024-le", "yearId": "camry-2024", "name": "LE", "slug": "le" },
+    { "id": "camry-2024-xle", "yearId": "camry-2024", "name": "XLE", "slug": "xle" },
+    { "id": "camry-2025-se", "yearId": "camry-2025", "name": "SE", "slug": "se" },
+    { "id": "camry-2023-se", "yearId": "camry-2023", "name": "SE", "slug": "se" },
+    { "id": "camry-2022-le", "yearId": "camry-2022", "name": "LE", "slug": "le" },
+    { "id": "rav4-2024-xle", "yearId": "rav4-2024", "name": "XLE", "slug": "xle" },
+    { "id": "rav4-2024-adventure", "yearId": "rav4-2024", "name": "Adventure", "slug": "adventure" },
+    { "id": "rav4-2023-le", "yearId": "rav4-2023", "name": "LE", "slug": "le" },
+    { "id": "accord-2024-sport", "yearId": "accord-2024", "name": "Sport", "slug": "sport" },
+    { "id": "accord-2024-exl", "yearId": "accord-2024", "name": "EX-L", "slug": "ex-l" },
+    { "id": "accord-2023-lx", "yearId": "accord-2023", "name": "LX", "slug": "lx" },
+    { "id": "crv-2024-ex", "yearId": "crv-2024", "name": "EX", "slug": "ex" },
+    { "id": "crv-2023-lx", "yearId": "crv-2023", "name": "LX", "slug": "lx" },
+    { "id": "f150-2024-xlt", "yearId": "f150-2024", "name": "XLT", "slug": "xlt" },
+    { "id": "f150-2024-lariat", "yearId": "f150-2024", "name": "Lariat", "slug": "lariat" },
+    { "id": "f150-2023-xl", "yearId": "f150-2023", "name": "XL", "slug": "xl" },
+    { "id": "model3-2024-rwd", "yearId": "model3-2024", "name": "RWD", "slug": "rwd" },
+    { "id": "model3-2024-longrange", "yearId": "model3-2024", "name": "Long Range", "slug": "long-range" },
+    { "id": "model3-2023-rwd", "yearId": "model3-2023", "name": "RWD", "slug": "rwd" },
+    { "id": "tucson-2024-sel", "yearId": "tucson-2024", "name": "SEL", "slug": "sel" },
+    { "id": "tucson-2023-se", "yearId": "tucson-2023", "name": "SE", "slug": "se" }
+  ]
+}

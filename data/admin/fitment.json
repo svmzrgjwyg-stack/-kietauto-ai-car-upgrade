@@ -1,0 +1,88 @@
+[
+  {
+    "productId": "dc-v35",
+    "brandId": "toyota",
+    "modelId": "camry",
+    "yearId": "camry-2024",
+    "status": "verified",
+    "notesKey": "fitment.notes.installedCamry2024",
+    "verifiedAt": "2026-09-01",
+    "verifiedBy": "tech-demo"
+  },
+  {
+    "productId": "dc-v35",
+    "brandId": "honda",
+    "modelId": "accord",
+    "status": "verified",
+    "notesKey": "fitment.notes.installedAccord",
+    "verifiedAt": "2026-08-15",
+    "verifiedBy": "tech-demo"
+  },
+  {
+    "productId": "hu-android10",
+    "brandId": "toyota",
+    "modelId": "rav4",
+    "yearId": "rav4-2024",
+    "trimId": "rav4-2024-xle",
+    "status": "verified",
+    "notesKey": "fitment.notes.installedRav4Xle",
+    "verifiedAt": "2026-07-20",
+    "verifiedBy": "tech-demo"
+  },
+  {
+    "productId": "cp-wireless",
+    "brandId": "honda",
+    "status": "verified",
+    "notesKey": "fitment.notes.hondaWireless",
+    "verifiedAt": "2026-06-01",
+    "verifiedBy": "tech-demo"
+  },
+  {
+    "productId": "cam360-basic",
+    "brandId": "ford",
+    "modelId": "f150",
+    "status": "verified",
+    "notesKey": "fitment.notes.f150BirdView",
+    "verifiedAt": "2026-05-10",
+    "verifiedBy": "tech-demo"
+  },
+  {
+    "productId": "hu-android10",
+    "brandId": "tesla",
+    "status": "incompatible",
+    "notesKey": "fitment.notes.teslaNoHeadUnit"
+  },
+  {
+    "productId": "hu-wireless",
+    "brandId": "tesla",
+    "status": "incompatible",
+    "notesKey": "fitment.notes.teslaNoHeadUnit"
+  },
+  {
+    "productId": "cp-module",
+    "brandId": "tesla",
+    "status": "incompatible",
+    "notesKey": "fitment.notes.teslaNoCarplay"
+  },
+  {
+    "productId": "liftgate-kit",
+    "brandId": "honda",
+    "modelId": "crv",
+    "yearId": "crv-2024",
+    "status": "verified",
+    "notesKey": "fitment.notes.crvLiftgate2024",
+    "verifiedAt": "2026-09-12",
+    "verifiedBy": "tech-demo"
+  },
+  {
+    "productId": "liftgate-pro",
+    "brandId": "toyota",
+    "modelId": "rav4",
+    "yearId": "rav4-2024",
+    "trimId": "rav4-2024-xle",
+    "status": "verified",
+    "notesKey": "fitment.notes.rav4LiftgateXle",
+    "verifiedAt": "2026-09-20",
+    "verifiedBy": "tech-demo"
+  }
+]

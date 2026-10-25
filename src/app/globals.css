@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #0b3d5c;
+  --brand-soft: #d7e8f3;
+  --accent: #e8b84a;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #dbe3ec;
+  --surface: #f3f6f9;
+  --wash: #eef3f7;
+  --background: var(--surface);
+  --foreground: var(--ink);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #dceaf4 0%, transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, #f7ecd4 0%, transparent 45%),
+    linear-gradient(180deg, #f7fafc 0%, var(--surface) 40%, #eef2f6 100%);
+  min-height: 100dvh;
+}
+
+.font-display {
+  font-family: var(--font-display), ui-serif, Georgia, serif;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.animate-rise {
+  animation: rise-in 0.55s ease-out both;
+}
+
+.animate-rise-delay {
+  animation: rise-in 0.7s ease-out 0.12s both;
+}
+
+.animate-cta {
+  animation: pulse-soft 2.8s ease-in-out infinite;
+}
