@@ -14,6 +14,7 @@ import {
   loadVehicle,
   saveCombo,
   saveVehicle,
+  saveWorkingCombo,
 } from "@/lib/combo/storage";
 
 type ComboContextValue = {
@@ -28,6 +29,7 @@ type ComboContextValue = {
   setIncludeLabor: (productId: string, includeLabor: boolean) => void;
   clearCombo: () => void;
   hydrated: boolean;
+  restoreDraft: (vehicle: VehicleSelection, items: ComboItem[]) => void;
 };
 
 const ComboContext = createContext<ComboContextValue | null>(null);
@@ -59,7 +61,7 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
         const existing = prev.find((i) => i.productId === productId);
         const next = existing
           ? prev.map((i) =>
-              i.productId === productId ? { ...i, qty: i.qty + 1 } : i,
+              i.productId === productId ? { ...i, qty: Math.min(99, i.qty + 1) } : i,
             )
           : [...prev, { productId, includeLabor: true, qty: 1 }];
         saveCombo(next);
@@ -76,7 +78,7 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
         const existing = without.find((i) => i.productId === productId);
         const next = existing
           ? without.map((i) =>
-              i.productId === productId ? { ...i, qty: i.qty + 1 } : i,
+              i.productId === productId ? { ...i, qty: Math.min(99, i.qty + 1) } : i,
             )
           : [...without, { productId, includeLabor: true, qty: 1 }];
         saveCombo(next);
@@ -99,7 +101,7 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
       const next = prev
         .map((i) =>
           i.productId === productId
-            ? { ...i, qty: Math.max(1, Math.min(99, qty)) }
+            ? { ...i, qty: Math.max(1, Math.min(99, Number.isFinite(qty) ? Math.floor(qty) : 1)) }
             : i,
         )
         .filter((i) => i.qty > 0);
@@ -123,6 +125,13 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
 
   const clearCombo = useCallback(() => persistItems([]), [persistItems]);
 
+  const restoreDraft = useCallback((nextVehicle: VehicleSelection, nextItems: ComboItem[]) => {
+    saveWorkingCombo(nextVehicle, nextItems);
+    // React batches these updates; the single persistent envelope was committed first.
+    setVehicleState({ ...nextVehicle });
+    setItems(nextItems.map((item) => ({ ...item })));
+  }, []);
+
   const value = useMemo(
     () => ({
       vehicle,
@@ -135,6 +144,7 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
       setIncludeLabor,
       clearCombo,
       hydrated,
+      restoreDraft,
     }),
     [
       vehicle,
@@ -147,6 +157,7 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
       setIncludeLabor,
       clearCombo,
       hydrated,
+      restoreDraft,
     ],
   );
 

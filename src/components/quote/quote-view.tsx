@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useCombo } from "@/components/combo/combo-context";
+import { SavedDrafts } from "./saved-drafts";
 import { downloadQuotePdf } from "./quote-pdf";
 import { vehicleLabel } from "@/lib/catalog/data";
 import { buildQuoteModel } from "@/lib/quote/model";
@@ -47,7 +48,7 @@ export function QuoteView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
     };
   }, []);
 
-  if (failed) return <p role="alert">{t("catalog.unavailable")}</p>;
+  if (failed) return <div className="space-y-4"><SavedDrafts /><p role="alert">{t("catalog.unavailable")}</p></div>;
 
   if (!hydrated) return null;
 
@@ -183,6 +184,7 @@ export function QuoteView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
 
   return (
     <div className="space-y-4">
+      <SavedDrafts onRestore={() => { setName(""); setPhone(""); setEmail(""); setNote(""); setConsent(false); setSubmitState({ kind: "idle" }); }} />
       <p className="text-xs text-[var(--muted)]">{t("home.disclaimer")}</p>
 
       {configured === false && (
