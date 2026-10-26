@@ -3,6 +3,7 @@
 import { useCatalog } from "@/lib/catalog/use-catalog";
 import type { CatalogSnapshot } from "@/lib/catalog/snapshot";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -26,6 +27,7 @@ export function RecommendView({ catalog: initialCatalog }: { catalog: CatalogSna
   const router = useRouter();
   const { vehicle, addProduct, replaceProduct, items, hydrated } = useCombo();
   const { showToast } = useToast();
+  const [showSamples, setShowSamples] = useState(false);
   const [categoryId, setCategoryId] = useState<string>("all");
   const [flash, setFlash] = useState<string | null>(null);
   const [conflict, setConflict] = useState<CategoryConflict | null>(null);
@@ -37,7 +39,7 @@ export function RecommendView({ catalog: initialCatalog }: { catalog: CatalogSna
   const categories = useMemo(() => getCategories(), []);
 
   const filtered = products.filter(
-    (p) => categoryId === "all" || p.categoryId === categoryId,
+    (p) => (showSamples || p.catalogSource === "owner") && (categoryId === "all" || p.categoryId === categoryId),
   );
 
   const comboCount = items.reduce((n, i) => n + i.qty, 0);
@@ -55,10 +57,10 @@ export function RecommendView({ catalog: initialCatalog }: { catalog: CatalogSna
     window.setTimeout(() => setFlash(null), 3200);
   }
 
-  function finishAdd(productId: string) {
-    addProduct(productId);
+  function finishAdd(productId: string, mode = afterAdd) {
+    addProduct(productId, !products.find((p) => p.id === productId)?.hardwareOnly);
     confirmAdded();
-    if (afterAdd === "quote") {
+    if (mode === "quote") {
       router.push(`/${locale}/quote`);
     }
   }
@@ -71,11 +73,14 @@ export function RecommendView({ catalog: initialCatalog }: { catalog: CatalogSna
       setConflict(c);
       return;
     }
-    finishAdd(productId);
+    finishAdd(productId, mode);
   }
 
   return (
     <div className="space-y-4 pb-6">
+      <Link className="block rounded-xl bg-blue-50 p-3 underline" href={`/${locale}/catalog`}>{locale === "vi" ? "Danh mục CarPlay Toyota / Lexus · cần hỏi giá" : "Toyota / Lexus CarPlay references · price on request"}</Link>
+      <label className="flex gap-2 text-sm"><input type="checkbox" checked={showSamples} onChange={(e) => setShowSamples(e.target.checked)} />{locale === "vi" ? "Hiện sản phẩm mẫu (giá chưa được duyệt)" : "Show sample products (unapproved prices)"}</label>
+      {filtered.length === 0 && <p>{locale === "vi" ? "Chưa có sản phẩm đã chốt giá trong nhóm này. Xem danh mục tham khảo và yêu cầu báo giá." : "No owner-priced products in this category. Browse references and request a quote."}</p>}
       {!vehicle ? (
         <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950">
           {t("recommend.needVehicle")}
@@ -168,7 +173,7 @@ export function RecommendView({ catalog: initialCatalog }: { catalog: CatalogSna
             const replaceId = conflict.existingProductId;
             setConflict(null);
             setPendingId(null);
-            replaceProduct(replaceId, id);
+            replaceProduct(replaceId, id, !products.find((p) => p.id === id)?.hardwareOnly);
             confirmAdded();
             if (afterAdd === "quote") {
               router.push(`/${locale}/quote`);

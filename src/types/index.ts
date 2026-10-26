@@ -53,7 +53,10 @@ export interface Product {
   descriptionKey: string;
   imageUrl: string;
   priceUsd: number;
-  laborCostUsd: number;
+  laborCostUsd: number | null;
+  catalogSource?: "owner" | "sample";
+  hardwareOnly?: boolean;
+  taxStatus?: "unconfirmed";
   tags: string[];
   active?: boolean;
 }
@@ -77,6 +80,8 @@ export interface ComboItem {
 }
 
 export interface QuoteLineItem {
+  priceScope?: "sample" | "pending_charges";
+  hardwareOnly?: boolean;
   productId: string;
   name: string;
   sku: string;
@@ -88,6 +93,7 @@ export interface QuoteLineItem {
 }
 
 export interface QuoteDraft {
+  priceScope?: "sample" | "pending_charges";
   id: string;
   locale: Locale;
   currency: "USD";

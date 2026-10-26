@@ -242,7 +242,7 @@ function fitmentLabel(
   return labels.fitmentUnverified;
 }
 
-function QuoteDocument({
+export function QuoteDocument({
   quote,
   labels,
 }: {
@@ -251,7 +251,11 @@ function QuoteDocument({
 }) {
   const locale = quote.locale;
   const dateStr = formatQuoteDate(quote.createdAt, locale);
-  const warnings = dedupeQuoteDisclaimers(quote.disclaimers);
+  const hasSamples = quote.priceScope === "sample" || quote.lineItems.some((line) => line.priceScope === "sample");
+  const hasPending = quote.priceScope === "pending_charges" || quote.lineItems.some((line) => line.hardwareOnly || line.priceScope === "pending_charges");
+  const sampleText = locale === "vi" ? "MẪU — giá chưa được duyệt để bán; không phải báo giá chính thức." : "SAMPLE — prices are not approved retail; not a final sales quote.";
+  const pendingText = locale === "vi" ? "Chỉ giá máy, chưa gồm công lắp. Thuế, vận chuyển, tồn kho và bộ phụ kiện cần xác nhận. Không phải tổng thanh toán cuối cùng." : "Hardware only; installation is not included. Tax inclusion, shipping, stock and package contents need confirmation. Not a final payable total.";
+  const warnings = dedupeQuoteDisclaimers([...quote.disclaimers, ...(hasSamples ? [sampleText] : []), ...(hasPending ? [pendingText] : [])]);
 
   return (
     <Document>
@@ -291,6 +295,10 @@ function QuoteDocument({
           ) : null}
         </View>
 
+        {(hasSamples || hasPending) && <View style={styles.warnBox}>
+          {hasSamples && <Text style={styles.warnTitle}>{sampleText}</Text>}
+          {hasPending && <Text style={styles.disclaimer}>{pendingText}</Text>}
+        </View>}
         <View style={styles.tableHeader}>
           <View style={styles.colItem}>
             <Text style={styles.tableHeaderText}>{labels.item}</Text>
@@ -331,6 +339,7 @@ function QuoteDocument({
           >
             <View style={styles.colItem}>
               <Text style={styles.cell}>{li.name}</Text>
+              {li.priceScope === "sample" && <Text style={styles.disclaimer}>{locale === "vi" ? "MẪU — chưa duyệt giá" : "SAMPLE — unapproved price"}</Text>}
             </View>
             <View style={styles.colSku}>
               <Text style={styles.cell}>{li.sku}</Text>
@@ -350,7 +359,7 @@ function QuoteDocument({
             </View>
             <View style={styles.colNum}>
               <Text style={styles.cellRight}>
-                {formatUsdPdf(li.labor, locale)}
+                {li.hardwareOnly ? (locale === "vi" ? "Chưa gồm công" : "Not included") : formatUsdPdf(li.labor, locale)}
               </Text>
             </View>
             <View style={styles.colLine}>
@@ -372,7 +381,7 @@ function QuoteDocument({
           </View>
           <View style={styles.totalsTotal}>
             <Text>
-              {labels.total} ({quote.currency})
+              {hasPending ? (locale === "vi" ? "Tạm tính phần đã có giá" : "Known-price subtotal") : labels.total} ({quote.currency})
             </Text>
             <Text>{formatUsdPdf(quote.total, locale)}</Text>
           </View>

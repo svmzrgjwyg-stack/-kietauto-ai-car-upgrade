@@ -77,9 +77,9 @@ export function validateQuoteRequest(input: unknown, catalog: CatalogSnapshot): 
     const product = products.get(item.productId);
     if (!product || seen.has(item.productId)) return null;
     seen.add(item.productId);
-    if (!money.safeParse(product.priceUsd).success || !money.safeParse(product.laborCostUsd).success) return null;
+    if (!money.safeParse(product.priceUsd).success || (product.laborCostUsd !== null && !money.safeParse(product.laborCostUsd).success)) return null;
     const unitPrice = cents(product.priceUsd) / 100;
-    const fullLabor = cents(product.laborCostUsd) * item.qty / 100;
+    const fullLabor = product.hardwareOnly || product.laborCostUsd === null ? 0 : cents(product.laborCostUsd) * item.qty / 100;
     if (!sameMoney(item.unitPrice, unitPrice) ||
       (!sameMoney(item.labor, 0) && !sameMoney(item.labor, fullLabor))) return null;
     const labor = item.labor === 0 ? 0 : fullLabor;
@@ -88,6 +88,8 @@ export function validateQuoteRequest(input: unknown, catalog: CatalogSnapshot): 
     productCents += cents(unitPrice) * item.qty;
     laborCents += cents(labor);
     items.push({
+      priceScope: product.catalogSource === "sample" ? "sample" : product.hardwareOnly || product.laborCostUsd === null || product.taxStatus === "unconfirmed" ? "pending_charges" : undefined,
+      hardwareOnly: product.hardwareOnly,
       productId: product.id,
       sku: product.sku,
       name: productName(product.nameKey, data.locale, product.sku),

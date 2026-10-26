@@ -9,6 +9,7 @@ export function publicCatalog(products: Product[], fitment: FitmentRecord[]): Ca
       id: p.id, sku: p.sku, categoryId: p.categoryId, nameKey: p.nameKey,
       descriptionKey: p.descriptionKey, imageUrl: p.imageUrl,
       priceUsd: p.priceUsd, laborCostUsd: p.laborCostUsd, tags: p.tags, active: p.active,
+      catalogSource: p.catalogSource, hardwareOnly: p.hardwareOnly, taxStatus: p.taxStatus,
     })),
     fitment: fitment.filter((r) => ids.has(r.productId)).map((r) => ({
       productId: r.productId, brandId: r.brandId, modelId: r.modelId,

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useCombo } from "@/components/combo/combo-context";
 
 const links = [
+  { href: "catalog", key: "catalog" as const },
   { href: "vehicle", key: "vehicle" as const },
   { href: "recommend", key: "recommend" as const },
   { href: "combo", key: "combo" as const },

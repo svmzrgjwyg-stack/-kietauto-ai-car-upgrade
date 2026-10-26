@@ -8,11 +8,12 @@
     "combo": "Combo",
     "chat": "Tư vấn AI",
     "admin": "Admin",
-    "quote": "Báo giá"
+    "quote": "Báo giá",
+    "catalog": "Toyota / Lexus"
   },
   "home": {
-    "cta": "Bắt đầu chọn xe",
-    "subtitle": "Chọn xe → xem phụ kiện → ghép combo → xuất PDF báo giá. Fitment mặc định cần xác minh.",
+    "cta": "Xem danh mục Toyota / Lexus",
+    "subtitle": "Danh mục cấu hình CarPlay cần xác minh và camera đã có giá máy. Giá lắp đặt, thuế và vận chuyển cần xác nhận riêng.",
     "disclaimer": "Fitment chưa xác minh thì không khẳng định lắp được. Thông tin liên hệ chỉ gửi khi bạn đồng ý và hệ thống báo giá đã cấu hình."
   },
   "vehicle": {
@@ -214,6 +215,14 @@
     "liftgatePro": {
       "name": "Cốp điện Pro",
       "desc": "Cốp điện nhớ chiều cao + chống kẹp."
+    },
+    "botslab2ch": {
+      "name": "Botslab 4K + 2K · 2CH",
+      "desc": "Chưa xác nhận mã model và bộ phụ kiện. Giá chỉ máy; hình minh họa, không phải ảnh sản phẩm."
+    },
+    "botslabG980": {
+      "name": "Botslab G980 · 4CH",
+      "desc": "Bản G980 4CH theo ảnh cung cấp; thẻ nhớ và bộ phụ kiện chưa xác minh. Giá chỉ máy; hình minh họa."
     }
   },
   "fitmentNotes": {

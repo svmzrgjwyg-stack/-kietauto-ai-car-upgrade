@@ -50,6 +50,10 @@ export function ComboView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
     [products],
   );
   const totals = comboTotals(items, byId);
+  const hasPendingCharges = items.some((item) => { const p = byId.get(item.productId); return p?.hardwareOnly || p?.laborCostUsd === null || p?.taxStatus === "unconfirmed"; });
+  const hasSamples = items.some((item) => byId.get(item.productId)?.catalogSource === "sample");
+  const pendingText = locale === "vi" ? "Chỉ giá máy; chưa gồm công lắp. Thuế, phí vận chuyển, tồn kho và bộ phụ kiện cần xác nhận. Đây không phải tổng thanh toán cuối cùng." : "Hardware only; installation is not included. Tax inclusion, shipping, stock and package contents need confirmation. This is not a final payable total.";
+  const sampleText = locale === "vi" ? "MẪU — giá chưa được chủ cửa hàng duyệt, không dùng làm báo giá bán chính thức." : "SAMPLE — prices are not owner-approved retail; not a final sales quote.";
 
   const hasUnverified = items.some((item) => {
     const { status } = resolveFitment(item.productId, vehicle, fitment);
@@ -89,6 +93,8 @@ export function ComboView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
 
   return (
     <div className="space-y-4 pb-36">
+      {hasPendingCharges && <p role="status" className="rounded-xl bg-amber-50 p-3 text-sm">{pendingText}</p>}
+      {hasSamples && <p role="status" className="rounded-xl bg-amber-50 p-3 text-sm">{sampleText}</p>}
       {vehicle && (
         <p className="text-sm font-medium text-[var(--brand)]">
           {vehicleLabel(vehicle)}
@@ -133,6 +139,7 @@ export function ComboView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
                 <div>
                   <p className="font-semibold text-[var(--ink)]">{name}</p>
                   <p className="text-xs text-[var(--muted)]">{product.sku}</p>
+                  {product.catalogSource === "sample" && <p className="text-xs font-bold text-amber-900">{sampleText}</p>}
                 </div>
                 <FitmentBadge status={status} />
               </div>
@@ -150,7 +157,7 @@ export function ComboView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
                     className="min-h-11 w-16 rounded-xl border border-[var(--line)] px-2 text-center text-[16px]"
                   />
                 </label>
-                <label className="flex min-h-11 items-center gap-2 text-sm">
+                {!product.hardwareOnly && product.laborCostUsd !== null && <label className="flex min-h-11 items-center gap-2 text-sm">
                   <input
                     type="checkbox"
                     checked={item.includeLabor}
@@ -160,7 +167,7 @@ export function ComboView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
                     className="h-5 w-5"
                   />
                   {t("combo.includeLabor")}
-                </label>
+                </label>}
                 <button
                   type="button"
                   onClick={() => {
@@ -179,7 +186,7 @@ export function ComboView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[var(--muted)]">{t("combo.lineLabor")}</span>
-                  <span>{formatUsd(labor, locale)}</span>
+                  <span>{product.hardwareOnly || product.laborCostUsd === null ? (locale === "vi" ? "Chưa bao gồm — cần báo giá" : "Not included — needs quote") : formatUsd(labor, locale)}</span>
                 </div>
                 <div className="flex justify-between border-t border-[var(--line)] pt-1 font-semibold">
                   <span>{t("combo.lineTotal")}</span>
@@ -201,7 +208,7 @@ export function ComboView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
           <span>{formatUsd(totals.subtotalLabor, locale)}</span>
         </div>
         <div className="mt-2 flex justify-between border-t border-[var(--line)] pt-3 text-base font-bold">
-          <span>{t("combo.total")}</span>
+          <span>{hasPendingCharges ? (locale === "vi" ? "Tạm tính phần đã có giá" : "Known-price subtotal") : t("combo.total")}</span>
           <span>{formatUsd(totals.total, locale)}</span>
         </div>
       </div>

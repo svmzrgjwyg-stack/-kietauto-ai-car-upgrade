@@ -13,6 +13,7 @@ export const vehicleSelectionSchema = z.object({ brandId: id, modelId: id, yearI
 export const comboItemsSchema = z.array(z.object({ productId: id, qty: z.number().int().min(1).max(99), includeLabor: z.boolean() }).strict()).max(30).refine((items) => new Set(items.map((i) => i.productId)).size === items.length, "Duplicate products");
 export const workingComboSchema = z.object({ vehicle: vehicleSelectionSchema.nullable(), items: comboItemsSchema }).strict();
 const snapshotSchema = z.object({
+  priceScope: z.enum(["sample", "pending_charges"]).optional(),
   vehicleLabel: text,
   lines: z.array(z.object({ productId: id, name: text, sku: text, qty: z.number().int().min(1).max(99), unitCents: cents, laborCents: cents, totalCents: cents, fitment: z.enum(["verified", "unverified", "incompatible"]) }).strict()).min(1).max(30),
   totalCents: cents,
@@ -39,7 +40,7 @@ export function isKnownVehicle(vehicle: VehicleSelection): boolean {
 export function draftSnapshot(items: ComboItem[], vehicle: VehicleSelection, catalog: CatalogSnapshot, translate: (key: string) => string): SavedQuoteDraft["snapshot"] {
   if (!isKnownVehicle(vehicle)) throw new Error("Vehicle unavailable");
   const quote = buildQuoteModel(comboItemsSchema.parse(items), vehicle, catalog, translate);
-  return snapshotSchema.parse({ vehicleLabel: vehicleLabel(vehicle), lines: quote.lineItems.map((line) => ({ productId: line.productId, name: line.name, sku: line.sku, qty: line.qty, unitCents: Math.round(line.unitPrice * 100), laborCents: Math.round(line.labor * 100), totalCents: Math.round(line.lineTotal * 100), fitment: line.fitmentStatus })), totalCents: Math.round(quote.total * 100) });
+  return snapshotSchema.parse({ priceScope: quote.priceScope, vehicleLabel: vehicleLabel(vehicle), lines: quote.lineItems.map((line) => ({ productId: line.productId, name: line.name, sku: line.sku, qty: line.qty, unitCents: Math.round(line.unitPrice * 100), laborCents: Math.round(line.labor * 100), totalCents: Math.round(line.lineTotal * 100), fitment: line.fitmentStatus })), totalCents: Math.round(quote.total * 100) });
 }
 export function createSavedDraft(input: { title: string; locale: Locale; vehicle: VehicleSelection; items: ComboItem[] }, catalog: CatalogSnapshot, translate: (key: string) => string): SavedQuoteDraft {
   const now = new Date().toISOString();
@@ -55,7 +56,7 @@ export function reconcileDraft(draft: SavedQuoteDraft, catalog: CatalogSnapshot)
     const product = catalog.products.find((p) => p.nameKey === key);
     return valid.snapshot.lines.find((line) => line.productId === product?.id)?.name || key;
   });
-  const changed = current.lines.some((line, i) => {
+  const changed = current.priceScope !== valid.snapshot.priceScope || current.lines.some((line, i) => {
     const old = valid.snapshot.lines[i];
     return line.unitCents !== old.unitCents || line.laborCents !== old.laborCents || line.fitment !== old.fitment || line.sku !== old.sku;
   });

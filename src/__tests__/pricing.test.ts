@@ -41,7 +41,7 @@ describe("pricing", () => {
   it("line total equals product + labor", () => {
     const item: ComboItem = { productId: "p1", includeLabor: true, qty: 1 };
     expect(lineTotal(product, item)).toBe(
-      product.priceUsd + product.laborCostUsd,
+      product.priceUsd + product.laborCostUsd!,
     );
   });
 });

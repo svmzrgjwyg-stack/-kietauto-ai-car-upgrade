@@ -2,6 +2,17 @@ import { describe, expect, it } from "vitest";
 import { MockAiClient, OpenAiClient } from "@/lib/ai";
 
 describe("AiClient adapters", () => {
+  it("uses only owner retail and sends unknown category prices to references", async () => {
+    const client = new MockAiClient();
+    const camera = await client.chat({messages:[{role:"user",content:"dashcam price"}],context:{locale:"en",vehicle:null}});
+    expect(camera.message.content).toContain("$115");
+    expect(camera.message.content).toContain("$230");
+    expect(camera.message.content).toContain("hardware only");
+    expect(camera.message.content).not.toMatch(/189|329|labor \$0/);
+    const carplay = await client.chat({messages:[{role:"user",content:"CarPlay"}],context:{locale:"en",vehicle:null}});
+    expect(carplay.message.content).toContain("price");
+    expect(carplay.message.content).toContain("/en/catalog");
+  });
   it("MockAiClient answers fitment questions without claiming unverified compatibility", async () => {
     const client = new MockAiClient();
     const res = await client.chat({

@@ -8,11 +8,12 @@
     "combo": "Combo",
     "chat": "AI Chat",
     "admin": "Admin",
-    "quote": "Quote"
+    "quote": "Quote",
+    "catalog": "Toyota / Lexus"
   },
   "home": {
-    "cta": "Start with your vehicle",
-    "subtitle": "Pick a vehicle → browse accessories → build a combo → export a PDF quote. Fitment defaults to needs verification.",
+    "cta": "Browse Toyota / Lexus",
+    "subtitle": "Explore unverified CarPlay configurations and hardware-priced cameras. Installation, tax and shipping require separate confirmation.",
     "disclaimer": "Unverified fitment never claims compatibility. Contact details are sent only with your consent when quote submission is configured."
   },
   "vehicle": {
@@ -214,6 +215,14 @@
     "liftgatePro": {
       "name": "Power Liftgate Pro",
       "desc": "Height memory + anti-pinch power liftgate."
+    },
+    "botslab2ch": {
+      "name": "Botslab 4K + 2K · 2CH",
+      "desc": "Exact model and package contents unconfirmed. Hardware only; placeholder, not an actual product photo."
+    },
+    "botslabG980": {
+      "name": "Botslab G980 · 4CH",
+      "desc": "G980 4CH variant from supplied image; memory card and package contents unverified. Hardware only; placeholder image."
     }
   },
   "fitmentNotes": {

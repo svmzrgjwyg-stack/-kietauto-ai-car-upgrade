@@ -1,5 +1,41 @@
 [
   {
+    "id": "botslab-2ch-model-pending",
+    "sku": "BOTSLAB-2CH-PENDING",
+    "categoryId": "dashcam",
+    "nameKey": "products.botslab2ch.name",
+    "descriptionKey": "products.botslab2ch.desc",
+    "imageUrl": "/placeholders/dashcam.svg",
+    "priceUsd": 115,
+    "laborCostUsd": null,
+    "tags": [
+      "hardware-only",
+      "model-unverified"
+    ],
+    "active": true,
+    "catalogSource": "owner",
+    "hardwareOnly": true,
+    "taxStatus": "unconfirmed"
+  },
+  {
+    "id": "botslab-g980-4ch",
+    "sku": "BOTSLAB-G980-4CH",
+    "categoryId": "dashcam",
+    "nameKey": "products.botslabG980.name",
+    "descriptionKey": "products.botslabG980.desc",
+    "imageUrl": "/placeholders/dashcam.svg",
+    "priceUsd": 230,
+    "laborCostUsd": null,
+    "tags": [
+      "hardware-only",
+      "package-unverified"
+    ],
+    "active": true,
+    "catalogSource": "owner",
+    "hardwareOnly": true,
+    "taxStatus": "unconfirmed"
+  },
+  {
     "id": "dc-v35",
     "sku": "KA-DC-V35",
     "categoryId": "dashcam",
@@ -8,8 +44,12 @@
     "imageUrl": "/placeholders/dashcam.svg",
     "priceUsd": 189,
     "laborCostUsd": 79,
-    "tags": ["front-rear", "wifi"],
-    "active": true
+    "tags": [
+      "front-rear",
+      "wifi"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "dc-pro4k",
@@ -20,8 +60,12 @@
     "imageUrl": "/placeholders/dashcam.svg",
     "priceUsd": 329,
     "laborCostUsd": 99,
-    "tags": ["4k", "parking-mode"],
-    "active": true
+    "tags": [
+      "4k",
+      "parking-mode"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "hu-android10",
@@ -32,8 +76,12 @@
     "imageUrl": "/placeholders/head-unit.svg",
     "priceUsd": 449,
     "laborCostUsd": 199,
-    "tags": ["android", "10-inch"],
-    "active": true
+    "tags": [
+      "android",
+      "10-inch"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "hu-wireless",
@@ -44,8 +92,12 @@
     "imageUrl": "/placeholders/head-unit.svg",
     "priceUsd": 599,
     "laborCostUsd": 229,
-    "tags": ["wireless", "carplay"],
-    "active": true
+    "tags": [
+      "wireless",
+      "carplay"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "cp-wireless",
@@ -56,8 +108,12 @@
     "imageUrl": "/placeholders/carplay.svg",
     "priceUsd": 149,
     "laborCostUsd": 49,
-    "tags": ["wireless", "adapter"],
-    "active": true
+    "tags": [
+      "wireless",
+      "adapter"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "cp-module",
@@ -68,8 +124,11 @@
     "imageUrl": "/placeholders/carplay.svg",
     "priceUsd": 399,
     "laborCostUsd": 179,
-    "tags": ["oem-integration"],
-    "active": true
+    "tags": [
+      "oem-integration"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "cam360-basic",
@@ -80,8 +139,11 @@
     "imageUrl": "/placeholders/camera-360.svg",
     "priceUsd": 699,
     "laborCostUsd": 349,
-    "tags": ["bird-view"],
-    "active": true
+    "tags": [
+      "bird-view"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "cam360-pro",
@@ -92,8 +154,12 @@
     "imageUrl": "/placeholders/camera-360.svg",
     "priceUsd": 999,
     "laborCostUsd": 399,
-    "tags": ["3d", "recording"],
-    "active": true
+    "tags": [
+      "3d",
+      "recording"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "led-fog",
@@ -104,8 +170,12 @@
     "imageUrl": "/placeholders/lights.svg",
     "priceUsd": 129,
     "laborCostUsd": 59,
-    "tags": ["fog", "led"],
-    "active": true
+    "tags": [
+      "fog",
+      "led"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "led-bar",
@@ -116,8 +186,12 @@
     "imageUrl": "/placeholders/lights.svg",
     "priceUsd": 249,
     "laborCostUsd": 89,
-    "tags": ["lightbar", "offroad"],
-    "active": true
+    "tags": [
+      "lightbar",
+      "offroad"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "liftgate-kit",
@@ -128,8 +202,12 @@
     "imageUrl": "/placeholders/liftgate.svg",
     "priceUsd": 549,
     "laborCostUsd": 249,
-    "tags": ["power-liftgate", "hands-free"],
-    "active": true
+    "tags": [
+      "power-liftgate",
+      "hands-free"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "liftgate-pro",
@@ -140,8 +218,13 @@
     "imageUrl": "/placeholders/liftgate.svg",
     "priceUsd": 749,
     "laborCostUsd": 299,
-    "tags": ["power-liftgate", "memory", "anti-pinch"],
-    "active": true
+    "tags": [
+      "power-liftgate",
+      "memory",
+      "anti-pinch"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "tint-ceramic",
@@ -152,8 +235,12 @@
     "imageUrl": "/placeholders/other.svg",
     "priceUsd": 399,
     "laborCostUsd": 0,
-    "tags": ["tint", "ceramic"],
-    "active": true
+    "tags": [
+      "tint",
+      "ceramic"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   },
   {
     "id": "remote-start",
@@ -164,7 +251,11 @@
     "imageUrl": "/placeholders/other.svg",
     "priceUsd": 449,
     "laborCostUsd": 199,
-    "tags": ["security", "remote"],
-    "active": true
+    "tags": [
+      "security",
+      "remote"
+    ],
+    "active": true,
+    "catalogSource": "sample"
   }
 ]

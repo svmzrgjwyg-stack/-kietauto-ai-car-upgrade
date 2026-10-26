@@ -4,7 +4,7 @@ import productsData from "../../../data/products.json";
 import { resolveFitment } from "@/lib/fitment/resolve";
 import type { FitmentRecord, Product, VehicleSelection } from "@/types";
 
-const products = productsData as Product[];
+const products = (productsData as Product[]).filter((p) => p.catalogSource === "owner" && p.active !== false);
 const fitment = fitmentData as FitmentRecord[];
 
 const RULE =
@@ -29,6 +29,7 @@ function productBlurb(locale: "vi" | "en", categoryId?: string): string {
     ? products.filter((p) => p.categoryId === categoryId && p.active !== false)
     : products.filter((p) => p.active !== false).slice(0, 4);
 
+  if (!list.length) return locale === "vi" ? "Chưa có giá bán được duyệt. Xem danh mục Toyota / Lexus tại /vi/catalog; cấu hình cần xác minh và hỏi giá riêng." : "No approved retail price. Browse Toyota / Lexus references at /en/catalog; fitment requires verification and pricing is on request.";
   return list
     .map((p) => {
       const status = resolveFitment(
@@ -44,7 +45,7 @@ function productBlurb(locale: "vi" | "en", categoryId?: string): string {
           : status === "verified"
             ? "Verified"
             : "Needs verification";
-      return `• ${p.sku}: $${p.priceUsd} (+ labor $${p.laborCostUsd}) — ${badge}`;
+      return `• ${p.sku}: $${p.priceUsd} (${locale === "vi" ? "chỉ máy; công lắp không bao gồm; thuế và vận chuyển chưa xác nhận" : "hardware only; installation excluded; tax and shipping unconfirmed"}) — ${badge}`;
     })
     .join("\n");
 }
@@ -137,8 +138,8 @@ export class MockAiClient implements AiClient {
     } else if (intents.includes("price") || intents.includes("combo")) {
       content =
         locale === "vi"
-          ? `Giá trên app là USD ước tính (phụ kiện + tùy chọn labor). Chưa gồm thuế/ship. Thêm sản phẩm vào Combo rồi xuất PDF báo giá.\n${productBlurb(locale)}`
-          : `Prices shown are estimated USD (parts + optional labor). Tax/shipping not included. Add items to Combo then export a PDF quote.\n${productBlurb(locale)}`;
+          ? `Giá máy USD đã được chủ cửa hàng cung cấp. Công lắp không bao gồm; thuế và vận chuyển chưa xác nhận. Thêm sản phẩm vào Combo rồi xuất PDF báo giá.\n${productBlurb(locale)}`
+          : `Owner-provided hardware prices in USD. Installation excluded; tax inclusion and shipping unconfirmed. Add items to Combo then export a PDF quote.\n${productBlurb(locale)}`;
     } else {
       content =
         locale === "vi"

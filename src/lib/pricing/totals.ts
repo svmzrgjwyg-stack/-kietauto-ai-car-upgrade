@@ -5,7 +5,8 @@ export function lineProductTotal(product: Product, item: ComboItem): number {
 }
 
 export function lineLaborTotal(product: Product, item: ComboItem): number {
-  if (!item.includeLabor) return 0;
+  // Zero charged labor here means NOT INCLUDED, not a free installation offer.
+  if (!item.includeLabor || product.hardwareOnly || product.laborCostUsd === null) return 0;
   return product.laborCostUsd * item.qty;
 }
 

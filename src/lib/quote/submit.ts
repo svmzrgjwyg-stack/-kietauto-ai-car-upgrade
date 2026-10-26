@@ -16,6 +16,8 @@ export type QuoteSubmitPayload = {
     trimId: string;
   } | null;
   items: Array<{
+    priceScope?: "sample" | "pending_charges";
+    hardwareOnly?: boolean;
     productId: string;
     sku: string;
     name: string;

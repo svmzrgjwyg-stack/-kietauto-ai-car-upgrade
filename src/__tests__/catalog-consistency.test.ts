@@ -60,7 +60,7 @@ describe("one current catalog for admin, recommendation, combo, quote and PDF", 
     expect(validateQuoteRequest(oldQuote, catalog)).toBeNull();
     // New module request/read does not re-seed or retain a stale in-memory snapshot.
     expect(await readCatalog()).toEqual(catalog);
-    expect(JSON.parse(await fs.readFile(path.join(directory, "products.json"), "utf8"))[0].priceUsd).toBe(777.25);
+    expect(JSON.parse(await fs.readFile(path.join(directory, "products.json"), "utf8")).find((p: { id: string }) => p.id === "dc-v35").priceUsd).toBe(777.25);
   });
 
   it("refresh immediately before export uses a changed admin price, not the earlier view snapshot", async () => {
@@ -115,20 +115,28 @@ describe("one current catalog for admin, recommendation, combo, quote and PDF", 
   });
 
   it("manual fulfillment persists only locally and stays absent from public catalog and PDF model", async () => {
-    const product = (await listProducts())[0];
+    const product = (await listProducts()).find((p) => p.id === "dc-v35")!;
     const fulfillment = { supplier: "PRIVATE", source: "private-reference", stockStatus: "in_stock", orderStatus: "planned", checkedOn: "2026-10-20", arrivalFrom: "2026-10-25", arrivalTo: "2026-10-28", shipmentGroup: "order-A", feeStatus: "estimated", feeUsd: 24.50 };
     expect((await putAdminProduct(request({ ...product, fulfillment }))).status).toBe(200);
-    expect((await listProducts())[0].fulfillment).toEqual(fulfillment);
+    expect((await listProducts()).find((p) => p.id === "dc-v35")!.fulfillment).toEqual(fulfillment);
     expect(JSON.stringify(await readCatalog())).not.toMatch(/PRIVATE|private-reference|fulfillment/);
     expect(buildQuoteModel(items, vehicle, await readCatalog(), (key) => key).total).toBe(536);
     expect((await putAdminProduct(request({ ...product, fulfillment: { ...fulfillment, feeUsd: -1 } }))).status).toBe(400);
-    expect((await listProducts())[0].fulfillment).toEqual(fulfillment);
+    expect((await listProducts()).find((p) => p.id === "dc-v35")!.fulfillment).toEqual(fulfillment);
+  });
+
+  it("keeps owner camera labor unquoted and rejects an installed-price edit", async () => {
+    const id = "botslab-2ch-model-pending";
+    expect((await putAdminProduct(request({ id, priceUsd: 115, laborCostUsd: null }))).status).toBe(200);
+    expect((await putAdminProduct(request({ id, priceUsd: 115, laborCostUsd: 0 }))).status).toBe(400);
+    expect((await putAdminProduct(request({ id, priceUsd: 115, laborCostUsd: 50 }))).status).toBe(400);
+    expect((await readCatalog()).products.find((p) => p.id === id)?.laborCostUsd).toBeNull();
   });
 
   it("rejects unknown products and invalid price edits at the admin API", async () => {
     expect((await putAdminProduct(request({ id: "new-id", priceUsd: 1, laborCostUsd: 2 }))).status).toBe(404);
     expect((await putAdminProduct(request({ id: "dc-v35", priceUsd: -1, laborCostUsd: 2 }))).status).toBe(400);
-    expect((await readCatalog()).products[0].priceUsd).toBe(189);
+    expect((await readCatalog()).products.find((p) => p.id === "dc-v35")!.priceUsd).toBe(189);
   });
 
   it("reads do not create files and corrupt overrides fail visibly instead of reverting to seed prices", async () => {
@@ -144,12 +152,12 @@ describe("local-only storage boundary", () => {
   it.each(["VERCEL", "AWS_LAMBDA_FUNCTION_NAME", "NETLIFY"])("%s overrides any local opt-in and never reports successful save", async (host) => {
     vi.stubEnv(host, "1");
     expect(localCatalogWritable()).toBe(false);
-    const product = (await listProducts())[0];
+    const product = (await listProducts()).find((p) => p.id === "dc-v35")!;
     await expect(upsertProduct({ ...product, priceUsd: 999 })).rejects.toThrow("read-only");
     await expect(softDeleteProduct(product.id)).rejects.toThrow("read-only");
     expect((await putAdminProduct(request(product))).status).toBe(503);
     expect((await putAdminFitment(request({ productId: product.id }))).status).toBe(503);
-    expect((await readCatalog()).products[0].priceUsd).toBe(189);
+    expect((await readCatalog()).products.find((p) => p.id === "dc-v35")!.priceUsd).toBe(189);
     expect(await fs.readdir(directory)).toEqual([]);
   });
 

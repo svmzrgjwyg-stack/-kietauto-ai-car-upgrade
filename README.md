@@ -105,3 +105,21 @@ Storage policy:
 Regression coverage includes admin API save → no-store catalog → quote/PDF model →
 server validation, fresh export after a price change, hidden items, persisted rereads,
 fitment/evidence, malformed storage, and refusal to save on unsupported hosts.
+
+### Toyota / Lexus catalog trial
+
+`/vi/catalog` and `/en/catalog` browse 45 unverified CarPlay configurations,
+not 45 independently priced products. Configuration references have unknown
+price, labor, stock and shipping; they cannot be added to a priced combo or
+exported as a completed priced quote. There is no Camry CarPlay match in this
+source. Source supplier codes, costs, raw notes, source identifiers and photos
+are deliberately absent from the public reference data.
+
+The two owner-priced Botslab cameras are USD 115 / USD 230, **hardware only**.
+Installation is excluded, tax inclusion and shipping remain unconfirmed. The
+2CH exact model and package contents require confirmation. Neutral placeholders
+are not actual product photos. Quotes/PDFs show known-price subtotals, not final
+payable totals. Sample products remain available only through an explicit toggle
+and are marked as unapproved sample pricing in combos, quotes and saved drafts.
+No paid API, operational system integration, image publication or production
+storage was added; existing hosted admin mutations remain read-only (503).

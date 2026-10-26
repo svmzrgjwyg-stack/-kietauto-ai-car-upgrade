@@ -70,10 +70,12 @@ export function ProductCard({
             {name}
           </h3>
           <p className="text-xs leading-relaxed text-[var(--muted)]">{desc}</p>
+          {product.catalogSource === "sample" && <p className="text-xs font-bold text-amber-800">{locale === "vi" ? "GIÁ MẪU · chưa được duyệt để bán" : "SAMPLE · not approved retail pricing"}</p>}
+          {product.hardwareOnly && <p className="text-xs font-semibold text-amber-900">{locale === "vi" ? "Chỉ máy · chưa gồm công lắp. Thuế, tồn kho và vận chuyển chưa xác nhận." : "Hardware only · installation excluded. Tax inclusion, stock and shipping unconfirmed."}</p>}
           <p className="text-sm font-semibold text-[var(--ink)]">
             {t("recommend.price")}: {formatUsd(product.priceUsd, locale)}
             <span className="ml-2 font-medium text-[var(--muted)]">
-              · {t("recommend.labor")} {formatUsd(product.laborCostUsd, locale)}
+              · {t("recommend.labor")} {product.laborCostUsd == null || product.hardwareOnly ? (locale === "vi" ? "chưa báo giá · không bao gồm" : "not quoted · not included") : formatUsd(product.laborCostUsd, locale)}
             </span>
           </p>
         </div>

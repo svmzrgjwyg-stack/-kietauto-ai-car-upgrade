@@ -32,7 +32,10 @@ export function QuoteView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
   const [configured, setConfigured] = useState<boolean | null>(null);
   const [submitState, setSubmitState] = useState<SubmitState>({ kind: "idle" });
 
-  const { failed, refresh } = useCatalog(initialCatalog);
+  const { catalog, failed, refresh } = useCatalog(initialCatalog);
+  const selectedProducts = catalog.products.filter((p) => items.some((item) => item.productId === p.id));
+  const hasSamples = selectedProducts.some((p) => p.catalogSource === "sample");
+  const hasPendingCharges = selectedProducts.some((p) => p.hardwareOnly || p.laborCostUsd === null || p.taxStatus === "unconfirmed");
   useEffect(() => {
     let cancelled = false;
     fetch("/api/quote/request")
@@ -66,7 +69,7 @@ export function QuoteView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
         ...totals,
         disclaimers: [
           t("pdf.disclaimerFitment"),
-          t("pdf.disclaimerPrice"),
+          ...(current.products.some((p) => items.some((item) => item.productId === p.id) && (p.hardwareOnly || p.taxStatus === "unconfirmed" || p.laborCostUsd === null)) ? [] : [t("pdf.disclaimerPrice")]),
           t("pdf.disclaimerContract"),
         ],
         customerName: name || undefined,
@@ -186,6 +189,8 @@ export function QuoteView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
     <div className="space-y-4">
       <SavedDrafts onRestore={() => { setName(""); setPhone(""); setEmail(""); setNote(""); setConsent(false); setSubmitState({ kind: "idle" }); }} />
       <p className="text-xs text-[var(--muted)]">{t("home.disclaimer")}</p>
+      {hasSamples && <p role="status" className="rounded-xl bg-amber-50 p-3 font-semibold">{locale === "vi" ? "MẪU — giá chưa được duyệt để bán; không phải báo giá chính thức." : "SAMPLE — prices are not approved retail; not a final sales quote."}</p>}
+      {hasPendingCharges && <p role="status" className="rounded-xl bg-amber-50 p-3">{locale === "vi" ? "Chỉ giá máy, chưa gồm công lắp. Thuế, vận chuyển, tồn kho và bộ phụ kiện cần xác nhận. Tạm tính, không phải tổng thanh toán cuối cùng." : "Hardware only; installation is not included. Tax inclusion, shipping, stock and package contents need confirmation. Known-price subtotal, not a final payable total."}</p>}
 
       {configured === false && (
         <p

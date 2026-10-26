@@ -35,6 +35,9 @@ export function SavedDrafts({ onRestore }: { onRestore?: () => void }) {
   const lock = useRef(false);
   const generation = useRef(0);
   const upload = useRef<HTMLInputElement>(null);
+  const scopeWarning = (scope?: "sample" | "pending_charges") => scope === "pending_charges"
+    ? (locale === "vi" ? "Chỉ giá máy; công lắp chưa gồm, thuế và vận chuyển cần xác nhận. Không phải tổng thanh toán cuối cùng." : "Hardware only; installation excluded, tax and shipping need confirmation. Not a final payable total.")
+    : (locale === "vi" ? "MẪU / giá lưu chưa được xác nhận để bán — cần duyệt lại trước khi báo khách." : "SAMPLE / historical prices are not confirmed retail — review before quoting a customer.");
   const money = (value: number) => new Intl.NumberFormat(locale === "vi" ? "vi-VN" : "en-US", { style: "currency", currency: "USD" }).format(value / 100);
 
   const cancelPending = useCallback(() => { generation.current++; }, []);
@@ -109,6 +112,7 @@ export function SavedDrafts({ onRestore }: { onRestore?: () => void }) {
     <ul className="space-y-3">{drafts.map((draft) => <li key={draft.id} className="rounded-xl border bg-white p-3">
       <h3 className="break-words font-semibold">{draft.title}</h3>
       <p className="text-sm">{draft.snapshot.vehicleLabel}</p>
+      <p className="text-xs font-semibold text-amber-900">{scopeWarning(draft.snapshot.priceScope)}</p>
       <p className="text-xs text-slate-600">{l.localDate}: {new Date(draft.createdAt).toLocaleString(locale)} · {l.historical}: {money(draft.snapshot.totalCents)}</p>
       <div className="mt-2 flex flex-wrap gap-2">
         <button type="button" className={button} disabled={busy} onClick={() => open(draft)}>{l.open}</button>
@@ -119,6 +123,7 @@ export function SavedDrafts({ onRestore }: { onRestore?: () => void }) {
     </li>)}</ul>
     {review && <div role="region" aria-label={l.review} className="space-y-3 rounded-xl border-2 border-[var(--brand)] bg-white p-3">
       <h3 className="font-bold">{l.review}: {review.draft.title}</h3>
+      <p className="text-sm font-semibold text-amber-900">{scopeWarning(review.result.kind === "unavailable" ? review.draft.snapshot.priceScope : review.result.current.priceScope)}</p>
       <p className="text-sm">{review.result.kind === "unavailable" ? l.unavailable : review.result.kind === "changed" ? l.changed : l.unchanged}</p>
       {review.draft.snapshot.lines.map((line, index) => <div key={line.productId} className="border-b py-2 text-sm">
         <p className="font-semibold">{line.name} · {l.qty} {line.qty}</p>

@@ -29,7 +29,7 @@ export default async function HomePage({
         {t("home.subtitle")}
       </p>
       <Link
-        href={`/${locale}/vehicle`}
+        href={`/${locale}/catalog`}
         className="animate-cta mt-8 inline-flex min-h-12 items-center justify-center rounded-2xl bg-[var(--accent)] px-6 text-sm font-bold text-[var(--ink)]"
       >
         {t("home.cta")}

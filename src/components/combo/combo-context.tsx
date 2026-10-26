@@ -21,9 +21,9 @@ type ComboContextValue = {
   vehicle: VehicleSelection | null;
   setVehicle: (v: VehicleSelection | null) => void;
   items: ComboItem[];
-  addProduct: (productId: string) => void;
+  addProduct: (productId: string, includeLabor?: boolean) => void;
   /** Remove `replaceId` then add `productId` (same-category swap). */
-  replaceProduct: (replaceId: string, productId: string) => void;
+  replaceProduct: (replaceId: string, productId: string, includeLabor?: boolean) => void;
   removeProduct: (productId: string) => void;
   setQty: (productId: string, qty: number) => void;
   setIncludeLabor: (productId: string, includeLabor: boolean) => void;
@@ -56,14 +56,14 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const addProduct = useCallback(
-    (productId: string) => {
+    (productId: string, includeLabor = true) => {
       setItems((prev) => {
         const existing = prev.find((i) => i.productId === productId);
         const next = existing
           ? prev.map((i) =>
               i.productId === productId ? { ...i, qty: Math.min(99, i.qty + 1) } : i,
             )
-          : [...prev, { productId, includeLabor: true, qty: 1 }];
+          : [...prev, { productId, includeLabor, qty: 1 }];
         saveCombo(next);
         return next;
       });
@@ -72,7 +72,7 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
   );
 
   const replaceProduct = useCallback(
-    (replaceId: string, productId: string) => {
+    (replaceId: string, productId: string, includeLabor = true) => {
       setItems((prev) => {
         const without = prev.filter((i) => i.productId !== replaceId);
         const existing = without.find((i) => i.productId === productId);
@@ -80,7 +80,7 @@ export function ComboProvider({ children }: { children: React.ReactNode }) {
           ? without.map((i) =>
               i.productId === productId ? { ...i, qty: Math.min(99, i.qty + 1) } : i,
             )
-          : [...without, { productId, includeLabor: true, qty: 1 }];
+          : [...without, { productId, includeLabor, qty: 1 }];
         saveCombo(next);
         return next;
       });

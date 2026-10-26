@@ -11,7 +11,7 @@ import { fulfillmentSchema } from "@/lib/shipping/planning";
 const editableProduct = z.object({
   id: z.string().min(1),
   priceUsd: z.number().finite().min(0).max(1_000_000_000),
-  laborCostUsd: z.number().finite().min(0).max(1_000_000_000),
+  laborCostUsd: z.number().finite().min(0).max(1_000_000_000).nullable(),
   active: z.boolean().optional(),
   fulfillment: fulfillmentSchema.optional(),
 });
@@ -37,10 +37,11 @@ export async function PUT(req: Request) {
   if (!parsed.success) return NextResponse.json({ error: `Invalid product: ${parsed.error.issues.map((issue) => issue.message).join("; ")}` }, { status: 400 });
   const existing = (await listProducts()).find((p) => p.id === parsed.data.id);
   if (!existing) return NextResponse.json({ error: "Unknown product" }, { status: 404 });
+  if (existing.hardwareOnly && parsed.data.laborCostUsd !== null) return NextResponse.json({ error: "Hardware-only product: installation price must remain unquoted" }, { status: 400 });
   const products = await upsertProduct({
     ...existing, ...parsed.data,
     priceUsd: Math.round(parsed.data.priceUsd * 100) / 100,
-    laborCostUsd: Math.round(parsed.data.laborCostUsd * 100) / 100,
+    laborCostUsd: parsed.data.laborCostUsd === null ? null : Math.round(parsed.data.laborCostUsd * 100) / 100,
   });
   return NextResponse.json({ products }, { headers: { "Cache-Control": "no-store" } });
 }

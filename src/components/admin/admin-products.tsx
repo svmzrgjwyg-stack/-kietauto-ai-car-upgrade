@@ -134,13 +134,14 @@ export function AdminProducts() {
                 {t("labor")}
                 <input
                   type="number"
-                  disabled={!canWrite}
-                  value={p.laborCostUsd}
+                  disabled={!canWrite || p.hardwareOnly}
+                  placeholder={locale === "vi" ? "Chưa báo giá / không bao gồm" : "Unquoted / not included"}
+                  value={p.laborCostUsd ?? ""}
                   onChange={(e) =>
                     setProducts((all) =>
                       all.map((x) =>
                         x.id === p.id
-                          ? { ...x, laborCostUsd: Number(e.target.value) }
+                          ? { ...x, laborCostUsd: e.target.value === "" ? null : Number(e.target.value) }
                           : x,
                       ),
                     )
