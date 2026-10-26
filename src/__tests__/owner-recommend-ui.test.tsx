@@ -25,3 +25,16 @@ it('first request quote click adds hardware only and navigates immediately', () 
  expect(addProduct).toHaveBeenCalledWith('botslab-2ch-model-pending',false);
  expect(push).toHaveBeenCalledWith('/en/quote');
 });
+it('renders distinct owner product photos with readable alt text and uncropped responsive layout', () => {
+ mount();
+ const two = screen.getByRole('img', {name:'Botslab 4K + 2K · 2CH'});
+ const four = screen.getByRole('img', {name:'Botslab G980 · 4CH'});
+ expect(two.getAttribute('src')).toContain('botslab-2ch.png');
+ expect(four.getAttribute('src')).toContain('botslab-g980-4ch.png');
+ for (const photo of [two, four]) {
+  expect(photo.className).toContain('object-contain');
+  expect(photo.className).toContain('w-full');
+  expect(photo.getAttribute('sizes')).toContain('100vw');
+ }
+ expect(screen.getAllByText(/Hardware only · installation excluded/).length).toBe(2);
+});

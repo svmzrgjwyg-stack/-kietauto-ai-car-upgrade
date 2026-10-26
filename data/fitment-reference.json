@@ -14,7 +14,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-001-dashboard.jpg",
+        "width": 210,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-002",
@@ -31,7 +40,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-002-dashboard.jpg",
+        "width": 192,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-003",
@@ -48,7 +66,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-003-dashboard.jpg",
+        "width": 240,
+        "height": 159,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-004",
@@ -65,7 +92,23 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-004-dashboard.jpg",
+        "width": 169,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      },
+      {
+        "src": "/reference-images/cp-004-rear-connectors.jpg",
+        "width": 134,
+        "height": 180,
+        "kind": "oem_headunit_rear_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-005",
@@ -82,7 +125,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-005-dashboard.jpg",
+        "width": 240,
+        "height": 177,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-006",
@@ -99,7 +151,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-006-dashboard.jpg",
+        "width": 145,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-007",
@@ -116,7 +177,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-007-dashboard.jpg",
+        "width": 240,
+        "height": 146,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-008",
@@ -133,7 +203,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-008-dashboard.jpg",
+        "width": 189,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-009",
@@ -150,7 +229,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-009-dashboard.jpg",
+        "width": 159,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-010",
@@ -167,7 +255,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-010-dashboard.jpg",
+        "width": 164,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-011",
@@ -184,7 +281,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-011-dashboard.jpg",
+        "width": 240,
+        "height": 163,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-012",
@@ -201,7 +307,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-012-dashboard.jpg",
+        "width": 158,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-013",
@@ -218,7 +333,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-013-dashboard.jpg",
+        "width": 132,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-014",
@@ -235,7 +359,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-014-dashboard.jpg",
+        "width": 211,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-015",
@@ -252,7 +385,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-015-dashboard.jpg",
+        "width": 151,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-016",
@@ -269,7 +411,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-016-dashboard.jpg",
+        "width": 142,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-017",
@@ -286,7 +437,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-017-dashboard.jpg",
+        "width": 129,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-018",
@@ -303,7 +463,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-018-dashboard.jpg",
+        "width": 154,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-019",
@@ -320,7 +489,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-019-dashboard.jpg",
+        "width": 137,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-020",
@@ -337,7 +515,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-020-dashboard.jpg",
+        "width": 126,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-021",
@@ -354,7 +541,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-021-dashboard.jpg",
+        "width": 102,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-022",
@@ -371,7 +567,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-022-dashboard.jpg",
+        "width": 240,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-023",
@@ -388,7 +593,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-023-dashboard.jpg",
+        "width": 158,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-024",
@@ -405,7 +619,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-024-dashboard.jpg",
+        "width": 113,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-025",
@@ -422,7 +645,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-025-dashboard.jpg",
+        "width": 120,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-026",
@@ -439,7 +671,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-026-dashboard.jpg",
+        "width": 160,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": true
+      }
+    ]
   },
   {
     "id": "CP-027",
@@ -456,7 +697,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-027-dashboard.jpg",
+        "width": 160,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": true
+      }
+    ]
   },
   {
     "id": "CP-028",
@@ -473,7 +723,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-028-dashboard.jpg",
+        "width": 148,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-029",
@@ -490,7 +749,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-029-dashboard.jpg",
+        "width": 152,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-030",
@@ -507,7 +775,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-030-dashboard.jpg",
+        "width": 140,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-031",
@@ -524,7 +801,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-031-dashboard.jpg",
+        "width": 98,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-032",
@@ -541,7 +827,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-032-dashboard.jpg",
+        "width": 130,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-033",
@@ -558,7 +853,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-033-dashboard.jpg",
+        "width": 123,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-034",
@@ -575,7 +879,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-034-dashboard.jpg",
+        "width": 240,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-035",
@@ -592,7 +905,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-035-dashboard.jpg",
+        "width": 173,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-036",
@@ -609,7 +931,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-036-dashboard.jpg",
+        "width": 160,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-037",
@@ -626,7 +957,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-037-dashboard.jpg",
+        "width": 132,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-038",
@@ -643,7 +983,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-038-dashboard.jpg",
+        "width": 141,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-039",
@@ -660,7 +1009,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-039-dashboard.jpg",
+        "width": 145,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-040",
@@ -677,7 +1035,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-040-dashboard.jpg",
+        "width": 170,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-041",
@@ -694,7 +1061,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-041-dashboard.jpg",
+        "width": 175,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-042",
@@ -711,7 +1087,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-042-dashboard.jpg",
+        "width": 111,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-043",
@@ -728,7 +1113,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-043-dashboard.jpg",
+        "width": 143,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-044",
@@ -745,7 +1139,16 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-044-dashboard.jpg",
+        "width": 171,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   },
   {
     "id": "CP-045",
@@ -762,6 +1165,15 @@
     "fitmentStatus": "unverified",
     "priceUsd": null,
     "installationPriceUsd": null,
-    "availability": "unknown"
+    "availability": "unknown",
+    "images": [
+      {
+        "src": "/reference-images/cp-045-dashboard.jpg",
+        "width": 101,
+        "height": 180,
+        "kind": "oem_dashboard_reference",
+        "sharedReference": false
+      }
+    ]
   }
 ]

@@ -5,7 +5,7 @@
     "categoryId": "dashcam",
     "nameKey": "products.botslab2ch.name",
     "descriptionKey": "products.botslab2ch.desc",
-    "imageUrl": "/placeholders/dashcam.svg",
+    "imageUrl": "/products/botslab-2ch.png",
     "priceUsd": 115,
     "laborCostUsd": null,
     "tags": [
@@ -23,7 +23,7 @@
     "categoryId": "dashcam",
     "nameKey": "products.botslabG980.name",
     "descriptionKey": "products.botslabG980.desc",
-    "imageUrl": "/placeholders/dashcam.svg",
+    "imageUrl": "/products/botslab-g980-4ch.png",
     "priceUsd": 230,
     "laborCostUsd": null,
     "tags": [

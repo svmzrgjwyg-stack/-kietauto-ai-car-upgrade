@@ -10,7 +10,7 @@ describe("Toyota/Lexus reference catalog", () => {
     for (const r of fitmentReferences) { expect(r.priceUsd).toBeNull(); expect(r.installationPriceUsd).toBeNull(); expect(r.fitmentStatus).toBe("unverified"); expect(r.usMarketVerified).toBe(false); expect(r.availability).toBe("unknown"); }
   });
   it("includes only public allowlisted fields without supplier/private source data", () => {
-    const fields = ["id", "make", "model", "yearFrom", "yearTo", "control", "screen", "screenInches", "navigationRequired", "market", "usMarketVerified", "fitmentStatus", "priceUsd", "installationPriceUsd", "availability"].sort();
+    const fields = ["images", "id", "make", "model", "yearFrom", "yearTo", "control", "screen", "screenInches", "navigationRequired", "market", "usMarketVerified", "fitmentStatus", "priceUsd", "installationPriceUsd", "availability"].sort();
     fitmentReferences.forEach((r) => expect(Object.keys(r).sort()).toEqual(fields));
     const raw = JSON.stringify(fitmentReferences);
     for (const value of ["supplier", "library_file", "raw_values", "cost_cents", "source_workbook"]) expect(raw).not.toContain(value);

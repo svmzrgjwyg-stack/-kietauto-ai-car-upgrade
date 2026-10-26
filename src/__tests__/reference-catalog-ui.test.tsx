@@ -27,3 +27,10 @@ describe("reference browser", () => {
     fireEvent.change(screen.getByLabelText("Tìm cấu hình / bộ điều khiển"), { target: { value: "Camry" } }); expect(screen.getByRole("status").textContent).toContain("0 cấu hình"); expect(screen.getByText(/Không có kết quả không có nghĩa/)).toBeTruthy();
   });
 });
+it('shows reference photographs with clear alt text, low-resolution notice and duplicate warning', () => {
+ render(<ReferenceBrowser references={fitmentReferences} locale="en" />);
+ expect(screen.getAllByRole('img')).toHaveLength(46);
+ expect(screen.getByRole('img',{name:/Lexus IS 2013–2014 · Factory head unit rear reference/})).toBeTruthy();
+ expect(screen.getByText(/Source images are low resolution/)).toBeTruthy();
+ expect(screen.getAllByText(/source reuses this image/)).toHaveLength(2);
+});

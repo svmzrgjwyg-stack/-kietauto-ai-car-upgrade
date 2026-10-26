@@ -26,6 +26,7 @@ export function ProductCard({
   const name = t(product.nameKey as Parameters<typeof t>[0]);
   const desc = t(product.descriptionKey as Parameters<typeof t>[0]);
   const [justAdded, setJustAdded] = useState(false);
+  const isOwnerProduct = product.catalogSource === "owner";
 
   function handleAdd() {
     onAdd();
@@ -39,10 +40,10 @@ export function ProductCard({
         <div className="flex gap-3 p-3">
           <Image
             src={product.imageUrl}
-            alt=""
+            alt={name}
             width={88}
             height={88}
-            className="pointer-events-none h-[88px] w-[88px] rounded-2xl object-cover"
+            className="pointer-events-none h-[88px] w-[88px] rounded-2xl object-contain"
           />
           <div className="min-w-0 flex-1 space-y-2">
             <FitmentBadge status={status} />
@@ -56,15 +57,19 @@ export function ProductCard({
 
   return (
     <article className="relative overflow-hidden rounded-3xl border border-[var(--line)] bg-white shadow-[0_10px_30px_-18px_rgba(15,23,42,0.45)]">
-      <div className="flex gap-3 p-3">
+      <div className={`flex gap-3 p-3 ${isOwnerProduct ? "flex-col" : ""}`}>
         <Image
           src={product.imageUrl}
-          alt=""
-          width={96}
-          height={96}
-          className="pointer-events-none h-24 w-24 shrink-0 rounded-2xl bg-[var(--wash)] object-cover"
+          alt={name}
+          width={isOwnerProduct ? 660 : 96}
+          height={isOwnerProduct ? (product.id === "botslab-2ch-model-pending" ? 710 : 700) : 96}
+          sizes={isOwnerProduct ? "(max-width: 640px) 100vw, 640px" : "96px"}
+          className={isOwnerProduct
+            ? "pointer-events-none h-72 w-full rounded-2xl sm:h-80 bg-white object-contain"
+            : "pointer-events-none h-24 w-24 shrink-0 rounded-2xl bg-[var(--wash)] object-contain"}
         />
         <div className="min-w-0 flex-1 space-y-2">
+          {isOwnerProduct && <p className="text-xs text-[var(--muted)]">{locale === "vi" ? "Ảnh giới thiệu sản phẩm; điện thoại minh họa không kèm theo. Phụ kiện cần xác nhận." : "Product reference image; pictured phone is not included. Confirm supplied accessories."}</p>}
           <FitmentBadge status={status} />
           <h3 className="text-base font-semibold leading-snug text-[var(--ink)]">
             {name}

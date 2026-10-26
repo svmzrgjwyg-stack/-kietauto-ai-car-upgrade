@@ -22,7 +22,7 @@ describe("owner camera retail is hardware only, not a completed installed quote"
       expect(p.hardwareOnly).toBe(true);
       expect(p.laborCostUsd).toBeNull();
       expect(p.taxStatus).toBe("unconfirmed");
-      expect(p.imageUrl).toBe("/placeholders/dashcam.svg");
+      expect(p.imageUrl).toBe(p.id === "botslab-2ch-model-pending" ? "/products/botslab-2ch.png" : "/products/botslab-g980-4ch.png");
     }
     expect(products.filter((p) => p.catalogSource === "sample")).toHaveLength(14);
   });

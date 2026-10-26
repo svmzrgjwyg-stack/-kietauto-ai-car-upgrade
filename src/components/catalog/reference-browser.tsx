@@ -29,9 +29,14 @@ export function ReferenceBrowser({ references, locale }: { references: FitmentRe
     <p className="text-xs leading-relaxed text-[var(--muted)]">{t.note}</p>
     {filtered.length === 0 && <p className="rounded-2xl bg-amber-50 p-4 text-sm text-amber-950">{t.empty}</p>}
     <div className="space-y-3">{filtered.map((r) => <article key={r.id} className="overflow-hidden rounded-3xl border border-[var(--line)] bg-white p-4 shadow-sm">
-      <div className="flex gap-3"><Image src="/placeholders/carplay.svg" alt="" width={64} height={64} className="h-16 w-16 shrink-0 rounded-xl object-cover" />
+      <div className="flex gap-3">
         <div className="min-w-0"><h2 className="font-semibold">{r.make} {r.model} · {r.yearFrom ?? "?"}–{r.yearTo ?? "?"}</h2>
           <p className="mt-1 text-xs text-[var(--muted)]">{t.reference}: {r.id}</p><p className="mt-2 inline-block rounded-full bg-amber-100 px-2 py-1 text-xs font-semibold text-amber-950">{t.unverified}</p></div></div>
+      <div className="mt-4 flex flex-wrap items-start gap-3">{r.images.map((photo) => <figure key={photo.src} className="max-w-full">
+        <Image src={photo.src} alt={`${r.make} ${r.model} ${r.yearFrom ?? "?"}–${r.yearTo ?? "?"} · ${photo.kind === "oem_headunit_rear_reference" ? t.rearImage : t.dashboardImage}`} width={photo.width} height={photo.height} sizes="240px" unoptimized className="h-auto max-h-44 w-auto max-w-full rounded-xl bg-[var(--wash)] object-contain" />
+        <figcaption className="mt-1 max-w-60 text-xs text-[var(--muted)]">{photo.kind === "oem_headunit_rear_reference" ? t.rearImage : t.imageCaption}</figcaption>
+      </figure>)}</div>
+      {r.images.some((photo) => photo.sharedReference) && <p className="mt-2 text-xs text-amber-900">{t.sharedImage}</p>}
       <p className="mt-3 text-lg font-bold text-[var(--brand)]">{t.quote}</p><p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">{t.noPrice}</p>
       <details className="mt-3 border-t border-[var(--line)] pt-2"><summary className="cursor-pointer py-2 text-sm font-semibold">{t.details}</summary>
         <dl className="space-y-2 text-sm"><div><dt className="font-semibold">{t.control}</dt><dd>{r.control ?? t.unknown}</dd></div>
