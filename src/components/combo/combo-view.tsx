@@ -4,6 +4,7 @@ import { useCatalog } from "@/lib/catalog/use-catalog";
 import type { CatalogSnapshot } from "@/lib/catalog/snapshot";
 
 import Link from "next/link";
+import { ReferenceSelectionReview } from "@/components/browse/reference-selection-review";
 import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { FitmentBadge } from "@/components/ui/fitment-badge";
@@ -73,14 +74,15 @@ export function ComboView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
     )
     .join(", ");
 
-  if (failed) return <p role="alert">{t("catalog.unavailable")}</p>;
+  if (failed) return <div className="space-y-4"><ReferenceSelectionReview locale={locale === "vi" ? "vi" : "en"} /><p role="alert">{t("catalog.unavailable")}</p><Link href={`/${locale}/catalog`} className="inline-flex min-h-11 items-center font-semibold text-[var(--brand)]">{t("nav.catalog")}</Link></div>;
 
   if (!hydrated) return null;
 
   if (items.length === 0) {
     return (
       <div className="space-y-4">
-        <p className="text-sm text-[var(--muted)]">{t("combo.empty")}</p>
+        <ReferenceSelectionReview locale={locale === "vi" ? "vi" : "en"} />
+        <p className="text-sm text-[var(--muted)]">{locale === "vi" ? "Chưa chọn thiết bị có giá. Anh vẫn có thể lưu cấu hình tham khảo bên trên hoặc xem thêm camera." : "No priced hardware selected. Keep reference configurations above or explore cameras."}</p>
         <Link
           href={`/${locale}/recommend`}
           className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-[var(--brand)] px-5 text-sm font-semibold text-white touch-manipulation"
@@ -93,6 +95,8 @@ export function ComboView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
 
   return (
     <div className="space-y-4 pb-36">
+      <ReferenceSelectionReview locale={locale === "vi" ? "vi" : "en"} />
+      <Link href={`/${locale}/recommend`} className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--brand)]">{locale === "vi" ? "← Chọn thêm thiết bị" : "← Explore more hardware"}</Link>
       {hasPendingCharges && <p role="status" className="rounded-xl bg-amber-50 p-3 text-sm">{pendingText}</p>}
       {hasSamples && <p role="status" className="rounded-xl bg-amber-50 p-3 text-sm">{sampleText}</p>}
       {vehicle && (
@@ -219,13 +223,13 @@ export function ComboView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
             href={`/${locale}/quote`}
             className="flex min-h-12 touch-manipulation items-center justify-center rounded-2xl bg-[var(--accent)] text-sm font-bold text-[var(--ink)]"
           >
-            {t("combo.requestQuote")}
+            {locale === "vi" ? "Tiếp tục · Lưu / xuất bản nháp" : "Continue · Save / export draft"}
           </Link>
           <Link
-            href={`/${locale}/quote`}
+            href={`/${locale}/catalog`}
             className="flex min-h-11 touch-manipulation items-center justify-center text-sm font-semibold text-[var(--brand)]"
           >
-            {t("combo.exportPdf")}
+            {locale === "vi" ? "Xem thêm màn hình & CarPlay" : "Explore screens & CarPlay"}
           </Link>
         </div>
       </div>

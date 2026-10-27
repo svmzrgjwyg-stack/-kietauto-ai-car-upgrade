@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -86,10 +87,11 @@ export function VehiclePicker() {
     <div className="space-y-5">
       <p className="rounded-xl bg-amber-50 p-3 text-sm">{locale === "vi" ? "Danh sách xe chỉ để chọn cấu hình tham khảo, không xác nhận phụ kiện lắp vừa. Toyota / Lexus được ưu tiên." : "Vehicle choices are reference configurations, not confirmed accessory fitment. Toyota / Lexus are prioritized."}</p>
       <div>
-        <label className="mb-2 block text-sm font-semibold text-[var(--ink)]">
+        <label htmlFor="vehicle-brand" className="mb-2 block text-sm font-semibold text-[var(--ink)]">
           {t("brand")}
         </label>
         <select
+          id="vehicle-brand"
           className={selectClass}
           value={brandId}
           onChange={(e) => {
@@ -112,10 +114,11 @@ export function VehiclePicker() {
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-semibold text-[var(--ink)]">
+        <label htmlFor="vehicle-model" className="mb-2 block text-sm font-semibold text-[var(--ink)]">
           {t("model")}
         </label>
         <select
+          id="vehicle-model"
           className={selectClass}
           value={modelId}
           disabled={!brandId}
@@ -138,10 +141,11 @@ export function VehiclePicker() {
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-semibold text-[var(--ink)]">
+        <label htmlFor="vehicle-year" className="mb-2 block text-sm font-semibold text-[var(--ink)]">
           {t("year")}
         </label>
         <select
+          id="vehicle-year"
           className={selectClass}
           value={yearId}
           disabled={!modelId}
@@ -164,10 +168,11 @@ export function VehiclePicker() {
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-semibold text-[var(--ink)]">
+        <label htmlFor="vehicle-trim" className="mb-2 block text-sm font-semibold text-[var(--ink)]">
           {t("trim")}
         </label>
         <select
+          id="vehicle-trim"
           className={selectClass}
           value={trimId}
           disabled={!yearId || trims.length === 0}
@@ -197,6 +202,7 @@ export function VehiclePicker() {
         </p>
       )}
 
+      <Link href={`/${locale}/catalog`} className="flex min-h-11 items-center text-sm font-semibold text-[var(--brand)] underline">{locale === "vi" ? "Chưa tìm thấy xe? Xem danh mục trước →" : "Car not listed? Explore the catalogue first →"}</Link>
       <div className="flex gap-3 pt-2">
         <button
           type="button"

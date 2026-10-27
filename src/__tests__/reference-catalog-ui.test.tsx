@@ -6,6 +6,7 @@ import { ReferenceBrowser } from "@/components/catalog/reference-browser";
 import { fitmentReferences } from "@/lib/catalog/reference";
 vi.mock("next/link", () => ({ default: ({ children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => <a {...props}>{children}</a> }));
 vi.mock("next/image", () => ({ default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => <span role="img" aria-label={props.alt || "illustration"} /> }));
+vi.mock("@/components/combo/combo-context", () => ({ useCombo: () => ({ vehicle: null }) }));
 afterEach(cleanup);
 describe("reference browser", () => {
   it("shows unknown prices and no combo/quote actions", () => {

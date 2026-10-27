@@ -64,3 +64,11 @@ body {
 .animate-cta {
   animation: pulse-soft 2.8s ease-in-out infinite;
 }
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

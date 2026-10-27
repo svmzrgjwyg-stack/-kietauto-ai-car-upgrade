@@ -4,6 +4,7 @@ import { useCatalog } from "@/lib/catalog/use-catalog";
 import type { CatalogSnapshot } from "@/lib/catalog/snapshot";
 
 import Link from "next/link";
+import { ReferenceSelectionReview } from "@/components/browse/reference-selection-review";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useCombo } from "@/components/combo/combo-context";
@@ -51,7 +52,7 @@ export function QuoteView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
     };
   }, []);
 
-  if (failed) return <div className="space-y-4"><SavedDrafts /><p role="alert">{t("catalog.unavailable")}</p></div>;
+  if (failed) return <div className="space-y-4"><ReferenceSelectionReview locale={locale} /><SavedDrafts /><p role="alert">{t("catalog.unavailable")}</p><Link href={`/${locale}/combo`} className="inline-flex min-h-11 items-center font-semibold text-[var(--brand)]">{t("quote.back")}</Link></div>;
 
   if (!hydrated) return null;
 
@@ -187,6 +188,9 @@ export function QuoteView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
 
   return (
     <div className="space-y-4">
+      <ReferenceSelectionReview locale={locale} compact />
+      <p className="rounded-2xl bg-[var(--brand-soft)] p-4 text-sm">{locale === "vi" ? "Đây là bước lưu / xuất bản nháp nội bộ, không phải đặt hàng. Danh sách cấu hình quan tâm tách riêng, không nằm trong giá hoặc PDF thiết bị." : "Save / export an internal draft, not an order. Reference interests stay separate from hardware pricing and the PDF."}</p>
+      {!vehicle && <p className="rounded-2xl bg-[var(--wash)] p-3 text-sm">{locale === "vi" ? "Anh vẫn xuất được PDF thiết bị. Để lưu bản nháp có tên, chọn xe trước: " : "You can still export the hardware PDF. To save a named draft, choose a vehicle first: "}<Link href={`/${locale}/vehicle`} className="inline-flex min-h-11 items-center font-semibold underline">{locale === "vi" ? "Chọn xe" : "Choose vehicle"}</Link></p>}
       <SavedDrafts onRestore={() => { setName(""); setPhone(""); setEmail(""); setNote(""); setConsent(false); setSubmitState({ kind: "idle" }); }} />
       <p className="text-xs text-[var(--muted)]">{t("home.disclaimer")}</p>
       {hasSamples && <p role="status" className="rounded-xl bg-amber-50 p-3 font-semibold">{locale === "vi" ? "MẪU — giá chưa được duyệt để bán; không phải báo giá chính thức." : "SAMPLE — prices are not approved retail; not a final sales quote."}</p>}
@@ -201,6 +205,9 @@ export function QuoteView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
         </p>
       )}
 
+      <details className="rounded-2xl border border-[var(--line)] bg-white p-4">
+      <summary className="min-h-11 cursor-pointer font-semibold">{locale === "vi" ? "Thông tin liên hệ (tùy chọn, bổ sung sau)" : "Contact details (optional, add later)"}</summary>
+      <div className="space-y-4">
       <label className="block space-y-2 text-sm font-semibold">
         {t("quote.customerName")}
         <input
@@ -250,6 +257,7 @@ export function QuoteView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
         <span>{t("quote.consent")}</span>
       </label>
 
+      </div></details>
       <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950">
         {t("fitment.disclaimer")}
       </p>
@@ -273,7 +281,7 @@ export function QuoteView({ catalog: initialCatalog }: { catalog: CatalogSnapsho
 
       <button
         type="button"
-        disabled={submitBusy || items.length === 0}
+        disabled={submitBusy || items.length === 0 || configured !== true}
         onClick={onSubmitRequest}
         className="flex min-h-12 w-full items-center justify-center rounded-2xl bg-[var(--accent)] text-sm font-bold text-[var(--ink)] disabled:opacity-40"
       >

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { FitmentBadge } from "@/components/ui/fitment-badge";
 import { formatUsd } from "@/lib/pricing/totals";
@@ -13,96 +12,47 @@ type Props = {
   locale: string;
   onAdd: () => void;
   onRequestQuote: () => void;
+  selectedQty?: number;
 };
 
-export function ProductCard({
-  product,
-  status,
-  locale,
-  onAdd,
-  onRequestQuote,
-}: Props) {
+/** Selection feedback comes from the persisted combo, never a speculative click timer. */
+export function ProductCard({ product, status, locale, onAdd, onRequestQuote, selectedQty = 0 }: Props) {
   const t = useTranslations();
+  const vi = locale === "vi";
   const name = t(product.nameKey as Parameters<typeof t>[0]);
   const desc = t(product.descriptionKey as Parameters<typeof t>[0]);
-  const [justAdded, setJustAdded] = useState(false);
-  const isOwnerProduct = product.catalogSource === "owner";
-
-  function handleAdd() {
-    onAdd();
-    setJustAdded(true);
-    window.setTimeout(() => setJustAdded(false), 1600);
-  }
-
-  if (status === "incompatible") {
-    return (
-      <article className="overflow-hidden rounded-3xl border border-rose-200 bg-rose-50/60 opacity-80">
-        <div className="flex gap-3 p-3">
-          <Image
-            src={product.imageUrl}
-            alt={name}
-            width={88}
-            height={88}
-            className="pointer-events-none h-[88px] w-[88px] rounded-2xl object-contain"
-          />
-          <div className="min-w-0 flex-1 space-y-2">
-            <FitmentBadge status={status} />
-            <h3 className="font-semibold text-[var(--ink)]">{name}</h3>
-            <p className="text-xs text-[var(--muted)]">{desc}</p>
-          </div>
-        </div>
-      </article>
-    );
-  }
-
+  const owner = product.catalogSource === "owner";
+  const blocked = status === "incompatible";
   return (
-    <article className="relative overflow-hidden rounded-3xl border border-[var(--line)] bg-white shadow-[0_10px_30px_-18px_rgba(15,23,42,0.45)]">
-      <div className={`flex gap-3 p-3 ${isOwnerProduct ? "flex-col" : ""}`}>
-        <Image
-          src={product.imageUrl}
-          alt={name}
-          width={isOwnerProduct ? 660 : 96}
-          height={isOwnerProduct ? (product.id === "botslab-2ch-model-pending" ? 710 : 700) : 96}
-          sizes={isOwnerProduct ? "(max-width: 640px) 100vw, 640px" : "96px"}
-          className={isOwnerProduct
-            ? "pointer-events-none h-72 w-full rounded-2xl sm:h-80 bg-white object-contain"
-            : "pointer-events-none h-24 w-24 shrink-0 rounded-2xl bg-[var(--wash)] object-contain"}
-        />
-        <div className="min-w-0 flex-1 space-y-2">
-          {isOwnerProduct && <p className="text-xs text-[var(--muted)]">{locale === "vi" ? "Ảnh giới thiệu sản phẩm; điện thoại minh họa không kèm theo. Phụ kiện cần xác nhận." : "Product reference image; pictured phone is not included. Confirm supplied accessories."}</p>}
-          <FitmentBadge status={status} />
-          <h3 className="text-base font-semibold leading-snug text-[var(--ink)]">
-            {name}
-          </h3>
-          <p className="text-xs leading-relaxed text-[var(--muted)]">{desc}</p>
-          {product.catalogSource === "sample" && <p className="text-xs font-bold text-amber-800">{locale === "vi" ? "GIÁ MẪU · chưa được duyệt để bán" : "SAMPLE · not approved retail pricing"}</p>}
-          {product.hardwareOnly && <p className="text-xs font-semibold text-amber-900">{locale === "vi" ? "Chỉ máy · chưa gồm công lắp. Thuế, tồn kho và vận chuyển chưa xác nhận." : "Hardware only · installation excluded. Tax inclusion, stock and shipping unconfirmed."}</p>}
-          <p className="text-sm font-semibold text-[var(--ink)]">
-            {t("recommend.price")}: {formatUsd(product.priceUsd, locale)}
-            <span className="ml-2 font-medium text-[var(--muted)]">
-              · {t("recommend.labor")} {product.laborCostUsd == null || product.hardwareOnly ? (locale === "vi" ? "chưa báo giá · không bao gồm" : "not quoted · not included") : formatUsd(product.laborCostUsd, locale)}
-            </span>
-          </p>
+    <article className={`overflow-hidden rounded-3xl border bg-white shadow-sm ${blocked ? "border-rose-200" : "border-[var(--line)]"}`}>
+      <details className="group">
+        <summary className="cursor-pointer list-none rounded-t-3xl p-4 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--brand)] [&::-webkit-details-marker]:hidden">
+          <Image src={product.imageUrl} alt={name}
+            width={owner ? 660 : 96} height={owner ? (product.id === "botslab-2ch-model-pending" ? 710 : 700) : 96}
+            sizes="(max-width: 640px) 100vw, 640px"
+            className="h-52 w-full rounded-2xl bg-white object-contain transition-[height] group-open:h-80 sm:h-64" />
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
+            <FitmentBadge status={status} />
+            {selectedQty > 0 && <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-900">{vi ? `Đã chọn · ${selectedQty}` : `Selected · ${selectedQty}`}</span>}
+          </div>
+          <h3 className="mt-3 text-lg font-semibold leading-snug text-[var(--ink)]">{name}</h3>
+          <p className="mt-2 text-xl font-bold text-[var(--brand)]">{formatUsd(product.priceUsd, locale)}{product.hardwareOnly && <span className="ml-2 text-xs font-medium text-[var(--muted)]">{vi ? "giá máy" : "hardware"}</span>}</p>
+          {product.catalogSource === "sample" && <p className="mt-2 text-xs font-bold text-amber-800">{vi ? "GIÁ MẪU · chưa được duyệt để bán" : "SAMPLE · not approved retail pricing"}</p>}
+          <p className="mt-3 flex justify-between text-sm font-semibold text-[var(--brand)]"><span className="group-open:hidden">{vi ? "Xem hình lớn & chi tiết" : "View larger image & details"}</span><span className="hidden group-open:inline">{vi ? "Thu gọn chi tiết" : "Collapse details"}</span><span aria-hidden="true" className="group-open:rotate-180">⌄</span></p>
+        </summary>
+        <div className="space-y-3 border-t border-[var(--line)] px-4 py-4 text-sm leading-relaxed text-[var(--muted)]">
+          <p>{desc}</p>
+          {owner && <p className="text-xs">{vi ? "Ảnh giới thiệu sản phẩm; điện thoại minh họa không kèm theo. Phụ kiện cần xác nhận." : "Product reference image; pictured phone is not included. Confirm supplied accessories."}</p>}
+          <p>{t("recommend.labor")}: {product.hardwareOnly || product.laborCostUsd == null ? (vi ? "chưa báo giá · không bao gồm" : "not quoted · not included") : formatUsd(product.laborCostUsd, locale)}</p>
         </div>
-      </div>
-
-      {/* Full-width actions below media/text — larger iOS hit targets */}
-      <div className="relative z-10 grid grid-cols-1 gap-2 border-t border-[var(--line)] bg-[var(--wash)]/60 p-3 sm:grid-cols-2">
-        <button
-          type="button"
-          onClick={handleAdd}
-          className="min-h-12 w-full touch-manipulation select-none rounded-xl border border-[var(--brand)] bg-white px-3 text-sm font-semibold text-[var(--brand)] active:bg-[var(--brand-soft)]"
-        >
-          {justAdded ? t("recommend.added") : t("recommend.add")}
-        </button>
-        <button
-          type="button"
-          onClick={onRequestQuote}
-          className="min-h-12 w-full touch-manipulation select-none rounded-xl bg-[var(--accent)] px-3 text-sm font-bold text-[var(--ink)] active:opacity-90"
-        >
-          {t("recommend.requestQuote")}
-        </button>
-      </div>
+      </details>
+      {product.hardwareOnly && <p className="px-4 pb-3 text-xs leading-relaxed text-amber-900">{vi ? "Chỉ máy · chưa gồm công lắp. Thuế, tồn kho và vận chuyển chưa xác nhận." : "Hardware only · installation excluded. Tax inclusion, stock and shipping unconfirmed."}</p>}
+      {blocked ? <p className="bg-rose-50 p-4 text-sm text-rose-900">{vi ? "Không thể chọn món này cho cấu hình xe hiện tại. Đổi xe hoặc xem món khác." : "This item cannot be selected for the current vehicle configuration. Change the vehicle or browse another item."}</p> : (
+        <div className="grid grid-cols-2 gap-2 border-t border-[var(--line)] bg-[var(--wash)]/60 p-3">
+          <button type="button" onClick={onAdd} className="min-h-12 touch-manipulation rounded-xl border border-[var(--brand)] bg-white px-3 text-sm font-semibold text-[var(--brand)] active:bg-[var(--brand-soft)]">{selectedQty > 0 ? (vi ? "Thêm 1" : "Add one more") : t("recommend.add")}</button>
+          <button type="button" onClick={onRequestQuote} className="min-h-12 touch-manipulation rounded-xl bg-[var(--brand)] px-3 text-sm font-semibold text-white">{selectedQty > 0 ? (vi ? "Xem gói đã chọn" : "Review selection") : (vi ? "Chọn & xem gói" : "Add & review")}</button>
+        </div>
+      )}
     </article>
   );
 }
